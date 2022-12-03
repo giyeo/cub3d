@@ -53,7 +53,7 @@ $(NAME): $(OBJS)
 clean:
 	rm -rf $(OBJS_DIR)
 
-fclean: clean
+fclean: clean minilibx_clean
 	@make $@ -C $(LIBFT_DIR)
 	rm -rf $(NAME)
 
