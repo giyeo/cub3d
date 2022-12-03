@@ -9,7 +9,11 @@ CFLAGS		:= #-Wall -Wextra -Werror
 
 
 # INCLUDES
+INCS_DIR	:= ./includes
+INCS		:= cub3d.h
+MAIN_HEADER := $(addprefix $(INCS_DIR)/, $(INCS))
 
+INC_FLAGS	:= -I $(INCS_DIR)
 
 # LIBFT
 
@@ -30,9 +34,9 @@ OBJS		:= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 # %.o: %.c
 # 	gcc $(CFLAG) -c $< -o $@
 # EXPLICIT COMPILATION OF THE OBJECTS
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(MAIN_HEADER)
 	mkdir -p $(@D)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@
 
 # TARGETS
 all: $(NAME)
