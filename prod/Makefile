@@ -2,7 +2,7 @@
 # MAIN VARIABLES
 NAME		:= cub3d
 CC			:= cc
-CFLAGS		:= #-Wall -Wextra -Werror
+CFLAGS		:= -Wall -Wextra -Werror
 
 # FLAG := -lm -lbsd -lXext -lX11 \
 # 	-fsanitize=address
