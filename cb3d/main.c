@@ -18,6 +18,6 @@ int	main(int argc, char **argv)
 
 	file_content = get_data_from_file(argc, argv[1]);
 	parse_file_content(file_content);
-	printf("%s\n", file_content);
+	//printf("%s\n", file_content);
 	free(file_content);
 }

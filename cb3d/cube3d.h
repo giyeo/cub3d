@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:38:39 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/03 04:04:48 by rpaulino         ###   ########.fr       */
+/*   Updated: 2022/12/03 04:51:26 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,7 @@ void	is_new_line(char c, int *line, int *column);
 int		jump_to_next_line(char *file_content, int i);
 void	parse_path(char *file_content);
 void	parse_color(char *file_content);
+
+//testing
+void	python_log(char *log);
 #endif

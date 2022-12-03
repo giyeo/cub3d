@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:51:06 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/03 04:00:10 by rpaulino         ###   ########.fr       */
+/*   Updated: 2022/12/03 05:00:05 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	parse_path(char *file_content)
 	strncpy(path, file_content + start, i - start);
 	path[i - start] = '\0';
 	fd = get_fd(path);
+	python_log("OK");
 	free(path);
 	close(fd);
 }
