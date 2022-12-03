@@ -1,38 +1,41 @@
 
 # MAIN VARIABLES
-NAME		:= cub3d
-CC			:= cc
-CFLAGS		:= -Wall -Wextra -Werror
-
-# FLAG := -lm -lbsd -lXext -lX11 \
-# 	-fsanitize=address
+NAME		:=	cub3d
+CC			:=	cc
+CFLAGS		:=	-O3 -Wall -Wextra -Werror
 
 # LIBRARIES
 ## libft
-LIBFT		:= ft
-LIBFT_DIR	:= ./libft
-INCS_LFT	:= libft.h
-LIBFT_LINK	:= -L$(LIBFT_DIR) -l$(LIBFT)
+LIBFT		:=	ft
+LIBFT_DIR	:=	./libft
+INCS_LFT	:=	libft.h
+LIBFT_LINK	:=	-L$(LIBFT_DIR) -l$(LIBFT)
 
 ## minilibx
-
+### minilibx requirements
+#### sudo apt-get install gcc make xorg libxext-dev libbsd-dev
+MLX			:=	mlx
+MLX_DIR		:=	./minilibx
+MLX_LINK	:=	-L$(MLX_DIR) -l$(MLX) -lXext -lX11
 
 # INCLUDES
-INCS_DIR	:= ./includes
-INCS		:= cub3d.h
-MAIN_HEADER := $(addprefix $(INCS_DIR)/, $(INCS))
+INCS_DIR	:=	./includes
+INCS		:=	cub3d.h
+MAIN_HEADER	:=	$(addprefix $(INCS_DIR)/, $(INCS))
 
-INC_FLAGS	:= -I $(INCS_DIR) -I $(LIBFT_DIR)/includes
+INC_FLAGS	:=	-I $(INCS_DIR) -I $(LIBFT_DIR)/includes \
+				-I $(MLX_DIR)
+LINK_FLAGS	:=	-lm $(LIBFT_LINK) $(MLX_LINK) -fsanitize=address
 
 # SOURCES
-SRCS_DIR	:= srcs
-SRCS 		:= main.c
+SRCS_DIR	:=	srcs
+SRCS		:=	main.c
 
-SRCS_PTH	:= $(addprefix $(SRCS_DIR)/, $(SRCS))
+SRCS_PTH	:=	$(addprefix $(SRCS_DIR)/, $(SRCS))
 
 # OBJECTS
-OBJS_DIR	:= ./objs
-OBJS		:= $(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
+OBJS_DIR	:=	./objs
+OBJS		:=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 # EXPLICIT COMPILATION OF THE OBJECTS
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(MAIN_HEADER)
@@ -44,7 +47,8 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C $(LIBFT_DIR)
-	$(CC) $(OBJS) $(CFLAGS) $(INC_FLAGS) $(LIBFT_LINK) -o $@
+	@make -C $(MLX_DIR)
+	$(CC) $(OBJS) $(CFLAGS) $(INC_FLAGS) $(LINK_FLAGS) -o $@
 
 clean:
 	rm -rf $(OBJS_DIR)
@@ -55,7 +59,7 @@ fclean: clean
 
 re: fclean all
 
-# # minilibx_clean:
-# # 	make clean
+minilibx_clean:
+	@make clean -C $(MLX_DIR)
 
-.PHONY: clean fclean re all
+.PHONY: clean fclean re all minilibx_clean

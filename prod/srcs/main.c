@@ -2,9 +2,12 @@
 
 int	main(int argc, char *argv[])
 {
+	void	*mlx;
+
 	(void)argc;
 	(void)argv;
-	ft_printf("Hello, world!\n");
+	(void)mlx;
+	mlx = mlx_init();
 
 	return (0);
 }
