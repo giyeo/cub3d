@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   libft_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/03 03:37:02 by rpaulino          #+#    #+#             */
+/*   Updated: 2022/12/03 03:37:57 by rpaulino         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
 
 size_t	ft_strlen(const char *pointer)
 {
-	size_t counter;
+	size_t	counter;
 
 	counter = 0;
 	while (pointer[counter] != '\0')
@@ -10,7 +22,7 @@ size_t	ft_strlen(const char *pointer)
 	return (counter);
 }
 
-int		ft_isdigit(int argument)
+int	ft_isdigit(int argument)
 {
 	if (argument >= 48 && argument <= 57)
 		return (1);
@@ -25,7 +37,7 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	unsigned char	*pointersource;
 
 	pointerdest = dest;
-	pointersource = (unsigned char*)src;
+	pointersource = (unsigned char *)src;
 	if (pointerdest == 0 && pointersource == 0)
 		return (dest);
 	while (n-- > 0)
@@ -65,9 +77,9 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	return (sub);
 }
 
-static char		*joinstrings(char *pointer, char const *s1, char const *s2)
+static char	*joinstrings(char *pointer, char const *s1, char const *s2)
 {
-	int counter;
+	int	counter;
 
 	counter = 0;
 	while (*s1 != '\0')

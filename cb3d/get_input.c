@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:19:02 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/03 03:25:45 by rpaulino         ###   ########.fr       */
+/*   Updated: 2022/12/03 04:05:12 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	get_fd(char *argv)
 {
 	int	fd;
 
+	printf("%s\n", argv);
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
 		throw_error("ERROR: Can't get File descriptor");
@@ -45,11 +46,11 @@ char	*read_data(int fd)
 	return (buffer);
 }
 
-char	*get_data_from_file(int argc, char *argv[])
+char	*get_data_from_file(int argc, char *argv)
 {
 	int	fd;
 
 	(void)argc;
-	fd = get_fd(argv[1]);
+	fd = get_fd(argv);
 	return (read_data(fd));
 }
