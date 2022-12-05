@@ -11,7 +11,9 @@ typedef struct	s_data {
 	int		endian;
 	int		screen_size;
 	int		player_x;
+	int		old_player_x;
 	int		player_y;
+	int		old_player_y;
 }			t_data;
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
@@ -36,14 +38,16 @@ int	this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int 
 
 int	key_control(int key, t_data *img)
 {
+	img->old_player_x = img->player_x;
+	img->old_player_y = img->player_y;
 	if (key == 65363)
-		img->player_x += 100;
+		img->player_x += 10;
 	if (key == 65361)
-		img->player_x -= 100;
+		img->player_x -= 10;
 	if (key == 65362)
-		img->player_y -= 100;
+		img->player_y -= 10;
 	if (key == 65364)
-		img->player_y += 100;
+		img->player_y += 10;
 	draw(img);
 	return (0);
 }
@@ -68,6 +72,7 @@ void	draw(t_data *img)
 
 	j = 0;
 	i = 0;
+	//the collision detector should be here!
 	while(height < matrix_height)
 	{
 		while(width < matrix_width)
@@ -86,9 +91,18 @@ void	draw(t_data *img)
 			//create vertical grid lines
 			if(j % (img->screen_size / matrix_height) == 0 && j != 0)
 				my_mlx_pixel_put(img, i, j, mlx_get_hex_trgb(125,125,125));
-			//create player
-			if(this_point_is_in_a_circle(i,j,img->player_x, img->player_y, 5))
-				my_mlx_pixel_put(img, i, j, mlx_get_hex_trgb(255,0,255));
+			//create a circle with player cordinates
+			if(this_point_is_in_a_circle(i,j,img->player_x, img->player_y, 50))
+			{
+				//center of the circle collision
+				if(matrix[height][width] != '1')
+					my_mlx_pixel_put(img, i, j, mlx_get_hex_trgb(255,0,255));
+				else
+				{
+					img->player_x = img->old_player_x;
+					img->player_y = img->old_player_y;
+				}
+			}
 			i++;
 		}
 		width = 0;
@@ -104,13 +118,15 @@ int main()
 {
 	t_data	img;
 
-	img.screen_size = 900;
+	img.screen_size = 1000;
 	img.mlx = mlx_init();
 	img.mlx_win = mlx_new_window(img.mlx, img.screen_size, img.screen_size, "2dMinirt");
 	img.img = mlx_new_image(img.mlx, img.screen_size, img.screen_size);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	img.player_x = 450;
-	img.player_y = 450;
+	img.player_x = img.screen_size / 2;
+	img.player_y = img.screen_size / 2;
+	img.old_player_x = img.screen_size / 2;
+	img.old_player_y = img.screen_size / 2;
 	draw(&img);
 	mlx_key_hook(img.mlx_win, key_control, &img);
 	mlx_loop(img.mlx);
