@@ -20,6 +20,20 @@ int	this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int 
 	return 0; 
 }
 
+int this_point_is_in_a_line(int i, int j, int x_position, int y_position, double rotation_angle)
+{
+    //essa é só uma linha reta, preciso fazer ela em relação a um angulo.
+    // x1 + l * cos(ang)
+    // y1 + l * sin(ang)
+    int nx; 
+    int ny;
+	nx = x_position + cos(rotation_angle) * 20;
+	ny = y_position + sin(rotation_angle) * 20;
+        if(i == nx && j == ny)
+            return(1);
+    return(0);
+}
+
 int	draw(t_data *img)
 {
 	int matrix_height = 5;
@@ -31,6 +45,17 @@ int	draw(t_data *img)
 	,{'1','0','0','0','1'}
 	,{'1','1','1','1','0'}
 	,{'1','0','0','0','1'}};
+
+	img->old_player_x = img->player_x;
+    img->old_player_y = img->player_y;
+	if(img->walk_fb == 1)
+    	img->player_y -= img->player_speed;// * sin(img->rotation_angle);
+	if(img->walk_fb == -1)
+		img->player_y += img->player_speed;// * sin(img->rotation_angle) 
+	if(img->walk_lr == 1)
+		img->player_x += img->player_speed;// * cos(img->rotation_angle)
+	if(img->walk_lr == -1)
+		img->player_x -= img->player_speed;// * cos(img->rotation_angle)
 
     int i = 0;
 	int j = 0;
@@ -68,6 +93,8 @@ int	draw(t_data *img)
 					img->player_y = img->old_player_y;
 				}
 			}
+            if(this_point_is_in_a_line(i,j,img->player_x, img->player_y, img->rotation_angle))
+                my_mlx_pixel_put(img, i, j, mlx_get_hex_trgb(0,255,0));
 			i++;
 		}
 		width = 0;

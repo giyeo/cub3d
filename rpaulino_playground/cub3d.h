@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+#include <math.h>
 #include "../prod/libft/includes/libft.h"
 #include "../prod/minilibx/mlx.h"
 # include <string.h> //Ilegal
@@ -34,6 +35,8 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
+# define PI 3.14159265359
+
 typedef struct	s_data {
 	void	*mlx;
 	void	*mlx_win;
@@ -49,6 +52,11 @@ typedef struct	s_data {
 	int		old_player_y;
 	int		player_radius;
 	int		player_speed;
+	double		rotation_angle;
+	double		rotation_speed;
+	int		walk_fb;
+	int		walk_lr;
+
 }			t_data;
 
 int		draw(t_data *img);

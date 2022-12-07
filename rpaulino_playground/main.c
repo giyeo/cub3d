@@ -2,13 +2,17 @@
 
 void	setup(t_data *img)
 {
-	img->screen_size = 500;
+	img->screen_size = 900;
 	img->player_radius = img->screen_size / 100;
-	img->player_speed = 5;
+	img->player_speed = 2;
 	img->player_x = img->screen_size / 2;
 	img->player_y = img->screen_size / 2;
 	img->old_player_x = img->screen_size / 2;
 	img->old_player_y = img->screen_size / 2;
+	img->rotation_angle = PI / 2;
+	img->rotation_speed = 2 * (PI / 180);
+	img->walk_fb = 0;
+	img->walk_lr = 0;
 }
 
 void	init(t_data *img)

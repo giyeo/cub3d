@@ -1,41 +1,32 @@
 #include "cub3d.h"
 
-int	key_pressed(int event, t_data *img)
+int key_pressed(int event, t_data *img)
 {
-	img->old_player_x = img->player_x;
-    img->old_player_y = img->player_y;
 	if (event == KEY_W)
-	{
-		//vars->player.walk_direction_fb = 1;
-		img->player_y -= img->player_speed;
-	}
+        img->walk_fb = 1;
 	if (event == KEY_S)
-	{
-		//vars->player.walk_direction_fb = -1;
-		img->player_y += img->player_speed;
-	}
+        img->walk_fb = -1;
 	if (event == KEY_D)
-	{
-		//vars->player.walk_direction_lr = 1;
-		img->player_x += img->player_speed;
-	}
+        img->walk_lr = 1;
 	if (event == KEY_A)
-	{
-		//vars->player.walk_direction_lr = -1;
-		img->player_x -= img->player_speed;
-	}
-	draw(img);
+        img->walk_lr = -1;
+    if (event == KEY_RIGHT)
+		img->rotation_angle += img->rotation_speed;
+    if (event == KEY_LEFT)
+		img->rotation_angle -= img->rotation_speed;
 	return (0);
 }
 
-int	key_released(int event, t_data *img)
+int key_released(int event, t_data *img)
 {
-	printf("%d: released\n", event);
-	// if (event == KEY_W)
-	// if (event == KEY_S)
-	// if (event == KEY_D)
-	// if (event == KEY_A)
-		
+	if (event == KEY_W)
+        img->walk_fb = 0;
+	if (event == KEY_S)
+        img->walk_fb = 0;
+	if (event == KEY_D)
+        img->walk_lr = 0;
+	if (event == KEY_A)
+        img->walk_lr = 0;
 	return (0);
 }
 
