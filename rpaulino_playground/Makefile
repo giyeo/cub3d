@@ -1,6 +1,6 @@
 NAME := cub3d
 
-SRC :=	main.c
+SRC :=	main.c key.c draw.c
 
 OBJS := $(SRC:.c=.o)
 
