@@ -2,13 +2,14 @@
 
 int key_pressed(int event, t_data *img)
 {
-	if (event == KEY_W)
+	printf("%d\n", event);
+	if (event == KEY_W)//44
         img->walk_fb = 1;
-	if (event == KEY_S)
+	if (event == KEY_S)//101
         img->walk_fb = -1;
-	if (event == KEY_D)
+	if (event == KEY_D)//97
         img->walk_lr = 1;
-	if (event == KEY_A)
+	if (event == KEY_A)//105
         img->walk_lr = -1;
     if (event == KEY_RIGHT)
 		img->rotation_angle += img->rotation_speed;

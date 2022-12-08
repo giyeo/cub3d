@@ -1,7 +1,7 @@
 NAME := cube3d
 
 SRC :=	main.c libft_utils.c get_input.c utils.c \
-		parse.c parse_utils.c
+		parse.c parse_utils.c ../prod/libft/libft.a
 
 OBJS := $(SRC:.c=.o)
 

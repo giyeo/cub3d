@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:51:06 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/03 05:00:05 by rpaulino         ###   ########.fr       */
+/*   Updated: 2022/12/08 01:04:03 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,38 +39,47 @@ void	is_valid_char(char c)
 
 void	parse_color(char *file_content)
 {
-	int	i;
+	char *line = ft_substr(file_content, 0, ft_str_find_idx(file_content, '\n'));
+	int i = 0;
+	int comma_index = 0;
+	int start_index = 0;
+	char *number_string;
+	char *trimmed_number_string;
+	int color[3];
+	while(i < 3)
+	{
+		comma_index = ft_str_find_idx(line + start_index, ',');
+		if(comma_index == -1)
+			comma_index = ft_str_find_idx(line + start_index, '\0');
+		number_string = ft_substr(line, start_index, comma_index);
+		trimmed_number_string = ft_strtrim(number_string, " ");
+		color[i++] = ft_atoi(trimmed_number_string);
+		start_index += comma_index + 1;
+		free(number_string);
+		free(trimmed_number_string);
+	}
+	printf("%d %d %d\n", color[0], color[1], color[2]);
+	free(line);
+}
 
-	i = 0;
-	while (file_content[i] == ' ')
-		i++;
-	while (file_content[i] != '\n')
-		i++;
+void	test_path(char *path)
+{
+	int		fd;
+
+	fd = get_fd(path);
+	python_log("OK");
+	close(fd);
 }
 
 void	parse_path(char *file_content)
 {
-	int		i;
-	int		start;
-	int		fd;
 	char	*path;
+	char	*trimmed_path;
 
-	i = 0;
-	start = 0;
-	while (file_content[i] == ' ')
-		i++;
-	start = i;
-	while (file_content[i] != '\n')
-		i++;
-	i--;
-	while (file_content[i] == ' ')
-		i--;
-	i++;
-	path = (char *)malloc(sizeof(char) * (i - start) + 1);
-	strncpy(path, file_content + start, i - start);
-	path[i - start] = '\0';
-	fd = get_fd(path);
-	python_log("OK");
+	path = ft_substr(file_content, 0, ft_str_find_idx(file_content, '\n'));
+	trimmed_path = ft_strtrim(path, " ");
+	test_path(trimmed_path);
+	
+	free(trimmed_path);
 	free(path);
-	close(fd);
 }

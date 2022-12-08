@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:38:39 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/03 04:51:26 by rpaulino         ###   ########.fr       */
+/*   Updated: 2022/12/08 01:06:28 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include "../prod/libft/includes/libft.h"
 
 # include <string.h> //Ilegal
 //_____________________________
@@ -32,7 +33,6 @@ typedef struct cube_data
 	char	*map;
 }	t_cdata;
 
-char	*ft_strjoin(char const *s1, char const *s2);
 void	throw_error(char *error);
 char	*get_data_from_file(int argc, char *argv);
 
