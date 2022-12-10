@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d.h                                           :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:38:39 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/03 04:51:26 by rpaulino         ###   ########.fr       */
+/*   Updated: 2022/12/10 19:32:11 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,15 @@ typedef struct	s_data {
 	int		old_player_y;
 	int		player_radius;
 	int		player_speed;
-	double		rotation_angle;
-	double		rotation_speed;
+	double	rotation_angle;
+	double	rotation_speed;
 	int		walk_fb;
 	int		walk_lr;
+	int		turn_dr;
 
 }			t_data;
 
 int		draw(t_data *img);
 void	input(t_data *img);
+int		update(t_data *img);
 #endif

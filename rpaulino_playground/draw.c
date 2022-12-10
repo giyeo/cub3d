@@ -1,5 +1,15 @@
 #include "cub3d.h"
 
+int matrix_height = 5;
+int matrix_width = 5;
+
+char matrix[5][5] =
+{{'1','1','1','0','0'}
+,{'1','0','0','0','1'}
+,{'1','0','0','0','1'}
+,{'1','1','1','0','0'}
+,{'1','0','0','0','1'}};
+
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
@@ -20,43 +30,44 @@ int	this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int 
 	return 0; 
 }
 
-int this_point_is_in_a_line(int i, int j, int x_position, int y_position, double rotation_angle)
+int this_point_is_in_a_line(double i, double j, double ox, double oy, double rotation_angle)
 {
-    //essa é só uma linha reta, preciso fazer ela em relação a um angulo.
-    // x1 + l * cos(ang)
-    // y1 + l * sin(ang)
-    int nx; 
-    int ny;
-	nx = x_position + cos(rotation_angle) * 20;
-	ny = y_position + sin(rotation_angle) * 20;
-        if(i == nx && j == ny)
-            return(1);
+    double bx; 
+    double by;
+	double slope_ab;
+
+	if(oy - by == 0)
+		return (0);
+	bx = floor(ox + cos(rotation_angle) * 100.0);
+	by = floor(oy + sin(rotation_angle) * 100.0);
+	slope_ab = (ox - bx) / (oy - by);
+	if (j - oy == slope_ab * (i - ox))
+		return (1);
     return(0);
+}
+
+int update(t_data *img)
+{
+	img->old_player_x = img->player_x;
+	img->old_player_y = img->player_y;
+
+	if(img->walk_fb != 0)
+	{
+		img->player_y += img->walk_fb * img->player_speed;
+	}
+	if(img->walk_lr != 0)
+	{
+		img->player_x += img->walk_lr * img->player_speed;
+	}
+	if(img->turn_dr != 0)
+	{
+		img->rotation_angle += img->turn_dr * img->rotation_speed;
+	}
+		return (0);
 }
 
 int	draw(t_data *img)
 {
-	int matrix_height = 5;
-	int matrix_width = 5;
-
-	char matrix[5][5] =
-	{{'1','1','1','0','0'}
-	,{'1','0','0','0','1'}
-	,{'1','0','0','0','1'}
-	,{'1','1','1','1','0'}
-	,{'1','0','0','0','1'}};
-
-	img->old_player_x = img->player_x;
-    img->old_player_y = img->player_y;
-	if(img->walk_fb == 1)
-    	img->player_y -= img->player_speed;// * sin(img->rotation_angle);
-	if(img->walk_fb == -1)
-		img->player_y += img->player_speed;// * sin(img->rotation_angle) 
-	if(img->walk_lr == 1)
-		img->player_x += img->player_speed;// * cos(img->rotation_angle)
-	if(img->walk_lr == -1)
-		img->player_x -= img->player_speed;// * cos(img->rotation_angle)
-
     int i = 0;
 	int j = 0;
 	int height = 0;
@@ -75,8 +86,8 @@ int	draw(t_data *img)
 			//create horizontal grid lines
 			if(i % (img->screen_size / matrix_width) == 0 && i != 0)
 			{
-				width++;
 				my_mlx_pixel_put(img, i, j, mlx_get_hex_trgb(125,125,125));
+				width++;
 			}
 			//create vertical grid lines
 			if(j % (img->screen_size / matrix_height) == 0 && j != 0)
@@ -93,7 +104,7 @@ int	draw(t_data *img)
 					img->player_y = img->old_player_y;
 				}
 			}
-            if(this_point_is_in_a_line(i,j,img->player_x, img->player_y, img->rotation_angle))
+            if(this_point_is_in_a_line(i, j, img->player_x, img->player_y, img->rotation_angle))
                 my_mlx_pixel_put(img, i, j, mlx_get_hex_trgb(0,255,0));
 			i++;
 		}

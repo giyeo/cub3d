@@ -2,32 +2,36 @@
 
 int key_pressed(int event, t_data *img)
 {
-	printf("%d\n", event);
-	if (event == KEY_W)//44
-        img->walk_fb = 1;
-	if (event == KEY_S)//101
+	if (event == 44)//44
         img->walk_fb = -1;
-	if (event == KEY_D)//97
+	if (event == 101)//101
+        img->walk_fb = 1;
+	if (event == 97)//97
         img->walk_lr = 1;
-	if (event == KEY_A)//105
+	if (event == 105)//105
         img->walk_lr = -1;
     if (event == KEY_RIGHT)
-		img->rotation_angle += img->rotation_speed;
+		img->turn_dr = 1;
     if (event == KEY_LEFT)
-		img->rotation_angle -= img->rotation_speed;
-	return (0);
+		img->turn_dr = -1;
+	printf("%d\n", event);
+	return (update(img));
 }
 
 int key_released(int event, t_data *img)
 {
-	if (event == KEY_W)
+	if (event == 44)
         img->walk_fb = 0;
-	if (event == KEY_S)
+	if (event == 101)
         img->walk_fb = 0;
-	if (event == KEY_D)
+	if (event == 97)
         img->walk_lr = 0;
-	if (event == KEY_A)
+	if (event == 105)
         img->walk_lr = 0;
+	if (event == KEY_RIGHT)
+		img->turn_dr = 0;
+    if (event == KEY_LEFT)
+		img->turn_dr = 0;
 	return (0);
 }
 

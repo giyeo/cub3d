@@ -15,7 +15,7 @@ bonus: all
 
 $(NAME): $(OBJS) $(SRC)
 	make --no-print-directory -C ../prod/minilibx
-	gcc $(OBJS) -o $(NAME) $(CFLAG) ../prod/minilibx/libmlx_Linux.a $(FLAG) -O3
+	gcc $(OBJS) -o $(NAME) $(CFLAG) ../prod/minilibx/libmlx_Linux.a $(FLAG) -O1
 
 # $(NAME): $(OBJS) $(SRC)
 # 	gcc $(OBJS) -o $(NAME) $(CFLAG) $(FLAG)
