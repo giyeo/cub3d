@@ -13,8 +13,13 @@ TST_SRCS	=	$(TST_SRC_DIR)/*/**.c \
 
 # MODULO A SER TESTADO
 MAIN_PJ		=	../prod
-SRC_DIR		=	$(addprefix $(MAIN_PJ)/, srcs)
-SRC_MODULE	=	$(SRC_DIR)/parser/*.c					# PASTA ../prod/srcs/parser | DEVE TER ALGUM .C lá, se não dá erro
+# SRC_DIR		=	$(addprefix $(MAIN_PJ)/, srcs)
+# SRC_MODULE	=	$(SRC_DIR)/parser/*.c					# PASTA ../prod/srcs/parser | DEVE TER ALGUM .C lá, se não dá erro
+
+# MODULO PARA ANJOSE (O VÁLIDO PARA O PROJETO PRINCIPAL É O DE CIMA)
+SRC_DIR		=	./srcs
+SRC_MODULE	=	$(SRC_DIR)/*.c
+
 
 SRCS		=	$(TST_SRCS) \
 				$(SRC_MODULE)
@@ -37,6 +42,8 @@ clean:
 	rm -rf ./$(BIN)
 
 debug:
+	gcc -g $(INCLUDE) $(SRCS) $(UNITY_SRCS) $(LIBFT_LINK) -o $(BIN)
+	gdb --tui ./$(BIN)
 
 valgrind:
 
