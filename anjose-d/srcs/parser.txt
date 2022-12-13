@@ -1,0 +1,24 @@
+
+verificar se tem apenas 2 args
+	main
+check extension (*.cub)
+checar arquivo
+	existencia
+	permissão leitura
+
+checar conteúdo arquivo .cub (conteúdo arquivo)
+	type identifier (precisa ter estes inicios de linha)
+		NO ./path
+		SO ./path
+		WE ./path
+		EA ./path
+		F ./path
+		C ./path
+			ORDEM NÃO OBRIGATÓRIA (Antes do mapa apenas)
+			Cada linha PODE ser separada por 1 ou mais linhas
+			CHECAR DE PATH existe e tem permissão leitura
+
+	mapa
+		possui apenas
+			0, 1, N, S, E, W
+		envolto de 1

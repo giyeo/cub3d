@@ -3,5 +3,10 @@
 
 # include "libft.h"
 # include <mlx.h>
+# include <fcntl.h>
+// open();
+
+# define MAP_FILE_EXT ".cub"
+
 
 #endif

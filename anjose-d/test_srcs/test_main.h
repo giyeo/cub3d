@@ -6,7 +6,12 @@
 
 extern char *g_str;
 
-void	test1();
-void	coisa();
+/* TESTES */
+void	file_check_test_existance();
+void	file_check_test_permission();
 
+/* SRC FILES (ISSO VAI SAIR DAQUI) */
+int		file_check(char *file);
+/* TEST UTILS */
+void	close_fd(int fd);
 #endif
