@@ -1,9 +1,9 @@
 #include "test_main.h"
 
+int fd;
+
 void	file_check_test_existance()
 {
-	int	fd;
-
 	fd = file_check("asdf");
 	TEST_ASSERT_EQUAL(-1, fd);
 	close_fd(fd);
@@ -15,5 +15,7 @@ void	file_check_test_existance()
 
 void	file_check_test_permission()
 {
-	TEST_ASSERT_EQUAL(-1, file_check("maps/noperm.cub"));
+	fd = file_check("maps/noperm.cub");
+	TEST_ASSERT_EQUAL(-1, fd);
+	close_fd(fd);
 }
