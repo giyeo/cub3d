@@ -21,6 +21,8 @@ int	main()
 	RUN_TEST(file_check_test_existance);
 	RUN_TEST(file_check_test_permission);
 
+	ft_printf("\033[1;33m extension_check_tests \033[0m\n");
+	RUN_TEST(extension_check_test);
 	return (UNITY_END());
 }
 void	close_fd(int fd)
