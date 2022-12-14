@@ -32,8 +32,9 @@ int	main()
 	RUN_TEST(read_file_test_not_null);
 	RUN_TEST(read_file_test_check_subject_lines);
 	RUN_TEST(read_file_test_check_several_blines);
+	RUN_TEST(read_file_test_invalid_map);
 
-
+	// verificar se quebra de linha está no meio do mapa (invalido)
 
 	return (UNITY_END());
 }

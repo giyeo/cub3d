@@ -18,6 +18,7 @@ void	line_count_test_breaklines();
 void	read_file_test_not_null();
 void	read_file_test_check_subject_lines();
 void	read_file_test_check_several_blines();
+void	read_file_test_invalid_map();
 
 
 /* SRC FILES (ISSO VAI SAIR DAQUI) */

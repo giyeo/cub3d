@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 00:14:09 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/14 00:25:03 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/14 11:04:53 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ int		line_count(char *file)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (line[0] && line[0] != '\n')
-			count++;
+		count++;
 		free(line);
 		line = get_next_line(fd);
 	}
