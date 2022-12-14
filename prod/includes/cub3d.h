@@ -7,6 +7,7 @@
 // open();
 
 # define MAP_FILE_EXT ".cub"
+# define ONLY_CHARS_MAP "01WNSE "
 
 /* type identifiers */
 # define TID_NORTH_TXT "NO"

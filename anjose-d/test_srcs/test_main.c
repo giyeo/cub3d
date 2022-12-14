@@ -35,6 +35,9 @@ int	main()
 	RUN_TEST(read_file_test_invalid_map);
 
 	// verificar se quebra de linha está no meio do mapa (invalido)
+	ft_printf("\033[1;33m find_split_line_tests \033[0m\n");
+	RUN_TEST(find_split_line_test_subject_mapfile);
+	RUN_TEST(find_split_line_test_doubleroom_mapfile);
 
 	return (UNITY_END());
 }
