@@ -16,7 +16,7 @@ void	tearDown()
 int	main()
 {
 	UNITY_BEGIN();
-	
+
 	ft_printf("\033[1;33m file_check_tests \033[0m\n");
 	RUN_TEST(file_check_test_existance);
 	RUN_TEST(file_check_test_permission);
@@ -30,6 +30,10 @@ int	main()
 
 	ft_printf("\033[1;33m read_file_tests \033[0m\n");
 	RUN_TEST(read_file_test_not_null);
+	RUN_TEST(read_file_test_check_subject_lines);
+	RUN_TEST(read_file_test_check_several_blines);
+
+
 
 	return (UNITY_END());
 }
