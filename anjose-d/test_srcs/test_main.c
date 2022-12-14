@@ -38,6 +38,8 @@ int	main()
 	ft_printf("\033[1;33m find_split_line_tests \033[0m\n");
 	RUN_TEST(find_split_line_test_subject_mapfile);
 	RUN_TEST(find_split_line_test_doubleroom_mapfile);
+	RUN_TEST(find_split_line_test_doublehole_mapfile);
+	RUN_TEST(find_split_line_test_many_blines_mapfile);
 
 	return (UNITY_END());
 }
