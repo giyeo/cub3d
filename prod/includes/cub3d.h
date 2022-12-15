@@ -9,6 +9,7 @@
 // perror();
 # include <string.h>
 // strerror();
+# include <errno.h>
 
 # define MAP_FILE_EXT ".cub"
 # define ONLY_CHARS_MAP "01WNSE "

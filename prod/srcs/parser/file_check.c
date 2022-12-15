@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <errno.h>
 
 int	file_check(char *file, int argc)
 {
