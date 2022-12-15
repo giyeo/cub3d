@@ -30,7 +30,9 @@ typedef struct	s_config
 	char	*EA;
 	int		F[3];
 	int		C[3];
-	char	**map;	
+	char	**map;
+	int		player_position[2];
+	char	player_direction;
 }			t_config;
 
 /* PARSER */

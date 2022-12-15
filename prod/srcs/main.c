@@ -9,6 +9,8 @@ void	init(t_config *config)
 	config->map = NULL;
 	config->F[0] = -1;
 	config->C[0] = -1;
+	config->player_position[0] = -1;
+	config->player_direction = 'Z';
 }
 
 int	main(int argc, char *argv[])
