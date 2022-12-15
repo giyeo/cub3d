@@ -14,18 +14,20 @@
 
 void	assign_color(char type, t_config *config, int *color)
 {
-	if(type == 'F')
+	if(type == 'F' && config->F[0] == -1)
 	{
 		config->F[0] = color[0];
 		config->F[1] = color[1];
 		config->F[2] = color[2];
 	}
-	else
+	else if (type == 'C' && config->C[0] == -1)
 	{
 		config->C[0] = color[0];
 		config->C[1] = color[1];
 		config->C[2] = color[2];
 	}
+	else
+		throw_error("Duplicate of Colors");
 }
 
 void	parse_color(char *file_content, char type, t_config *config)
@@ -59,23 +61,29 @@ void	parse_color(char *file_content, char type, t_config *config)
 void	test_path(char *path)
 {
 	int		fd;
+	char 	*temp;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		throw_error(strerror(errno));
+	{
+		temp = ft_strjoin(path, ": ");
+		throw_error(ft_strjoin(temp, strerror(errno)));
+	}
 	close(fd);
 }
 
 void	assign_config(char *path, char type, t_config *config)
 {
-	if(type == 'N')
+	if (type == 'N' && config->NO == NULL)
 		config->NO = path;
-	if(type == 'W')
+	else if (type == 'W' && config->WE == NULL)
 		config->WE = path;
-	if(type == 'S')
+	else if(type == 'S' && config->SO == NULL)
 		config->SO = path;
-	if(type == 'E')
+	else if(type == 'E' && config->EA == NULL)
 		config->EA = path;
+	else
+		throw_error("More Than one Texture");
 }
 
 void	parse_path(char *file_content, char type, t_config *config)
@@ -91,14 +99,16 @@ void	parse_path(char *file_content, char type, t_config *config)
 	free(path);
 }
 
-void	is_valid_char(char c)
+int	check_invalid_char_or_map_start(char c)
 {
+	if(c == '1')
+		return (1);
 	if (c != 'N' && c != 'O' && c != 'S'
 		&& c != 'W' && c != 'E' && c != 'A'
-		&& c != 'F' && c != 'C' && c != '1'
-		&& c != '0' && c != ' ' && c != '\n'
-		&& c != '\r')
+		&& c != 'F' && c != 'C' && c != ' '
+		&& c != '\n' && c != '\r')
 			throw_error("Not Allowed Char in .cub file");
+	return(0);
 }
 
 int	can_parse(char *line_content, int i)
@@ -126,7 +136,6 @@ int	can_parse(char *line_content, int i)
 
 void	parse_line_content(char *line_content, char type, t_config *config)
 {
-	//Impedir que venha mais de um tipo de variavel aqui.	
 	if (type == 'F' || type == 'C')
 		parse_color(line_content + 1, type, config);
 	else
@@ -134,12 +143,11 @@ void	parse_line_content(char *line_content, char type, t_config *config)
 }
 
 int	validate_config(char **buffer, t_config *config)
-{	
-	(void)config;
+{
+	char	*line_content;
 	int		line;
 	int		column;
 	int		type;
-	char	*line_content;
 
 	line = 0;
 	while (buffer[line] != NULL)
@@ -148,9 +156,8 @@ int	validate_config(char **buffer, t_config *config)
 		column = 0;
 		while (line_content[column] != '\0')
 		{
-			if(line_content[column] == '1')
+			if(check_invalid_char_or_map_start(line_content[column]))
 				return (line);
-			is_valid_char(line_content[column]);
 			type = can_parse(line_content, column);
 			if (type != 0)
 			{
