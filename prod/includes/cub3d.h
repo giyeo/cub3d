@@ -5,6 +5,10 @@
 # include <mlx.h>
 # include <fcntl.h>
 // open();
+# include <stdio.h>
+// perror();
+# include <string.h>
+// strerror();
 
 # define MAP_FILE_EXT ".cub"
 # define ONLY_CHARS_MAP "01WNSE "
@@ -16,5 +20,25 @@
 # define TID_EAST_TXT "EA"
 # define TID_FLOOR_CLR "F"
 # define TID_CELLING_CLR "C"
+
+typedef struct	s_config
+{
+	char	*NO;
+	char	*SO;
+	char	*WE;
+	char	*EA;
+	int		F[3];
+	int		C[3];
+	char	**map;	
+}			t_config;
+
+/* PARSER */
+int		file_check(char *file, int argc);
+int		extension_check(char *file);
+char	**read_file(int	fd, char *file);
+int		line_count(char *file);
+
+/* UTILS */
+void	throw_error(char *error);
 
 #endif

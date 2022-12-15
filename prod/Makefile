@@ -28,8 +28,19 @@ INC_FLAGS	:=	-I $(INCS_DIR) -I $(LIBFT_DIR)/includes \
 LINK_FLAGS	:=	-lm $(LIBFT_LINK) $(MLX_LINK) -fsanitize=address
 
 # SOURCES
+PARSER_DIR	:=	parser
+PARSER_SRCS	:=	extension_check.c \
+				file_check.c \
+				line_count.c \
+				read_file.c
+
+UTILS_DIR	:=	utils
+UTILS_SRCS	:=	utils.c
+
 SRCS_DIR	:=	srcs
-SRCS		:=	main.c
+SRCS		:=	main.c \
+				$(addprefix $(PARSER_DIR)/, $(PARSER_SRCS)) \
+				$(addprefix $(UTILS_DIR)/, $(UTILS_SRCS))
 
 SRCS_PTH	:=	$(addprefix $(SRCS_DIR)/, $(SRCS))
 
