@@ -2,12 +2,11 @@
 
 void	read_file_test_not_null()
 {
-	char	*file = "maps/subject.cub";
 	int		fd;
 	char	**file_read;
 
-	fd = open(file, O_RDONLY);
-	file_read = read_file(fd, file);
+	fd = open(SUBJECT_MAP, O_RDONLY);
+	file_read = read_file(fd, SUBJECT_MAP);
 	close_fd(fd);
 	TEST_ASSERT_NOT_NULL(file_read);
 }
@@ -18,8 +17,8 @@ void	read_file_test_check_subject_lines()
 	int		fd;
 	char	**file_read;
 
-	fd = open(file, O_RDONLY);
-	file_read = read_file(fd, file);
+	fd = open(SUBJECT_MAP, O_RDONLY);
+	file_read = read_file(fd, SUBJECT_MAP);
 	close_fd(fd);
 	TEST_ASSERT_NOT_NULL(file_read);
 	TEST_ASSERT_EQUAL_STRING("NO ./path_to_the_north_texture", file_read[0]);
@@ -52,8 +51,8 @@ void	read_file_test_check_several_blines()
 	int		fd;
 	char	**file_read;
 
-	fd = open(file, O_RDONLY);
-	file_read = read_file(fd, file);
+	fd = open(MANY_BLINES_MAP, O_RDONLY);
+	file_read = read_file(fd, MANY_BLINES_MAP);
 	close_fd(fd);
 	TEST_ASSERT_NOT_NULL(file_read);
 	TEST_ASSERT_EQUAL_STRING("\0", file_read[0]);
@@ -91,8 +90,8 @@ void	read_file_test_invalid_map()
 	int		fd;
 	char	**file_read;
 
-	fd = open(file, O_RDONLY);
-	file_read = read_file(fd, file);
+	fd = open(DOUBLE_ROOM_MAP, O_RDONLY);
+	file_read = read_file(fd, DOUBLE_ROOM_MAP);
 	close_fd(fd);
 	TEST_ASSERT_NOT_NULL(file_read);
 	TEST_ASSERT_EQUAL_STRING("NO ./textures/texture1", file_read[0]);

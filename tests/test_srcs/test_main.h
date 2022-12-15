@@ -5,11 +5,14 @@
 #include "cub3d.h"
 
 /* maps */
-#define SUBJECT_MAP "maps/subject.cub"
-#define DOUBLE_ROOM_MAP "maps/DOUBLE_ROOM_SIMPLE_MAP.cub"
-#define DOUBLE_HOLE_MAP "maps/BIG_ROOM_HOLES_SIMPLE_MAP.cub"
-#define NO_PERM_MAP "maps/noperm.cub"
-#define MANY_BLINES_MAP "maps/several_breaklines.cub"
+// SIMPLE
+#define SUBJECT_MAP "../maps_for_test/simple/subject.cub"
+#define DOUBLE_ROOM_MAP "../maps_for_test/simple/DOUBLE_ROOM_SIMPLE_MAP.cub"
+#define DOUBLE_HOLE_MAP "../maps_for_test/simple/BIG_ROOM_HOLES_SIMPLE_MAP.cub"
+#define MANY_BLINES_MAP "../maps_for_test/simple/several_breaklines.cub"
+
+// WRONG
+#define NO_PERM_MAP "../maps_for_test/wrong/noperm.cub"
 
 extern char *g_str;
 
@@ -34,10 +37,6 @@ void	find_split_line_test_many_blines_mapfile();
 
 
 /* SRC FILES (ISSO VAI SAIR DAQUI) */
-int		file_check(char *file);
-int		extension_check(char *file);
-char	**read_file(int	fd, char *file);
-int		line_count(char *file);
 int		find_split_line(char **read_file);
 
 /* TEST UTILS */

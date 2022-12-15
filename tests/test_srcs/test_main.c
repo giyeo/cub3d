@@ -24,7 +24,7 @@ int	main()
 	ft_printf("\033[1;33m extension_check_tests \033[0m\n");
 	RUN_TEST(extension_check_test);
 
-	ft_printf("\033[1;33m read_file_tests \033[0m\n");
+	ft_printf("\033[1;33m line_count_tests \033[0m\n");
 	RUN_TEST(line_count_test_no_breakline);
 	RUN_TEST(line_count_test_breaklines);
 
@@ -36,11 +36,11 @@ int	main()
 
 	// verificar se quebra de linha está no meio do mapa (invalido)
 		// esta validação será feita na validação da config
-	ft_printf("\033[1;33m find_split_line_tests \033[0m\n");
-	RUN_TEST(find_split_line_test_subject_mapfile);
-	RUN_TEST(find_split_line_test_doubleroom_mapfile);
-	RUN_TEST(find_split_line_test_doublehole_mapfile);
-	RUN_TEST(find_split_line_test_many_blines_mapfile);
+	// ft_printf("\033[1;33m find_split_line_tests \033[0m\n");
+	// RUN_TEST(find_split_line_test_subject_mapfile);
+	// RUN_TEST(find_split_line_test_doubleroom_mapfile);
+	// RUN_TEST(find_split_line_test_doublehole_mapfile);
+	// RUN_TEST(find_split_line_test_many_blines_mapfile);
 
 	return (UNITY_END());
 }

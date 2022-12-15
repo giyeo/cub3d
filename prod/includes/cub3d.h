@@ -34,7 +34,9 @@ typedef struct	s_config
 }			t_config;
 
 /* PARSER */
-int		file_check(char *file, int argc);
+int		file_validate(char *file, int argc);
+
+int		file_check(char *file);
 int		extension_check(char *file);
 char	**read_file(int	fd, char *file);
 int		line_count(char *file);
@@ -45,4 +47,5 @@ void	throw_error(char *error);
 
 /* VALIDATE*/
 int		validate_config(char **buffer, t_config *config);
+
 #endif
