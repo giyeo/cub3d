@@ -1,0 +1,2 @@
+chmod 000 noperm.cub
+	remove the permission from this file to test it

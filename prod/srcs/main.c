@@ -7,7 +7,7 @@ int	main(int argc, char *argv[])
 	char		**buffer;
 	t_config	config;
 
-	fd = file_check(argv[1], argc);
+	fd = file_validate(argv[1], argc);
 	buffer = read_file(fd, argv[1]);
 	parser_and_validate(buffer, &config);
 	// run (&config);
