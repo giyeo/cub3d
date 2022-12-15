@@ -35,14 +35,19 @@ int	main()
 	RUN_TEST(read_file_test_invalid_map);
 
 	ft_printf("\033[1;33m validate_config_tests \033[0m\n");
-	RUN_TEST(validate_config_test);
+	// RUN_TEST(validate_config_test);
+
+	ft_printf("\033[1;33m validate_map_tests \033[0m\n");
+
+
+
 	// verificar se quebra de linha está no meio do mapa (invalido)
 		// esta validação será feita na validação da config
-	// ft_printf("\033[1;33m find_split_line_tests \033[0m\n");
-	// RUN_TEST(find_split_line_test_subject_mapfile);
-	// RUN_TEST(find_split_line_test_doubleroom_mapfile);
-	// RUN_TEST(find_split_line_test_doublehole_mapfile);
-	// RUN_TEST(find_split_line_test_many_blines_mapfile);
+	ft_printf("\033[1;33m find_split_line_tests \033[0m\n");
+	RUN_TEST(find_split_line_test_subject_mapfile);
+	RUN_TEST(find_split_line_test_doubleroom_mapfile);
+	RUN_TEST(find_split_line_test_doublehole_mapfile);
+	RUN_TEST(find_split_line_test_many_blines_mapfile);
 
 	return (UNITY_END());
 }
