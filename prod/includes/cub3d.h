@@ -44,6 +44,7 @@ void	parser_and_validate(char **buffer, t_config *config);
 
 /* UTILS */
 void	throw_error(char *error);
+int		only_these(char *str, char *needles);
 
 /* VALIDATE*/
 int		validate_config(char **buffer, t_config *config);

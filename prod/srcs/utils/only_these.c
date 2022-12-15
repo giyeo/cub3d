@@ -1,29 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_split_line.c                                  :+:      :+:    :+:   */
+/*   only_these.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/14 17:27:10 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/15 17:17:56 by anjose-d         ###   ########.fr       */
+/*   Created: 2022/12/15 17:17:26 by anjose-d          #+#    #+#             */
+/*   Updated: 2022/12/15 17:17:43 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	find_split_line(char **read_file)
+int	only_these(char *str, char *needles)
 {
-	int	idx_line;
-	int	mtx_size;
+	int	i;
+	int	j;
+	int	found;
 
-	mtx_size = ft_mtxlen(read_file);
-	idx_line = mtx_size;
-	while (read_file[idx_line - 1] && idx_line)
+	i = 0;
+	if (str[i] == '\0')
+		return (-1);
+	while (str[i])
 	{
-		idx_line--;
-		if (only_these(read_file[idx_line], ONLY_CHARS_MAP))
-			break ;
+		j = 0;
+		found = 0;
+		while (needles[j])
+		{
+			if (str[i] == needles[j])
+			{
+				found = 1;
+				break ;
+			}
+			j++;
+		}
+		if (found == 0)
+			return (-1);
+		i++;
 	}
-	return (idx_line);
 }

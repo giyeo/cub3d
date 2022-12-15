@@ -38,7 +38,8 @@ PARSER_SRCS	:=	extension_check.c \
 				validate_config.c \
 
 UTILS_DIR	:=	utils
-UTILS_SRCS	:=	utils.c
+UTILS_SRCS	:=	utils.c \
+				only_these.c
 
 SRCS_DIR	:=	srcs
 SRCS		:=	main.c \
