@@ -35,6 +35,8 @@ void	find_split_line_test_doubleroom_mapfile();
 void	find_split_line_test_doublehole_mapfile();
 void	find_split_line_test_many_blines_mapfile();
 
+void	validate_config_test();
+
 
 /* SRC FILES (ISSO VAI SAIR DAQUI) */
 int		find_split_line(char **read_file);

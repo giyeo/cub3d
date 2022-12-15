@@ -34,6 +34,8 @@ int	main()
 	RUN_TEST(read_file_test_check_several_blines);
 	RUN_TEST(read_file_test_invalid_map);
 
+	ft_printf("\033[1;33m validate_config_tests \033[0m\n");
+	RUN_TEST(validate_config_test);
 	// verificar se quebra de linha está no meio do mapa (invalido)
 		// esta validação será feita na validação da config
 	// ft_printf("\033[1;33m find_split_line_tests \033[0m\n");
