@@ -37,6 +37,7 @@ int		file_check(char *file, int argc);
 int		extension_check(char *file);
 char	**read_file(int	fd, char *file);
 int		line_count(char *file);
+void	parser_and_validate(char **buffer, t_config *config);
 
 /* UTILS */
 void	throw_error(char *error);

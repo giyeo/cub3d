@@ -9,7 +9,7 @@ int	main(int argc, char *argv[])
 
 	fd = file_check(argv[1], argc);
 	buffer = read_file(fd, argv[1]);
-	//void parser(buffer, &config);
+	parser_and_validate(buffer, &config);
 	// run (&config);
 
 	(void)fd;
