@@ -34,15 +34,6 @@ int	main()
 	RUN_TEST(read_file_test_check_several_blines);
 	RUN_TEST(read_file_test_invalid_map);
 
-	ft_printf("\033[1;33m validate_config_tests \033[0m\n");
-	ft_printf(" TESTS BEING MADE! \n");
-	/* validate_config function is breaking tests because of the 'throws' */
-	// RUN_TEST(validate_config_test);
-
-	ft_printf("\033[1;33m validate_map_tests \033[0m\n");
-
-
-
 	// verificar se quebra de linha está no meio do mapa (invalido)
 		// esta validação será feita na validação da config
 	ft_printf("\033[1;33m find_split_line_tests \033[0m\n");
@@ -50,6 +41,20 @@ int	main()
 	RUN_TEST(find_split_line_test_doubleroom_mapfile);
 	RUN_TEST(find_split_line_test_doublehole_mapfile);
 	RUN_TEST(find_split_line_test_many_blines_mapfile);
+	RUN_TEST(find_split_line_test_invalid_mapfile);
+
+	ft_printf("\033[1;33m validate_config_tests \033[0m\n");
+	ft_printf(" TESTS BEING MADE! \n");
+	/* validate_config function is breaking tests because of the 'throws' */
+	// RUN_TEST(validate_config_test);
+
+	ft_printf("\033[1;33m validate_map_tests \033[0m\n");
+	RUN_TEST(validate_map_test_invalid_char_in_map);
+	RUN_TEST(validate_map_test_valid_map);
+	RUN_TEST(validate_map_test_bottom_entrance_map);
+	// RUN_TEST(validate_map_test_top_entrance_map);
+	// RUN_TEST(validate_map_test_left_entrance_map);
+	// RUN_TEST(validate_map_test_right_entrance_map);
 
 	return (UNITY_END());
 }

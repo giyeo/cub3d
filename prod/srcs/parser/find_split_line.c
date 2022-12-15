@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:27:10 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/15 17:17:56 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/15 20:03:34 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	find_split_line(char **read_file)
 	while (read_file[idx_line - 1] && idx_line)
 	{
 		idx_line--;
-		if (only_these(read_file[idx_line], ONLY_CHARS_MAP))
+		if (read_file[idx_line][0] == 0)
 			break ;
 	}
 	return (idx_line);

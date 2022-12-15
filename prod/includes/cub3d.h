@@ -41,6 +41,7 @@ int		extension_check(char *file);
 char	**read_file(int	fd, char *file);
 int		line_count(char *file);
 void	parser_and_validate(char **buffer, t_config *config);
+int		find_split_line(char **read_file);
 
 /* UTILS */
 void	throw_error(char *error);
@@ -48,5 +49,6 @@ int		only_these(char *str, char *needles);
 
 /* VALIDATE*/
 int		validate_config(char **buffer, t_config *config);
+int		validate_map(char **buffer, t_config *config);
 
 #endif

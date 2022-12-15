@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   only_these.c                                       :+:      :+:    :+:   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/15 17:17:26 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/15 19:56:55 by anjose-d         ###   ########.fr       */
+/*   Created: 2022/12/15 17:03:52 by anjose-d          #+#    #+#             */
+/*   Updated: 2022/12/15 20:14:21 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	only_these(char *str, char *needles)
-{
-	int	i;
-	int	j;
-	int	found;
+int	map_has_entrance(char **buffer, int split_line);
 
-	i = 0;
-	if (str[i] == '\0')
+int	validate_map(char **buffer, t_config *config)
+{
+	int	split_line;
+	int	i;
+
+	split_line = find_split_line(buffer) + 1;
+	i = split_line;
+	// checar se está circundado por 1
+	if (map_has_entrance(buffer, split_line))
 		return (-1);
-	while (str[i])
+	while (buffer[i])
 	{
-		j = 0;
-		found = 0;
-		while (needles[j])
-		{
-			if (str[i] == needles[j])
-			{
-				found = 1;
-				break ;
-			}
-			j++;
-		}
-		if (found == 0)
-			return (-1);
+		// check invalid chars
+		if(only_these(buffer[i], ONLY_CHARS_MAP))
+			return (-2);
 		i++;
 	}
+	return (0);
+}
+
+int	map_has_entrance(char **buffer, int split_line)
+{
+	
 	return (0);
 }

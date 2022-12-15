@@ -13,7 +13,11 @@
 
 // WRONG
 #define NO_PERM_MAP "../maps_for_test/wrong/noperm.cub"
-
+#define INVALID_MAP "../maps_for_test/wrong/invalid_char_in_map.cub"
+#define ENTRANCE_TOP_MAP "../maps_for_test/wrong/entrance_on_top.cub"
+#define ENTRANCE_LEFT_MAP "../maps_for_test/wrong/entrance_on_the_left.cub"
+#define ENTRANCE_RIGHT_MAP "../maps_for_test/wrong/entrance_on_the_right.cub"
+#define ENTRANCE_BOTTOM_MAP "../maps_for_test/wrong/entrance_on_the_bottom.cub"
 extern char *g_str;
 
 /* TESTES */
@@ -34,8 +38,15 @@ void	find_split_line_test_subject_mapfile();
 void	find_split_line_test_doubleroom_mapfile();
 void	find_split_line_test_doublehole_mapfile();
 void	find_split_line_test_many_blines_mapfile();
-
+void	find_split_line_test_invalid_mapfile();
 void	validate_config_test();
+
+void	validate_map_test_invalid_char_in_map();
+void	validate_map_test_valid_map();
+void	validate_map_test_bottom_entrance_map();
+void	validate_map_test_top_entrance_map();
+void	validate_map_test_left_entrance_map();
+void	validate_map_test_right_entrance_map();
 
 
 /* SRC FILES (ISSO VAI SAIR DAQUI) */

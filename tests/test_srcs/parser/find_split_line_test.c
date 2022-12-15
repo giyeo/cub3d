@@ -54,3 +54,15 @@ void	find_split_line_test_many_blines_mapfile()
 	TEST_ASSERT_EQUAL(12, split_line);
 }
 
+void	find_split_line_test_invalid_mapfile()
+{
+	int		fd;
+	char	**file_read;
+	int		split_line;
+
+	fd = open(INVALID_MAP, O_RDONLY);
+	file_read = read_file(fd, INVALID_MAP);
+	close_fd(fd);
+	split_line = find_split_line(file_read);
+	TEST_ASSERT_EQUAL(7, split_line);
+}

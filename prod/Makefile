@@ -36,6 +36,7 @@ PARSER_SRCS	:=	extension_check.c \
 				parser_and_validate.c \
 				file_validate.c \
 				validate_config.c \
+				find_split_line.c
 
 UTILS_DIR	:=	utils
 UTILS_SRCS	:=	utils.c \
