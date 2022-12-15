@@ -35,6 +35,8 @@ int	main()
 	RUN_TEST(read_file_test_invalid_map);
 
 	ft_printf("\033[1;33m validate_config_tests \033[0m\n");
+	ft_printf(" TESTS BEING MADE! \n");
+	/* validate_config function is breaking tests because of the 'throws' */
 	// RUN_TEST(validate_config_test);
 
 	ft_printf("\033[1;33m validate_map_tests \033[0m\n");
