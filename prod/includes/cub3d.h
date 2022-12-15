@@ -42,4 +42,6 @@ void	parser_and_validate(char **buffer, t_config *config);
 /* UTILS */
 void	throw_error(char *error);
 
+/* VALIDATE*/
+int		validate_config(char **buffer, t_config *config);
 #endif
