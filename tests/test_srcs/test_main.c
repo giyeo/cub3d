@@ -56,6 +56,9 @@ int	main()
 	RUN_TEST(validate_map_test_left_entrance_map);
 	RUN_TEST(validate_map_test_right_entrance_map);
 
+	RUN_TEST(validate_map_test_open_on_top_map);
+	RUN_TEST(validate_map_test_open_on_bottom_map);
+
 	return (UNITY_END());
 }
 

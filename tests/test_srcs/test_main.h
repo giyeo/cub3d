@@ -18,6 +18,8 @@
 #define ENTRANCE_LEFT_MAP "../maps_for_test/wrong/entrance_on_the_left.cub"
 #define ENTRANCE_RIGHT_MAP "../maps_for_test/wrong/entrance_on_the_right.cub"
 #define ENTRANCE_BOTTOM_MAP "../maps_for_test/wrong/entrance_on_the_bottom.cub"
+#define OPEN_ON_TOP_MAP "../maps_for_test/wrong/map_open_on_top.cub"
+#define OPEN_ON_BOTTOM_MAP "../maps_for_test/wrong/map_open_on_bottom.cub"
 
 extern char *g_str;
 
@@ -50,7 +52,8 @@ void	validate_map_test_bottom_entrance_map();
 void	validate_map_test_top_entrance_map();
 void	validate_map_test_left_entrance_map();
 void	validate_map_test_right_entrance_map();
-
+void	validate_map_test_open_on_top_map();
+void	validate_map_test_open_on_bottom_map();
 
 /* SRC FILES (ISSO VAI SAIR DAQUI) */
 int		find_split_line(char **read_file);

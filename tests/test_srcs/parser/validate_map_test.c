@@ -72,7 +72,26 @@ void	validate_map_test_right_entrance_map()
 	TEST_ASSERT_EQUAL(-1, ret);
 }
 
-// only this characters
-/*
-	0, 1, N, S, E, W
-*/
+void	validate_map_test_open_on_top_map()
+{
+	t_config	config;
+	char		**buffer;
+	int			ret;
+
+	int	fd = file_check(OPEN_ON_TOP_MAP);
+	buffer = read_file(fd, OPEN_ON_TOP_MAP);
+	ret = validate_map(buffer, &config);
+	TEST_ASSERT_EQUAL(-1, ret);
+}
+
+void	validate_map_test_open_on_bottom_map()
+{
+	t_config	config;
+	char		**buffer;
+	int			ret;
+
+	int	fd = file_check(OPEN_ON_BOTTOM_MAP);
+	buffer = read_file(fd, OPEN_ON_BOTTOM_MAP);
+	ret = validate_map(buffer, &config);
+	TEST_ASSERT_EQUAL(-1, ret);
+}
