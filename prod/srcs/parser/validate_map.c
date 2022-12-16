@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:03:52 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/16 17:16:23 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/16 18:10:15 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ int	check_map(char **buffer, int first_line, t_config *config)
 		{
 			if (buffer[line][i] == '0')
 			{
-				if (i == 0)				// canto esquerdo
+				// if (i == 0)				// canto esquerdo
+				// 	return (-1);
+				// else {
+				if (check_surroundings(buffer, line, i, config->player_position))
 					return (-1);
-				else {
-					if (check_surroundings(buffer, line, i, config->player_position))
-						return (-1);
-				}
+				// }
 			}
 			i++;
 		}
@@ -71,8 +71,10 @@ int	check_map(char **buffer, int first_line, t_config *config)
 
 int	check_surroundings(char **buffer, int line, int col, int player_pos[2])
 {
-	if ((!is_one_of_these(buffer[line][col - 1], "01") && line != player_pos[0] && col != player_pos[1]) ||
-	(!is_one_of_these(buffer[line][col + 1], "01") && line != player_pos[0] && col != player_pos[1])
+	if ((!is_one_of_these(buffer[line][col - 1], "01") && line != player_pos[0] && col != player_pos[1]) || // checa esquerda
+	(!is_one_of_these(buffer[line][col + 1], "01") && line != player_pos[0] && col != player_pos[1]) ||		// checa direita
+	(!is_one_of_these(buffer[line - 1][col], "01") && line != player_pos[0] && col != player_pos[1]) ||		// checa topo
+	(!is_one_of_these(buffer[line + 1][col], "01") && line != player_pos[0] && col != player_pos[1])		// checa bottom
 	)
 	{
 		return (-1);

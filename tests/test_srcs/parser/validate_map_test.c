@@ -95,3 +95,4 @@ void	validate_map_test_open_on_bottom_map()
 	ret = validate_map(buffer, &config);
 	TEST_ASSERT_EQUAL(-1, ret);
 }
+
