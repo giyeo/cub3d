@@ -18,6 +18,7 @@
 #define ENTRANCE_LEFT_MAP "../maps_for_test/wrong/entrance_on_the_left.cub"
 #define ENTRANCE_RIGHT_MAP "../maps_for_test/wrong/entrance_on_the_right.cub"
 #define ENTRANCE_BOTTOM_MAP "../maps_for_test/wrong/entrance_on_the_bottom.cub"
+
 extern char *g_str;
 
 /* TESTES */

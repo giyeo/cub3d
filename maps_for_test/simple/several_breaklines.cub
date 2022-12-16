@@ -1,11 +1,11 @@
 
-NO ./path_to_the_north_texture
+NO ../textures/texture1
 
-SO ./path_to_the_south_texture
+SO ../textures/texture2
 
-WE ./path_to_the_west_texture
+WE ../textures/texture3
 
-EA ./path_to_the_east_texture
+EA ../textures/texture4
 
 F 220,100,0
 

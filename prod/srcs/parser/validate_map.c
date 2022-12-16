@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:03:52 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/15 20:14:21 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/15 23:23:32 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	validate_map(char **buffer, t_config *config)
 
 int	map_has_entrance(char **buffer, int split_line)
 {
-	
+	// função para encontrar player
+	// verificar 4 horizontes dos 0 (acima, abaixo, laterais)
+		// deve ter 0 ou 1 (ou player position)
 	return (0);
 }
