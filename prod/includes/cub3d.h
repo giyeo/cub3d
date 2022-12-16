@@ -4,6 +4,7 @@
 # include "libft.h"
 # include <mlx.h>
 # include <fcntl.h>
+# include "errors.h"
 // open();
 # include <stdio.h>
 // perror();
@@ -33,6 +34,7 @@ typedef struct	s_config
 	char	**map;
 	int		player_position[2];
 	char	player_direction;
+	char	*errors[255];
 }			t_config;
 
 /* PARSER */
@@ -48,6 +50,7 @@ int		find_split_line(char **read_file);
 /* UTILS */
 void	throw_error(char *error);
 int		only_these(char *str, char *needles);
+void	config_init(t_config *config);
 
 /* VALIDATE*/
 int		validate_config(char **buffer, t_config *config);

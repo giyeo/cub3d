@@ -40,7 +40,9 @@ void	find_split_line_test_doubleroom_mapfile();
 void	find_split_line_test_doublehole_mapfile();
 void	find_split_line_test_many_blines_mapfile();
 void	find_split_line_test_invalid_mapfile();
-void	validate_config_test();
+
+void	validate_config_test_not_null();
+void	validate_config_test_values_check();
 
 void	validate_map_test_invalid_char_in_map();
 void	validate_map_test_valid_map();
