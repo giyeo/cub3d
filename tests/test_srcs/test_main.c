@@ -51,10 +51,10 @@ int	main()
 	ft_printf("\033[1;33m validate_map_tests \033[0m\n");
 	RUN_TEST(validate_map_test_invalid_char_in_map);
 	RUN_TEST(validate_map_test_valid_map);
+	RUN_TEST(validate_map_test_top_entrance_map);
 	RUN_TEST(validate_map_test_bottom_entrance_map);
-	// RUN_TEST(validate_map_test_top_entrance_map);
-	// RUN_TEST(validate_map_test_left_entrance_map);
-	// RUN_TEST(validate_map_test_right_entrance_map);
+	RUN_TEST(validate_map_test_left_entrance_map);
+	RUN_TEST(validate_map_test_right_entrance_map);
 
 	return (UNITY_END());
 }

@@ -41,7 +41,8 @@ PARSER_SRCS	:=	extension_check.c \
 UTILS_DIR	:=	utils
 UTILS_SRCS	:=	utils.c \
 				only_these.c \
-				config_init.c
+				config_init.c \
+				find_player.c
 
 SRCS_DIR	:=	srcs
 SRCS		:=	main.c \

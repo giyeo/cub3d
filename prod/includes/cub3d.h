@@ -14,6 +14,8 @@
 
 # define MAP_FILE_EXT ".cub"
 # define ONLY_CHARS_MAP "01WNSE "
+# define PLAYER_DIRECTIONS "NSEW"
+
 
 /* type identifiers */
 # define TID_NORTH_TXT "NO"
@@ -51,6 +53,8 @@ int		find_split_line(char **read_file);
 void	throw_error(char *error);
 int		only_these(char *str, char *needles);
 void	config_init(t_config *config);
+int		is_one_of_these(char c, char *these);
+int		find_player(char **buffer, int first_line, t_config *config);
 
 /* VALIDATE*/
 int		validate_config(char **buffer, t_config *config);

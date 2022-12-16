@@ -9,7 +9,7 @@ void	validate_map_test_invalid_char_in_map()
 	int	fd = file_check(INVALID_MAP);
 	buffer = read_file(fd, INVALID_MAP);
 	ret = validate_map(buffer, &config);
-	TEST_ASSERT_EQUAL(-2, ret);
+	TEST_ASSERT_EQUAL(-1, ret);
 }
 
 void	validate_map_test_valid_map()
