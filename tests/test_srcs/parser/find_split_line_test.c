@@ -38,7 +38,7 @@ void	find_split_line_test_doublehole_mapfile()
 	file_read = read_file(fd, DOUBLE_HOLE_MAP);
 	close_fd(fd);
 	split_line = find_split_line(file_read);
-	TEST_ASSERT_EQUAL(0, split_line);
+	TEST_ASSERT_EQUAL(7, split_line);
 }
 
 void	find_split_line_test_many_blines_mapfile()

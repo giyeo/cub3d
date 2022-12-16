@@ -96,3 +96,14 @@ void	validate_map_test_open_on_bottom_map()
 	TEST_ASSERT_EQUAL(-1, ret);
 }
 
+void	validate_map_test_double_hole_map()
+{
+	t_config	config;
+	char		**buffer;
+	int			ret;
+
+	int	fd = file_check(DOUBLE_HOLE_MAP);
+	buffer = read_file(fd, DOUBLE_HOLE_MAP);
+	ret = validate_map(buffer, &config);
+	TEST_ASSERT_EQUAL(0, ret);
+}
