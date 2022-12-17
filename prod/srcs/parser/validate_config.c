@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_config.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:49:51 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/15 12:10:45 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/16 22:01:30 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	assign_color(char type, t_config *config, int *color)
 
 void	parse_color(char *file_content, char type, t_config *config)
 {
-	char *line = ft_substr(file_content, 0, ft_str_find_idx(file_content, '\n'));
 	int i = 0;
 	int comma_index = 0;
 	int start_index = 0;
@@ -42,20 +41,21 @@ void	parse_color(char *file_content, char type, t_config *config)
 
 	color = (int *)(malloc(sizeof(int) * 3));
 	while(i < 3)
-	{
-		comma_index = ft_str_find_idx(line + start_index, ',');
-		if(comma_index == -1)
-			comma_index = ft_str_find_idx(line + start_index, '\0');
-		number_string = ft_substr(line, start_index, comma_index);
+	{	//FIND WHERE END
+		comma_index = ft_str_find_idx(file_content + start_index, ',');
+		if(comma_index == -1) //CASE LAST NUMBER
+			comma_index = ft_str_find_idx(file_content + start_index, '\0');
+		//GET STRING AND PARSE TO NUMBER
+		number_string = ft_substr(file_content, start_index, comma_index);
 		trimmed_number_string = ft_strtrim(number_string, " ");
 		color[i++] = ft_atoi(trimmed_number_string);
+		//REPEAT
 		start_index += comma_index + 1;
 		free(number_string);
 		free(trimmed_number_string);
 	}
 	assign_color(type, config, color);
 	free(color);
-	free(line);
 }
 
 void	test_path(char *path)
@@ -134,10 +134,41 @@ int	can_parse(char *line_content, int i)
 	return (0);
 }
 
+void	color_error_handling(char *line_content)
+{
+	int i = 0;
+	int count_commas = 0;
+	int has_digit = 0;
+	while(line_content[i] != '\0')
+	{
+		if(!ft_isdigit(line_content[i])
+		&& line_content[i] != ' '
+		&& line_content[i] != ',')
+			throw_error("Invalid Char on Color");
+		if(ft_isdigit(line_content[i]))
+			has_digit = 1;
+		if(line_content[i] == ',')
+		{
+			if(has_digit == 0)
+				throw_error("Not enough digits");
+			count_commas++;
+			has_digit = 0;
+		}
+		i++;
+	}
+	if(has_digit == 0)
+		throw_error("Not enough digits");
+	if(count_commas != 2)
+		throw_error("Only 2 commas allowed");
+}
+
 void	parse_line_content(char *line_content, char type, t_config *config)
 {
 	if (type == 'F' || type == 'C')
+	{
+		color_error_handling(line_content + 1);
 		parse_color(line_content + 1, type, config);
+	}
 	else
 		parse_path(line_content + 2, type, config);
 }

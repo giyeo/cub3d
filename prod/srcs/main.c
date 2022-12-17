@@ -13,6 +13,12 @@ void	init(t_config *config)
 	config->player_direction = 'Z';
 }
 
+char **error(void)
+{
+	static char	*errors[255];
+	return (&errors);
+}
+
 int	main(int argc, char *argv[])
 {
 	void		*mlx;

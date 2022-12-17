@@ -36,7 +36,6 @@ typedef struct	s_config
 	char	**map;
 	int		player_position[2];
 	char	player_direction;
-	char	*errors[255];
 }			t_config;
 
 /* PARSER */
