@@ -4,7 +4,6 @@
 void	find_split_line_test_subject_mapfile()
 {
 	int		fd;
-	char	**file_read;
 	int		split_line;
 
 	fd = open(SUBJECT_MAP, O_RDONLY);
@@ -17,7 +16,6 @@ void	find_split_line_test_subject_mapfile()
 void	find_split_line_test_doubleroom_mapfile()
 {
 	int		fd;
-	char	**file_read;
 	int		split_line;
 
 	fd = open(DOUBLE_ROOM_MAP, O_RDONLY);
@@ -31,7 +29,6 @@ void	find_split_line_test_doubleroom_mapfile()
 void	find_split_line_test_doublehole_mapfile()
 {
 	int		fd;
-	char	**file_read;
 	int		split_line;
 
 	fd = open(DOUBLE_HOLE_MAP, O_RDONLY);
@@ -44,7 +41,6 @@ void	find_split_line_test_doublehole_mapfile()
 void	find_split_line_test_many_blines_mapfile()
 {
 	int		fd;
-	char	**file_read;
 	int		split_line;
 
 	fd = open(MANY_BLINES_MAP, O_RDONLY);
@@ -57,7 +53,6 @@ void	find_split_line_test_many_blines_mapfile()
 void	find_split_line_test_invalid_mapfile()
 {
 	int		fd;
-	char	**file_read;
 	int		split_line;
 
 	fd = open(INVALID_MAP, O_RDONLY);

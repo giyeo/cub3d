@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 18:37:12 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/14 11:45:17 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/18 11:23:48 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	remove_bline(char **str, int lsize)
 	char *line;
 
 	line = *str;
-	while (line && lsize >= 0 && line[lsize - 1]
+	while (line && lsize > 0 && line[lsize - 1]
 		&& find_bline(line, lsize))
 	{
 		line[lsize - 1] = '\0';

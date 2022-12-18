@@ -3,7 +3,6 @@
 void	read_file_test_not_null()
 {
 	int		fd;
-	char	**file_read;
 
 	fd = open(SUBJECT_MAP, O_RDONLY);
 	file_read = read_file(fd, SUBJECT_MAP);
@@ -15,7 +14,6 @@ void	read_file_test_check_subject_lines()
 {
 	char	*file = "maps/subject.cub";
 	int		fd;
-	char	**file_read;
 
 	fd = open(SUBJECT_MAP, O_RDONLY);
 	file_read = read_file(fd, SUBJECT_MAP);
@@ -49,7 +47,6 @@ void	read_file_test_check_several_blines()
 {
 	char	*file = "maps/several_breaklines.cub";
 	int		fd;
-	char	**file_read;
 
 	fd = open(MANY_BLINES_MAP, O_RDONLY);
 	file_read = read_file(fd, MANY_BLINES_MAP);
@@ -88,7 +85,6 @@ void	read_file_test_invalid_map()
 {
 	char	*file = "maps/DOUBLE_ROOM_SIMPLE_MAP.cub";
 	int		fd;
-	char	**file_read;
 
 	fd = open(DOUBLE_ROOM_MAP, O_RDONLY);
 	file_read = read_file(fd, DOUBLE_ROOM_MAP);

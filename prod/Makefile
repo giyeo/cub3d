@@ -44,10 +44,14 @@ UTILS_SRCS	:=	utils.c \
 				config_init.c \
 				find_player.c
 
+FREE_DIR	:=	free
+FREE_SRCS	:=	free_config.c
+
 SRCS_DIR	:=	srcs
 SRCS		:=	main.c \
 				$(addprefix $(PARSER_DIR)/, $(PARSER_SRCS)) \
-				$(addprefix $(UTILS_DIR)/, $(UTILS_SRCS))
+				$(addprefix $(UTILS_DIR)/, $(UTILS_SRCS)) \
+				$(addprefix $(FREE_DIR)/, $(FREE_SRCS))
 
 SRCS_PTH	:=	$(addprefix $(SRCS_DIR)/, $(SRCS))
 

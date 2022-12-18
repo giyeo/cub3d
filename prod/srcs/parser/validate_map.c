@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:03:52 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/18 10:57:26 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/18 12:13:18 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	validate_map(char **buffer, t_config *config)
 	int	i;
 
 	first_line = find_split_line(buffer) + 1;
-	
 	i = first_line;
 	// checar se está circundado por 1
 	if (check_map(buffer, first_line, config))
@@ -55,12 +54,8 @@ int	check_map(char **buffer, int first_line, t_config *config)
 		{
 			if (buffer[line][i] == '0')
 			{
-				// if (i == 0)				// canto esquerdo
-				// 	return (-1);
-				// else {
 				if (check_surroundings(buffer, line, i, config->player_position))
 					return (-1);
-				// }
 			}
 			i++;
 		}
@@ -73,7 +68,7 @@ int	check_surroundings(char **buffer, int line, int col, int player_pos[2])
 {
 	// se posição atual 0 passa do tamanho da linha anterior
 		// return -1
-	if (strlen(buffer[line - 1]) < col || strlen(buffer[line + 1]) < col)
+	if (col == 0 || strlen(buffer[line - 1]) < col || strlen(buffer[line + 1]) < col)
 		return (-1);
 	if ((!is_one_of_these(buffer[line][col - 1], "01") && line != player_pos[0] && col != player_pos[1]) || // checa esquerda
 	(!is_one_of_these(buffer[line][col + 1], "01") && line != player_pos[0] && col != player_pos[1]) ||		// checa direita

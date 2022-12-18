@@ -1,16 +1,18 @@
 #include "test_main.h"
 
-char *g_str;
+char		**file_read;
+t_config	config;
 
 void	setUp()
 {
-	g_str = NULL;
+	file_read = NULL;
+	config_init(&config);
 }
 
 void	tearDown()
 {
-	if(g_str)
-		free(g_str);
+	ft_destroy_matrix(file_read);
+	free_config(&config);
 }
 
 int	main()
@@ -34,8 +36,8 @@ int	main()
 	RUN_TEST(read_file_test_check_several_blines);
 	RUN_TEST(read_file_test_invalid_map);
 
-	// verificar se quebra de linha está no meio do mapa (invalido)
-		// esta validação será feita na validação da config
+	// // verificar se quebra de linha está no meio do mapa (invalido)
+	// 	// esta validação será feita na validação da config
 	ft_printf("\033[1;33m find_split_line_tests \033[0m\n");
 	RUN_TEST(find_split_line_test_subject_mapfile);
 	RUN_TEST(find_split_line_test_doubleroom_mapfile);
@@ -43,10 +45,10 @@ int	main()
 	RUN_TEST(find_split_line_test_many_blines_mapfile);
 	RUN_TEST(find_split_line_test_invalid_mapfile);
 
-	ft_printf("\033[1;33m validate_config_tests \033[0m\n");
-	/* validate_config function is breaking tests because of the 'throws' */
-	// RUN_TEST(validate_config_test_not_null);
-	// RUN_TEST(validate_config_test_values_check);
+	// ft_printf("\033[1;33m validate_config_tests \033[0m\n");
+	// /* validate_config function is breaking tests because of the 'throws' */
+	// // RUN_TEST(validate_config_test_not_null);
+	// // RUN_TEST(validate_config_test_values_check);
 
 	ft_printf("\033[1;33m validate_map_tests \033[0m\n");
 	RUN_TEST(validate_map_test_invalid_char_in_map);

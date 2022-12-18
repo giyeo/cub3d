@@ -3,11 +3,10 @@
 void	validate_config_test_not_null()
 {
 	t_config	config;
-	char		**buffer;
 
 	int	fd = file_check(SUBJECT_MAP);
-	buffer = read_file(fd, SUBJECT_MAP);
-	validate_config(buffer, &config);
+	file_read = read_file(fd, SUBJECT_MAP);
+	validate_config(file_read, &config);
 
 	TEST_ASSERT_NOT_NULL(config.NO);
 	TEST_ASSERT_NOT_NULL(config.SO);
@@ -19,11 +18,10 @@ void	validate_config_test_not_null()
 void	validate_config_test_values_check()
 {
 	t_config	config;
-	char		**buffer;
 
 	int	fd = file_check(SUBJECT_MAP);
-	buffer = read_file(fd, SUBJECT_MAP);
-	validate_config(buffer, &config);
+	file_read = read_file(fd, SUBJECT_MAP);
+	validate_config(file_read, &config);
 
 	TEST_ASSERT_EQUAL_STRING("NO ../textures/texture1", config.NO);
 	TEST_ASSERT_EQUAL_STRING("SO ../textures/texture2", config.SO);

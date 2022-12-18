@@ -5,7 +5,8 @@
 #include "cub3d.h"
 #include "maps.h"
 
-extern char *g_str;
+extern char		**file_read;
+extern t_config	config;
 
 /* TESTES */
 void	file_check_test_existance();
