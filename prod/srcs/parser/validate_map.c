@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:03:52 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/16 18:10:15 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/18 10:57:26 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@ int	check_map(char **buffer, int first_line, t_config *config)
 
 int	check_surroundings(char **buffer, int line, int col, int player_pos[2])
 {
+	// se posição atual 0 passa do tamanho da linha anterior
+		// return -1
+	if (strlen(buffer[line - 1]) < col || strlen(buffer[line + 1]) < col)
+		return (-1);
 	if ((!is_one_of_these(buffer[line][col - 1], "01") && line != player_pos[0] && col != player_pos[1]) || // checa esquerda
 	(!is_one_of_these(buffer[line][col + 1], "01") && line != player_pos[0] && col != player_pos[1]) ||		// checa direita
 	(!is_one_of_these(buffer[line - 1][col], "01") && line != player_pos[0] && col != player_pos[1]) ||		// checa topo

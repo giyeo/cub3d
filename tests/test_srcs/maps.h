@@ -16,5 +16,6 @@
 # define ENTRANCE_BOTTOM_MAP "../maps_for_test/wrong/entrance_on_the_bottom.cub"
 # define OPEN_ON_TOP_MAP "../maps_for_test/wrong/map_open_on_top.cub"
 # define OPEN_ON_BOTTOM_MAP "../maps_for_test/wrong/map_open_on_bottom.cub"
+# define OPEN_INVREAD_MAP "../maps_for_test/wrong/map_open_invalidread.cub"
 
 #endif

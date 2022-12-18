@@ -107,3 +107,15 @@ void	validate_map_test_double_hole_map()
 	ret = validate_map(buffer, &config);
 	TEST_ASSERT_EQUAL(0, ret);
 }
+
+void	validate_map_test_open_invalid_read_map()
+{
+	t_config	config;
+	char		**buffer;
+	int			ret;
+
+	int	fd = file_check(OPEN_INVREAD_MAP);
+	buffer = read_file(fd, OPEN_INVREAD_MAP);
+	ret = validate_map(buffer, &config);
+	TEST_ASSERT_EQUAL(-1, ret);
+}

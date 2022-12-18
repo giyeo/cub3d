@@ -58,6 +58,7 @@ int	main()
 	RUN_TEST(validate_map_test_open_on_top_map);
 	RUN_TEST(validate_map_test_open_on_bottom_map);
 	RUN_TEST(validate_map_test_double_hole_map);
+	RUN_TEST(validate_map_test_open_invalid_read_map); // invalid read
 
 	return (UNITY_END());
 }
