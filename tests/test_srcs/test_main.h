@@ -9,6 +9,10 @@ extern char		**file_read;
 extern t_config	config;
 
 /* TESTES */
+
+// libft
+void	ft_mtxcpy_not_null();
+
 void	file_check_test_existance();
 void	file_check_test_permission();
 

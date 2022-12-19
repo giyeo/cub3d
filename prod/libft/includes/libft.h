@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 00:12:18 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/08/13 20:30:23 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/19 18:36:04 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -542,6 +542,9 @@ int			ft_mtxlen(char **mtx);
 Destroy all the content in a matrix
 */
 void		ft_destroy_matrix(char **matrix);
+
+/* Copy a given matrix */
+char		**ft_mtxcpy(char **mtx_root);
 
 /* Same thing as atoi but with bigger capacity of conversion */
 long long	ft_atoi_llong(const char *str);
