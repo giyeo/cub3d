@@ -52,11 +52,14 @@ int		find_split_line(char **read_file);
 void	throw_error(char *error);
 int		only_these(char *str, char *needles);
 void	config_init(t_config *config);
+void	init(t_config *config);
+void	print_struct(t_config *config);
+void	check_struct(t_config *config, int i);
 int		is_one_of_these(char c, char *these);
 int		find_player(char **buffer, int first_line, t_config *config);
 
 /* VALIDATE*/
-int		validate_config(char **buffer, t_config *config);
+void	validate_config(char **buffer, t_config *config);
 int		validate_map(char **buffer, t_config *config);
 
 /* FREE */

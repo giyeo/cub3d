@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:03:52 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/18 12:13:18 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/20 12:01:15 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	validate_map(char **buffer, t_config *config)
 			return (-1);
 		i++;
 	}
+	config->map = ft_mtxcpy(buffer + first_line);
+	check_struct(config, 1);
 	return (0);
 }
 

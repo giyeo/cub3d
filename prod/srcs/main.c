@@ -1,42 +1,19 @@
 #include <cub3d.h>
 
-void	init(t_config *config)
-{
-	config->NO = NULL;
-	config->WE = NULL;
-	config->SO = NULL;
-	config->EA = NULL;
-	config->map = NULL;
-	config->F[0] = -1;
-	config->C[0] = -1;
-	config->player_position[0] = -1;
-	config->player_direction = 'Z';
-}
-
-char **error(void)
-{
-	static char	*errors[255];
-	return (&errors);
-}
-
 int	main(int argc, char *argv[])
 {
-	void		*mlx;
-	int			fd;
-	char		**buffer;
 	t_config	config;
+	char		**buffer;
+	int			fd;
 
 	init(&config);
 	fd = file_validate(argv[1], argc);
 	buffer = read_file(fd, argv[1]);
+	close(fd);
 	parser_and_validate(buffer, &config);
+	ft_destroy_matrix(buffer);
 	// run (&config);
-
-	(void)fd;
-	(void)buffer;
-	(void)config;
-	(void)argc;
-	(void)mlx;
-
+	print_struct(&config);
+	free_config(&config);
 	return (0);
 }
