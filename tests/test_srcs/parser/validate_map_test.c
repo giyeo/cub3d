@@ -99,3 +99,13 @@ void	validate_map_test_open_invalid_read_map()
 	ret = validate_map(file_read, &config);
 	TEST_ASSERT_EQUAL(-1, ret);
 }
+
+void	validate_map_test_two_players_map()
+{
+	int			ret;
+
+	int	fd = file_check(TWO_PLAYERS_MAP);
+	file_read = read_file(fd, TWO_PLAYERS_MAP);
+	ret = validate_map(file_read, &config);
+	// TEST_ASSERT_EQUAL(-1, ret);
+}

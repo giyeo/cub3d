@@ -45,6 +45,7 @@ void	validate_map_test_open_on_top_map();
 void	validate_map_test_open_on_bottom_map();
 void	validate_map_test_double_hole_map();
 void	validate_map_test_open_invalid_read_map();
+void	validate_map_test_two_players_map();
 
 /* SRC FILES (ISSO VAI SAIR DAQUI) */
 int		find_split_line(char **read_file);

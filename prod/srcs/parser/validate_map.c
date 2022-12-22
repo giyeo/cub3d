@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:03:52 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/20 12:01:15 by rpaulino         ###   ########.fr       */
+/*   Updated: 2022/12/21 21:46:45 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_map(char **buffer, int first_line, t_config *config);
-int	check_surroundings(char **buffer, int line, int col, int player_pos[2]);
+int		check_map(char **buffer, int first_line, t_config *config);
+int		check_surroundings(char **buffer, int line, int col, int player_pos[2]);
+void	is_player(char **buffer, int line, int col, t_config *config);
 
 int	validate_map(char **buffer, t_config *config)
 {
@@ -24,16 +25,15 @@ int	validate_map(char **buffer, t_config *config)
 	i = first_line;
 	// checar se está circundado por 1
 	if (check_map(buffer, first_line, config))
-		return (-1);
+		return (-1); // throw_error
 	while (buffer[i])
 	{
 		// check invalid chars
 		if(only_these(buffer[i], ONLY_CHARS_MAP))
-			return (-1);
+			return (-1);  // throw_error
 		i++;
 	}
 	config->map = ft_mtxcpy(buffer + first_line);
-	check_struct(config, 1);
 	return (0);
 }
 
@@ -54,7 +54,8 @@ int	check_map(char **buffer, int first_line, t_config *config)
 		int i = 0;
 		while (buffer[line][i])
 		{
-			if (buffer[line][i] == '0')
+			is_player(buffer, line, i, config);
+			if (is_one_of_these(buffer[line][i], "0NSWE"))
 			{
 				if (check_surroundings(buffer, line, i, config->player_position))
 					return (-1);
@@ -72,13 +73,22 @@ int	check_surroundings(char **buffer, int line, int col, int player_pos[2])
 		// return -1
 	if (col == 0 || strlen(buffer[line - 1]) < col || strlen(buffer[line + 1]) < col)
 		return (-1);
-	if ((!is_one_of_these(buffer[line][col - 1], "01") && line != player_pos[0] && col != player_pos[1]) || // checa esquerda
-	(!is_one_of_these(buffer[line][col + 1], "01") && line != player_pos[0] && col != player_pos[1]) ||		// checa direita
-	(!is_one_of_these(buffer[line - 1][col], "01") && line != player_pos[0] && col != player_pos[1]) ||		// checa topo
-	(!is_one_of_these(buffer[line + 1][col], "01") && line != player_pos[0] && col != player_pos[1])		// checa bottom
+	if ((!is_one_of_these(buffer[line][col - 1], ONLY_CHARS_MAP) || // checa esquerda
+		!is_one_of_these(buffer[line][col + 1], ONLY_CHARS_MAP) ||		// checa direita
+		!is_one_of_these(buffer[line - 1][col], ONLY_CHARS_MAP) ||		// checa topo
+		!is_one_of_these(buffer[line + 1][col], ONLY_CHARS_MAP))		// checa bottom
 	)
 	{
 		return (-1);
 	}
 	return (0);
+}
+
+void	is_player(char **buffer, int line, int col, t_config *config)
+{
+	if (is_one_of_these(buffer[line][col], PLAYER_DIRECTIONS))
+	{
+		if (config->player_position[0] != line || config->player_position[1] != col)
+			throw_error("The map has two players");
+	}
 }
