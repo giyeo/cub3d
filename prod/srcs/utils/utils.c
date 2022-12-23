@@ -69,7 +69,7 @@ void	print_struct(t_config *config)
 	config->player_direction);
 	int i = 0;
 	printf("------START MAP------\n");
-	while(config->map[i])
+	while(config->map && config->map[i])
 		printf("%s\n", config->map[i++]);
 	printf("------END MAP------\n");
 }
