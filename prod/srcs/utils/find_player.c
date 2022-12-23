@@ -28,6 +28,7 @@ int	find_player(char **buffer, int first_line, t_config *config)
 			{
 				config->player_position[0] = line;
 				config->player_position[1] = col;
+				config->player_direction = buffer[line][col];
 				break ;
 				
 			}

@@ -63,4 +63,13 @@ void	print_struct(t_config *config)
 			config->NO, config->EA, config->SO, config->WE,
 			config->F[0], config->F[1], config->F[2],
 			config->C[0], config->C[1], config->C[2]);
+	printf("Player Position X: %d, Y: %d.\nPlayer Direction: %c\n",
+	config->player_position[0],
+	config->player_position[1],
+	config->player_direction);
+	int i = 0;
+	printf("------START MAP------\n");
+	while(config->map[i])
+		printf("%s\n", config->map[i++]);
+	printf("------END MAP------\n");
 }
