@@ -15,6 +15,6 @@
 void	parser_and_validate(char **buffer, t_config *config)
 {
 	validate_config(buffer, config);
-	//validate_map(buffer, config);
+	validate_map(buffer, config);
 	check_struct(config, 1);
 }

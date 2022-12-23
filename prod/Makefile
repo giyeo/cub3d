@@ -37,7 +37,7 @@ PARSER_SRCS	:=	extension_check.c \
 				file_validate.c \
 				validate_config.c \
 				find_split_line.c \
-				#validate_map.c
+				validate_map.c
 
 UTILS_DIR	:=	utils
 UTILS_SRCS	:=	utils.c \
