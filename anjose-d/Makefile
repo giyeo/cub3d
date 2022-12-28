@@ -82,6 +82,9 @@ fclean: clean minilibx_clean
 
 re: fclean all
 
+run: all
+	./$(NAME) ../maps_for_test/simple/subject.cub
+
 minilibx_clean:
 	@make clean -C $(MLX_DIR)
 
