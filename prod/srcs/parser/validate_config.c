@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:49:51 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/20 12:09:14 by rpaulino         ###   ########.fr       */
+/*   Updated: 2022/12/27 22:27:20 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ void	parse_line_content(char *line_content, char type, t_config *config)
 		parse_path(line_content + 2, type, config);
 }
 
-void	validate_config(char **buffer, t_config *config)
+int	validate_config(char **buffer, t_config *config)
 {
 	char	*line_content;
 	int		line;
@@ -192,7 +192,7 @@ void	validate_config(char **buffer, t_config *config)
 		while (line_content[column] != '\0')
 		{
 			if (check_invalid_char_or_map_start(line_content[column]))
-				return ;
+				return (line);
 			type = can_parse(line_content, column);
 			if (type != 0)
 			{
@@ -203,5 +203,6 @@ void	validate_config(char **buffer, t_config *config)
 		}
 		line++;
 	}
-	check_struct(config, 0);
+	throw_error("Map not found");
+	return (line);
 }

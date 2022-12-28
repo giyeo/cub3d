@@ -59,7 +59,7 @@ int		is_one_of_these(char c, char *these);
 int		find_player(char **buffer, int first_line, t_config *config);
 
 /* VALIDATE*/
-void	validate_config(char **buffer, t_config *config);
+int		validate_config(char **buffer, t_config *config);
 int		validate_map(char **buffer, t_config *config);
 
 /* FREE */
