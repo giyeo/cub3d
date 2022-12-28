@@ -38,6 +38,13 @@ typedef struct	s_config
 	char	player_direction;
 }			t_config;
 
+typedef struct s_conn
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+}				t_conn;
+
+
 /* PARSER */
 int		file_validate(char *file, int argc);
 
@@ -52,8 +59,6 @@ int		find_split_line(char **read_file);
 void	throw_error(char *error);
 int		only_these(char *str, char *needles);
 void	config_init(t_config *config);
-void	init(t_config *config);
-void	print_struct(t_config *config);
 void	check_struct(t_config *config, int i);
 int		is_one_of_these(char c, char *these);
 int		find_player(char **buffer, int first_line, t_config *config);

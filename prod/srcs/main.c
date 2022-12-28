@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:02:23 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/20 12:02:45 by rpaulino         ###   ########.fr       */
+/*   Updated: 2022/12/28 16:42:44 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cub3d.h>
+#include "cub3d.h"
 
 int	main(int argc, char *argv[])
 {
@@ -18,7 +18,7 @@ int	main(int argc, char *argv[])
 	char		**buffer;
 	int			fd;
 
-	init(&config);
+	config_init(&config);
 	fd = file_validate(argv[1], argc);
 	buffer = read_file(fd, argv[1]);
 	close(fd);

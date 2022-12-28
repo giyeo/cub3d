@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:32:11 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/20 11:56:24 by rpaulino         ###   ########.fr       */
+/*   Updated: 2022/12/28 16:34:21 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	check_struct(t_config *config, int i)
 		throw_error("Map configuration missing");
 }
 
-void	init(t_config *config)
+void	init_config(t_config *config)
 {
 	config->NO = NULL;
 	config->WE = NULL;
