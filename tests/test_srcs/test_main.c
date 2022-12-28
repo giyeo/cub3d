@@ -62,10 +62,11 @@ int	main()
 	RUN_TEST(validate_map_test_double_hole_map);
 	RUN_TEST(validate_map_test_open_invalid_read_map); // invalid read
 	RUN_TEST(validate_map_test_two_players_map);
+	RUN_TEST(validate_map_test_glued_map);
 
 
-	ft_printf("\033[1;33m libft_tests \033[0m\n");
-	RUN_TEST(ft_mtxcpy_not_null);
+	// ft_printf("\033[1;33m libft_tests \033[0m\n");
+	// RUN_TEST(ft_mtxcpy_not_null);
 	return (UNITY_END());
 }
 

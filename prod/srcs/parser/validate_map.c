@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:03:52 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/27 22:16:17 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/27 23:09:22 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	validate_map(char **buffer, t_config *config)
 {
 	int	first_line;
 	int	i;
-	first_line = find_split_line(buffer) + 1;
+	first_line = 0;
 	i = first_line;
 	// checar se está circundado por 1
 	if (check_map(buffer, first_line, config))
@@ -68,8 +68,8 @@ int	check_surroundings(char **buffer, int line, int col)
 	// se posição atual 0 passa do tamanho da linha anterior
 		// return -1
 	if (col == 0
-		|| strlen(buffer[line - 1]) < (size_t)col
-		|| strlen(buffer[line + 1]) < (size_t)col)
+		|| ft_strlen(buffer[line - 1]) < (size_t)col
+		|| ft_strlen(buffer[line + 1]) < (size_t)col)
 		return (-1);
 	if ((!is_one_of_these(buffer[line][col - 1], ONLY_CHARS_MAP)	// checa esquerda
 		|| !is_one_of_these(buffer[line][col + 1], ONLY_CHARS_MAP)		// checa direita

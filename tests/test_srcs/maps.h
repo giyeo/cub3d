@@ -18,4 +18,6 @@
 # define OPEN_ON_BOTTOM_MAP "../maps_for_test/wrong/map_open_on_bottom.cub"
 # define OPEN_INVREAD_MAP "../maps_for_test/wrong/map_open_invalidread.cub"
 # define TWO_PLAYERS_MAP "../maps_for_test/wrong/SUBJECT_TWO_PLAYERS.cub"
+# define GLUED_MAP "../maps_for_test/simple/glued-map.cub"
+
 #endif
