@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:03:52 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/21 21:46:45 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/27 22:16:17 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	validate_map(char **buffer, t_config *config)
 		i++;
 	}
 	config->map = ft_mtxcpy(buffer + first_line);
-	printf("%s\n", config->map[0]);
 	return (0);
 }
 
