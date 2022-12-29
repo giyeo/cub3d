@@ -25,7 +25,7 @@ MAIN_HEADER	:=	$(addprefix $(INCS_DIR)/, $(INCS))
 
 INC_FLAGS	:=	-I $(INCS_DIR) -I $(LIBFT_DIR)/includes \
 				-I $(MLX_DIR)
-LINK_FLAGS	:=	-lm $(LIBFT_LINK) $(MLX_LINK) -fsanitize=address
+LINK_FLAGS	:=	-lm $(LIBFT_LINK) $(MLX_LINK) #-fsanitize=address
 
 # SOURCES
 PARSER_DIR	:=	parser

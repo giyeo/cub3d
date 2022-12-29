@@ -25,6 +25,8 @@
 # define TID_FLOOR_CLR "F"
 # define TID_CELLING_CLR "C"
 
+# define IMG_SIZE 32
+
 typedef struct	s_config
 {
 	char	*NO;
