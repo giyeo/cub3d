@@ -6,13 +6,13 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 23:56:34 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/29 00:24:34 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/29 01:05:58 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	end_game(t_config *config)
+int	end_game(t_config *config)
 {
 	if (config->conn_mlx.mlx_ptr)
 	{

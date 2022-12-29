@@ -62,5 +62,5 @@ void	free_config(t_config *config);
 /* MLX */
 // hooks
 int		key_mapping(int keysym, t_config *config);
-void	end_game(t_config *config);
+int		end_game(t_config *config);
 #endif
