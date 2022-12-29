@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:36:20 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/19 18:49:07 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/29 00:52:41 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,16 @@ char		**ft_mtxcpy(char **mtx_root)
 
 	mtx_ret = NULL;
 	mtx_len = ft_mtxlen(mtx_root);
-	mtx_ret = malloc((mtx_len * sizeof(char **)) + 1);
+	mtx_ret = malloc((mtx_len + 1) * sizeof(char **));
 	if (!mtx_ret)
 		return (NULL);
 	i = 0;
 	while (i < mtx_len)
 	{
-		mtx_ret[i] = ft_strdup(mtx_root[i]);
+		if (mtx_root[i])
+			mtx_ret[i] = ft_strdup(mtx_root[i]);
 		i++;
 	}
-	mtx_ret[i] = '\0';
+	mtx_ret[i] = NULL;
 	return (mtx_ret);
 }
