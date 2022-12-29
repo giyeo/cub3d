@@ -95,7 +95,7 @@ fclean: clean minilibx_clean
 re: fclean all
 
 run: all
-	./$(NAME) ../maps_for_test/simple/subject.cub
+	./$(NAME) ./rendermap.cub
 
 valgrind:
 	@make -C $(LIBFT_DIR)

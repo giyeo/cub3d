@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:20:32 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/29 16:15:45 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/29 17:10:48 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,37 @@ void	img_pix_put(t_img *img, int x, int y, int color);
 void	render_map(t_config *config)
 {
 	char **map;
+	int	i;
+	int	j;
 
 	map = config->map;
-	(void)map;
+
 	if (config->conn_mlx.win_ptr != NULL)
 	{
-		render_background(config, WHITE_PIXEL, &config->img);
-		render_rect(config->conn_mlx,
-			config->window_width - 100,
-			config->window_height - 100,
-			100,
-			100,
-			GREEN_PIXEL, &config->img
-		);
-		render_rect(config->conn_mlx,
-			0,
-			0,
-			100,
-			100,
-			RED_PIXEL, &config->img
-		);
+		render_background(config, 0x0, &config->img);
+		i = 0;
+		while (config->map[i])
+		{
+			j = 0;
+			while (config->map[i][j])
+			{
+				int	tileX = j * IMG_SIZE;
+				int	tileY = i * IMG_SIZE;
+				int	tileColor = map[i][j] != 0 ? 255 : 0;
+
+				if (config->map[i][j] == '1')
+				render_rect(config->conn_mlx,
+					tileX,
+					tileY,
+					IMG_SIZE,
+					IMG_SIZE,
+					WHITE_PIXEL,
+					&config->img
+				);
+				j++;
+			}
+			i++;
+		}		
 		mlx_put_image_to_window(config->conn_mlx.mlx_ptr, config->conn_mlx.win_ptr,
 			config->img.mlx_img, 0, 0
 		);
