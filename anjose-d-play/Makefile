@@ -2,7 +2,7 @@
 # MAIN VARIABLES
 NAME		:=	cub3d
 CC			:=	cc
-CFLAGS		:=	-O3 -Wall -Wextra -Werror
+CFLAGS		:= -Wall -Wextra -Werror
 
 # LIBRARIES
 ## libft
@@ -37,7 +37,12 @@ PARSER_SRCS	:=	extension_check.c \
 				file_validate.c \
 				validate_config.c \
 				find_split_line.c \
-				validate_map.c
+				validate_map.c \
+
+HOOKS_DIR	:=	hooks
+HOOKS_SRCS	:=	end_game.c \
+				key_mapping.c
+
 
 UTILS_DIR	:=	utils
 UTILS_SRCS	:=	utils.c \
@@ -52,9 +57,11 @@ SRCS_DIR	:=	srcs
 SRCS		:=	main.c \
 				$(addprefix $(PARSER_DIR)/, $(PARSER_SRCS)) \
 				$(addprefix $(UTILS_DIR)/, $(UTILS_SRCS)) \
-				$(addprefix $(FREE_DIR)/, $(FREE_SRCS))
+				$(addprefix $(FREE_DIR)/, $(FREE_SRCS)) \
+				$(addprefix $(HOOKS_DIR)/, $(HOOKS_SRCS))
 
-SRCS_PTH	:=	$(addprefix $(SRCS_DIR)/, $(SRCS))
+SRCS_PTH	:=	$(addprefix $(SRCS_DIR)/, $(SRCS)) \
+				libft/srcs/ft_mtxcpy.c
 
 # OBJECTS
 OBJS_DIR	:=	./objs
@@ -74,7 +81,7 @@ $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(INC_FLAGS) $(LINK_FLAGS) -o $@
 
 clean:
-	rm -rf $(OBJS_DIR)
+	rm -rf $(OBJS_DIR) valgrind
 
 fclean: clean minilibx_clean
 	@make $@ -C $(LIBFT_DIR)
@@ -85,7 +92,13 @@ re: fclean all
 run: all
 	./$(NAME) ../maps_for_test/simple/subject.cub
 
+valgrind:
+	@make -C $(LIBFT_DIR)
+	@make -C $(MLX_DIR)
+	$(CC) -g $(SRCS_PTH) $(CFLAGS) $(INC_FLAGS) $(LINK_FLAGS) -o $@
+	valgrind --leak-check=full --track-origins=yes ./$(NAME) ../maps_for_test/simple/subject.cub
+
 minilibx_clean:
 	@make clean -C $(MLX_DIR)
 
-.PHONY: clean fclean re all minilibx_clean
+.PHONY: clean fclean re all minilibx_clean valgrind

@@ -2,9 +2,11 @@
 # define CUB3D_H
 
 # include "libft.h"
-# include <mlx.h>
+# include "mlx.h"
 # include <fcntl.h>
 # include "errors.h"
+# include "defines.h"
+# include <X11/X.h>
 // open();
 # include <stdio.h>
 // perror();
@@ -12,20 +14,11 @@
 // strerror();
 # include <errno.h>
 
-# define MAP_FILE_EXT ".cub"
-# define ONLY_CHARS_MAP "01WNSE "
-# define PLAYER_DIRECTIONS "NSEW"
-
-
-/* type identifiers */
-# define TID_NORTH_TXT "NO"
-# define TID_SOUTH_TXT "SO"
-# define TID_WEST_TXT "WE"
-# define TID_EAST_TXT "EA"
-# define TID_FLOOR_CLR "F"
-# define TID_CELLING_CLR "C"
-
-# define IMG_SIZE 32
+typedef struct s_conn
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+}				t_conn;
 
 typedef struct	s_config
 {
@@ -38,14 +31,8 @@ typedef struct	s_config
 	char	**map;
 	int		player_position[2];
 	char	player_direction;
+	t_conn	conn_mlx;
 }			t_config;
-
-typedef struct s_conn
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-}				t_conn;
-
 
 /* PARSER */
 int		file_validate(char *file, int argc);
@@ -72,4 +59,8 @@ int		validate_map(char **buffer, t_config *config);
 /* FREE */
 void	free_config(t_config *config);
 
+/* MLX */
+// hooks
+int		key_mapping(int keysym, t_config *config);
+void	end_game(t_config *config);
 #endif
