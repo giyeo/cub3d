@@ -32,6 +32,10 @@ typedef struct	s_config
 	int		player_position[2];
 	char	player_direction;
 	t_conn	conn_mlx;
+
+	// tirar daqui
+	int	window_width;
+	int	window_height;
 }			t_config;
 
 /* PARSER */

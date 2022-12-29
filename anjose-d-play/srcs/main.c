@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:02:23 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/29 01:13:24 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:22:46 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ int	main(int argc, char *argv[])
 
 	// init window
 	config.conn_mlx.mlx_ptr = mlx_init();
-	int	WINDOW_WIDTH = IMG_SIZE * ft_mtx_biggest_strlen(config.map);
-	int	WINDOW_HEIGHT = IMG_SIZE * ft_mtxlen(config.map);
-	config.conn_mlx.win_ptr = mlx_new_window(config.conn_mlx.mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "TEST");
+	config.window_height = IMG_SIZE * ft_mtxlen(config.map); 
+	config.window_width = IMG_SIZE * ft_mtx_biggest_strlen(config.map);
+	config.conn_mlx.win_ptr = mlx_new_window(config.conn_mlx.mlx_ptr,
+		config.window_width, config.window_height, "TEST");
 	
 	mlx_hook(config.conn_mlx.win_ptr, KeyPress, KeyPressMask, &key_mapping, &config);
 	mlx_hook(config.conn_mlx.win_ptr, DestroyNotify, NoEventMask, &end_game, &config);

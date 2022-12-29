@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 23:56:34 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/29 01:05:58 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/29 11:36:46 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	end_game(t_config *config)
 		mlx_destroy_window(config->conn_mlx.mlx_ptr, config->conn_mlx.win_ptr);
 		mlx_destroy_display(config->conn_mlx.mlx_ptr);
 		free(config->conn_mlx.mlx_ptr);
+		config->conn_mlx.mlx_ptr = NULL;
+		config->conn_mlx.win_ptr = NULL;
 	}
 	free_config(config);
 	exit (0);
