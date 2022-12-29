@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 00:12:18 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/19 18:36:04 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/28 21:42:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -555,5 +555,8 @@ int			ft_is_numeric(char *str);
 
 /* split a string in two, using idx as delimiter */
 char		**ft_split_idx(char const *s, int idx);
+
+/* find the biggest string in the matrix */
+int			ft_mtx_biggest_strlen(char **mtx);
 
 #endif

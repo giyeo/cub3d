@@ -6,7 +6,7 @@
 #    By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 00:12:28 by anjose-d          #+#    #+#              #
-#    Updated: 2022/12/19 18:41:19 by anjose-d         ###   ########.fr        #
+#    Updated: 2022/12/28 21:42:32 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,9 @@ SOURCES	= 	ft_atoi.c \
 			ft_extcheck.c \
 			ft_str_find_idx.c ft_strndup.c ft_is_numeric.c \
 			ft_power.c ft_nbrsize.c ft_mtxlen.c \
-			ft_destroy_matrix.c	ft_atoi_llong.c ft_mtxcpy.c
+			ft_destroy_matrix.c	ft_atoi_llong.c ft_mtxcpy.c \
+			ft_mtx_biggest_strlen.c
+
 
 SRCSBNS	=	ft_lstnew.c \
 			ft_lstadd_front.c \
