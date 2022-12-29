@@ -12,6 +12,9 @@ void	config_init(t_config *config)
 	config->player_position[0] = -1;
 	config->player_position[1] = -1;
 	config->player_direction = 'Z';
+
+
+
 	// config->errors[ERR_OK] = "Success";
 	// config->errors[ERR_NO_FD] = "can't get file descriptor";
 	// config->errors[ERR_INV_CHAR_IN_FILE] = "invalid char in .cub file";

@@ -20,6 +20,15 @@ typedef struct s_conn
 	void	*win_ptr;
 }				t_conn;
 
+typedef struct s_img
+{
+	void	*mlx_img;
+	char	*addr;
+	int		bpp;	/* bits per pixel */
+	int		line_len;
+	int		endian;
+}				t_img;
+
 typedef struct	s_config
 {
 	char	*NO;
@@ -32,10 +41,12 @@ typedef struct	s_config
 	int		player_position[2];
 	char	player_direction;
 	t_conn	conn_mlx;
+	t_img	img;
 
 	// tirar daqui
 	int	window_width;
 	int	window_height;
+
 }			t_config;
 
 /* PARSER */
