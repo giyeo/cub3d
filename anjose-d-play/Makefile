@@ -41,7 +41,8 @@ PARSER_SRCS	:=	extension_check.c \
 
 HOOKS_DIR	:=	hooks
 HOOKS_SRCS	:=	end_game.c \
-				key_mapping.c
+				key_mapping.c \
+				load_game.c
 
 
 UTILS_DIR	:=	utils
