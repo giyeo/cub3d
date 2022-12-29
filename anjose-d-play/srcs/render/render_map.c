@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_game.c                                        :+:      :+:    :+:   */
+/*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/29 01:26:25 by anjose-d         ###   ########.fr       */
+/*   Created: 2022/12/29 01:20:32 by anjose-d          #+#    #+#             */
+/*   Updated: 2022/12/29 01:26:13 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	load_game(t_config *config)
+void	render_map(t_config *config)
 {
-	(void)config;
+	char **map;
 
-	// TODO:
-	// clear_window();
-	render_map(config);
-	// render_rays();
-	// render_player();
-
-	return (0);
+	map = config->map;
+	(void)map;
 }

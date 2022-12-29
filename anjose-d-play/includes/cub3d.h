@@ -64,4 +64,7 @@ void	free_config(t_config *config);
 int		key_mapping(int keysym, t_config *config);
 int		end_game(t_config *config);
 int		load_game(t_config *config);
+
+// render
+void	render_map(t_config *config);
 #endif

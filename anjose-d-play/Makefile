@@ -44,6 +44,9 @@ HOOKS_SRCS	:=	end_game.c \
 				key_mapping.c \
 				load_game.c
 
+RENDER_DIR	:=	render
+RENDER_SRCS	:=	render_map.c
+
 
 UTILS_DIR	:=	utils
 UTILS_SRCS	:=	utils.c \
@@ -59,7 +62,8 @@ SRCS		:=	main.c \
 				$(addprefix $(PARSER_DIR)/, $(PARSER_SRCS)) \
 				$(addprefix $(UTILS_DIR)/, $(UTILS_SRCS)) \
 				$(addprefix $(FREE_DIR)/, $(FREE_SRCS)) \
-				$(addprefix $(HOOKS_DIR)/, $(HOOKS_SRCS))
+				$(addprefix $(HOOKS_DIR)/, $(HOOKS_SRCS)) \
+				$(addprefix $(RENDER_DIR)/, $(RENDER_SRCS))
 
 SRCS_PTH	:=	$(addprefix $(SRCS_DIR)/, $(SRCS)) \
 				libft/srcs/ft_mtxcpy.c
