@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_map.c                                       :+:      :+:    :+:   */
+/*   render_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 01:20:32 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/29 17:54:07 by anjose-d         ###   ########.fr       */
+/*   Created: 2022/12/29 17:12:18 by anjose-d          #+#    #+#             */
+/*   Updated: 2022/12/29 22:20:01 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-#define RED_PIXEL 0xFF0000
-#define GREEN_PIXEL 0xFF00
-#define WHITE_PIXEL 0xFFFFFF
-
-int		render_background(t_config *config, int color, t_img *img);
-
-void	render_map(t_config *config)
+void	render_player(t_config *config)
 {
 	char **map;
 	int	i;
@@ -28,7 +22,6 @@ void	render_map(t_config *config)
 
 	if (config->conn_mlx.win_ptr != NULL)
 	{
-		render_background(config, 0x0, &config->img);
 		i = 0;
 		while (config->map[i])
 		{
@@ -39,15 +32,17 @@ void	render_map(t_config *config)
 				int	tileY = i * IMG_SIZE;
 				int	tileColor = map[i][j] != 0 ? 255 : 0;
 
-				if (config->map[i][j] == '1')
-				render_rect(config->conn_mlx,
-					tileX,
-					tileY,
-					IMG_SIZE,
-					IMG_SIZE,
-					WHITE_PIXEL,
-					&config->img
-				);
+				if (config->map[i][j] == 'N')
+				{
+					render_rect(config->conn_mlx,
+						tileX,
+						tileY,
+						IMG_SIZE / 4,
+						IMG_SIZE / 4,
+						0xFFFF00,
+						&config->img
+					);
+				}
 				j++;
 			}
 			i++;
@@ -55,25 +50,13 @@ void	render_map(t_config *config)
 	}
 }
 
-int	render_background(t_config *config, int color, t_img *img)
+void	move_player(t_config *config)
 {
-	int	i;
-	int	j;
+	float newPlayerX = config->player.x + 10;
+	float newPlayerY = config->player.y + 10;
 
-	if (config->conn_mlx.win_ptr == NULL)
-		return (1);
-	i = 0;
-	while (i < config->window_height)
-	{
-		j = 0;
-		while (j < config->window_width)
-		{
-			img_pix_put(img, j, i, color);
-			j++;
-		}
-		i++;
-	}
-	return (0);
+	// TODO:
+	// perform wall collision
+	config->player.x = newPlayerX;
+	config->player.y = newPlayerY;
 }
-
-

@@ -45,7 +45,10 @@ HOOKS_SRCS	:=	end_game.c \
 				load_game.c
 
 RENDER_DIR	:=	render
-RENDER_SRCS	:=	render_map.c
+RENDER_SRCS	:=	render_map.c \
+				render_player.c \
+				img_pix_put.c \
+				render_rect.c
 
 
 UTILS_DIR	:=	utils

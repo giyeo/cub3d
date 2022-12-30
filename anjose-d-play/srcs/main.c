@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:02:23 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/29 16:41:01 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/29 22:45:55 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ int	main(int argc, char *argv[])
 
 	config.img.mlx_img = mlx_new_image(config.conn_mlx.mlx_ptr, config.window_width, config.window_height);
 	config.img.addr = mlx_get_data_addr(config.img.mlx_img, &config.img.bpp, &config.img.line_len, &config.img.endian);
+
+	config.player.height = 1;
+	config.player.width = 1;
+	config.player.x = config.player_position[0];
+	config.player.y = config.player_position[1];
+	config.player.rotation_angle = PI / 2;
+	config.player.walk_speed = 100;
+	config.player.turn_speed = 45 * (PI / 180);
 
 	mlx_hook(config.conn_mlx.win_ptr, KeyPress, KeyPressMask, &key_mapping, &config);
 	mlx_hook(config.conn_mlx.win_ptr, DestroyNotify, NoEventMask, &end_game, &config);

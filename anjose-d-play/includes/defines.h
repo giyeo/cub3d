@@ -27,4 +27,6 @@
 # define RIGHT_ARROW 65363
 # define ESC 65307
 
+# define PI 3.141592653
+
 #endif

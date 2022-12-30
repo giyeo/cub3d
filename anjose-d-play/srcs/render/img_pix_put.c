@@ -1,30 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   load_game.c                                        :+:      :+:    :+:   */
+/*   img_pix_put.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/29 22:16:51 by anjose-d         ###   ########.fr       */
+/*   Created: 2022/12/29 17:52:47 by anjose-d          #+#    #+#             */
+/*   Updated: 2022/12/29 17:53:07 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	load_game(t_config *config)
+void	img_pix_put(t_img *img, int x, int y, int color)
 {
-	(void)config;
+	char *pixel;
 
-	// TODO:
-	// clear_window();
-	// update_values();
-	render_map(config);
-	// render_rays();
-	render_player(config);
-	mlx_put_image_to_window(config->conn_mlx.mlx_ptr,
-			config->conn_mlx.win_ptr,
-			config->img.mlx_img, 0, 0
-		);
-	return (0);
+	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
+	*(int *)pixel = color;
 }

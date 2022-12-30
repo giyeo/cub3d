@@ -7,6 +7,7 @@
 # include "errors.h"
 # include "defines.h"
 # include <X11/X.h>
+# include "math.h"
 // open();
 # include <stdio.h>
 // perror();
@@ -29,6 +30,18 @@ typedef struct s_img
 	int		endian;
 }				t_img;
 
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	width;
+	float	height;
+	float	rotation_angle;
+	float	turn_speed;
+	float	walk_speed;
+}				t_player;
+
+
 typedef struct	s_config
 {
 	char	*NO;
@@ -42,6 +55,7 @@ typedef struct	s_config
 	char	player_direction;
 	t_conn	conn_mlx;
 	t_img	img;
+	t_player	player;
 
 	// tirar daqui
 	int	window_width;
@@ -82,4 +96,12 @@ int		load_game(t_config *config);
 
 // render
 void	render_map(t_config *config);
+void	render_player(t_config *config);
+void	img_pix_put(t_img *img, int x, int y, int color);
+int		render_rect(t_conn conn_mlx, int x, int y, int rect_height, int rect_width, int color, t_img *img);
+int		render_line(t_config *config, int x, int y, int radius, int color);
+
+// player
+void	move_player(t_config *config);
+
 #endif
