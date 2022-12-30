@@ -36,9 +36,11 @@ typedef struct s_player
 	float	y;
 	float	width;
 	float	height;
+	int		turn_direction; // -1 for left, +1 for right | 0 to still
+	int		walk_direction; // -1 for back, +1 for front | 0 to still
 	float	rotation_angle;
-	float	turn_speed;
 	float	walk_speed;
+	float	turn_speed;
 }				t_player;
 
 
@@ -51,15 +53,13 @@ typedef struct	s_config
 	int		F[3];
 	int		C[3];
 	char	**map;
+	int		map_num_rows;
+	int		map_num_cols;
 	int		player_position[2];
 	char	player_direction;
 	t_conn	conn_mlx;
 	t_img	img;
 	t_player	player;
-
-	// tirar daqui
-	int	window_width;
-	int	window_height;
 
 }			t_config;
 
@@ -95,6 +95,7 @@ int		end_game(t_config *config);
 int		load_game(t_config *config);
 
 // render
+int		render_background(t_config *config, int color, t_img *img);
 void	render_map(t_config *config);
 void	render_player(t_config *config);
 void	img_pix_put(t_img *img, int x, int y, int color);

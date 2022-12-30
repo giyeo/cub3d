@@ -22,6 +22,7 @@ MLX_LINK	:=	-L$(MLX_DIR) -l$(MLX) -lXext -lX11
 INCS_DIR	:=	./includes
 INCS		:=	cub3d.h
 MAIN_HEADER	:=	$(addprefix $(INCS_DIR)/, $(INCS))
+TRACK_INC	:=	$(INCS_DIR)/defines.h $(INCS_DIR)/errors.h
 
 INC_FLAGS	:=	-I $(INCS_DIR) -I $(LIBFT_DIR)/includes \
 				-I $(MLX_DIR)
@@ -46,6 +47,7 @@ HOOKS_SRCS	:=	end_game.c \
 
 RENDER_DIR	:=	render
 RENDER_SRCS	:=	render_map.c \
+				render_background.c \
 				render_player.c \
 				img_pix_put.c \
 				render_rect.c
@@ -76,7 +78,7 @@ OBJS_DIR	:=	./objs
 OBJS		:=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 # EXPLICIT COMPILATION OF THE OBJECTS
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(MAIN_HEADER)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(MAIN_HEADER) $(TRACK_INC)
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@
 

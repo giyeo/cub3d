@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:12:18 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/29 22:20:01 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/30 12:42:56 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	render_player(t_config *config)
 			j = 0;
 			while (config->map[i][j])
 			{
-				int	tileX = j * IMG_SIZE;
-				int	tileY = i * IMG_SIZE;
+				int	tileX = config->player.y * TILE_SIZE;
+				int	tileY = config->player.x * TILE_SIZE;
 				int	tileColor = map[i][j] != 0 ? 255 : 0;
 
 				if (config->map[i][j] == 'N')
@@ -37,8 +37,8 @@ void	render_player(t_config *config)
 					render_rect(config->conn_mlx,
 						tileX,
 						tileY,
-						IMG_SIZE / 4,
-						IMG_SIZE / 4,
+						TILE_SIZE / 4,
+						TILE_SIZE / 4,
 						0xFFFF00,
 						&config->img
 					);
@@ -48,15 +48,4 @@ void	render_player(t_config *config)
 			i++;
 		}
 	}
-}
-
-void	move_player(t_config *config)
-{
-	float newPlayerX = config->player.x + 10;
-	float newPlayerY = config->player.y + 10;
-
-	// TODO:
-	// perform wall collision
-	config->player.x = newPlayerX;
-	config->player.y = newPlayerY;
 }

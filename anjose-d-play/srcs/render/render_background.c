@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   img_pix_put.c                                      :+:      :+:    :+:   */
+/*   render_background.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 17:52:47 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/30 12:22:18 by anjose-d         ###   ########.fr       */
+/*   Created: 2022/12/30 11:52:13 by anjose-d          #+#    #+#             */
+/*   Updated: 2022/12/30 12:47:28 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	img_pix_put(t_img *img, int x, int y, int color)
+int	render_background(t_config *config, int color, t_img *img)
 {
-	char *pixel;
+	int	i;
+	int	j;
 
-	pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-	*(int *)pixel = color;
+	if (config->conn_mlx.win_ptr == NULL)
+		return (1);
+	i = 0;
+	while (i < WINDOW_HEIGHT)
+	{
+		j = 0;
+		while (j < WINDOW_WIDTH)
+		{
+			img_pix_put(img, j, i, color);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
