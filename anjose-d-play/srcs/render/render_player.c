@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:12:18 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/30 12:42:56 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/30 21:25:05 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,18 @@ void	render_player(t_config *config)
 			j = 0;
 			while (config->map[i][j])
 			{
-				int	tileX = config->player.y * TILE_SIZE;
-				int	tileY = config->player.x * TILE_SIZE;
+				int	tileX = config->player.x * TILE_SIZE;
+				int	tileY = config->player.y * TILE_SIZE;
 				int	tileColor = map[i][j] != 0 ? 255 : 0;
 
 				if (config->map[i][j] == 'N')
 				{
 					render_rect(config->conn_mlx,
-						tileX,
-						tileY,
-						TILE_SIZE / 4,
-						TILE_SIZE / 4,
-						0xFFFF00,
+						MINIMAP_SCALE_FACTOR * tileX,
+						MINIMAP_SCALE_FACTOR * tileY,
+						MINIMAP_SCALE_FACTOR * config->player.height,
+						MINIMAP_SCALE_FACTOR * config->player.width,
+						YELLOW_PIXEL,
 						&config->img
 					);
 				}
@@ -49,3 +49,4 @@ void	render_player(t_config *config)
 		}
 	}
 }
+

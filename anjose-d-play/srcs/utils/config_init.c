@@ -12,8 +12,10 @@ void	config_init(t_config *config)
 	config->player_position[0] = -1;
 	config->player_position[1] = -1;
 	config->player_direction = 'Z';
-
-
+	config->conn_mlx.mlx_ptr = NULL;
+	config->conn_mlx.win_ptr = NULL;
+	config->img.addr = NULL;
+	config->img.mlx_img = NULL;
 
 	// config->errors[ERR_OK] = "Success";
 	// config->errors[ERR_NO_FD] = "can't get file descriptor";

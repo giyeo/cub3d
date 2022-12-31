@@ -90,7 +90,8 @@ void	free_config(t_config *config);
 
 /* MLX */
 // hooks
-int		key_mapping(int keysym, t_config *config);
+int		key_pressed(int keysym, t_config *config);
+int		key_released(int keysym, t_config *config);
 int		end_game(t_config *config);
 int		load_game(t_config *config);
 
@@ -100,7 +101,7 @@ void	render_map(t_config *config);
 void	render_player(t_config *config);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int		render_rect(t_conn conn_mlx, int x, int y, int rect_height, int rect_width, int color, t_img *img);
-int		render_line(t_config *config, int x, int y, int radius, int color);
+int		render_line(t_config *config, float x1, float y1, float x2, float y2, int color);
 
 // player
 void	move_player(t_config *config);

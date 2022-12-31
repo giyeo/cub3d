@@ -50,7 +50,7 @@ RENDER_SRCS	:=	render_map.c \
 				render_background.c \
 				render_player.c \
 				img_pix_put.c \
-				render_rect.c
+				render_rect.c render_line.c
 
 
 UTILS_DIR	:=	utils
@@ -106,7 +106,7 @@ valgrind:
 	@make -C $(LIBFT_DIR)
 	@make -C $(MLX_DIR)
 	$(CC) -g $(SRCS_PTH) $(CFLAGS) $(INC_FLAGS) $(LINK_FLAGS) -o $@
-	valgrind --leak-check=full --track-origins=yes ./$(NAME) ../maps_for_test/simple/subject.cub
+	valgrind --leak-check=full --track-origins=yes ./$@ ../maps_for_test/simple/subject.cub
 
 minilibx_clean:
 	@make clean -C $(MLX_DIR)

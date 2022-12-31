@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:20:32 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/30 12:41:13 by anjose-d         ###   ########.fr       */
+/*   Updated: 2022/12/30 20:43:29 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	render_map(t_config *config)
 	if (config->conn_mlx.win_ptr != NULL)
 	{
 		i = 0;
-		while (i < config->map[i])
+		while (config->map[i])
 		{
 			j = 0;
 			while (config->map[i][j]) 
@@ -33,23 +33,16 @@ void	render_map(t_config *config)
 				int	tileColor = map[i][j] != 0 ? 255 : 0;
 
 				if (config->map[i][j] == '1')
-				render_rect(config->conn_mlx,
-					tileX * MINIMAP_SCALE_FACTOR,
-					tileY * MINIMAP_SCALE_FACTOR,
-					TILE_SIZE * MINIMAP_SCALE_FACTOR,
-					TILE_SIZE * MINIMAP_SCALE_FACTOR,
-					WHITE_PIXEL,
-					&config->img
-				);
-				else
+				{
 					render_rect(config->conn_mlx,
-						tileX * MINIMAP_SCALE_FACTOR,
-						tileY * MINIMAP_SCALE_FACTOR,
-						TILE_SIZE * MINIMAP_SCALE_FACTOR,
-						TILE_SIZE * MINIMAP_SCALE_FACTOR,
-						BLACK_PIXEL,
+						MINIMAP_SCALE_FACTOR * tileX,
+						MINIMAP_SCALE_FACTOR * tileY,
+						MINIMAP_SCALE_FACTOR * TILE_SIZE,
+						MINIMAP_SCALE_FACTOR * TILE_SIZE,
+						WHITE_PIXEL,
 						&config->img
 					);
+				}
 				j++;
 			}
 			i++;

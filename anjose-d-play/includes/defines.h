@@ -10,6 +10,7 @@
 #define GREEN_PIXEL 0xFF00
 #define WHITE_PIXEL 0xFFFFFF
 #define BLACK_PIXEL 0x0
+#define YELLOW_PIXEL 0xFFFF00
 
 
 /* type identifiers */
@@ -43,8 +44,6 @@
 #define MAP_NUM_COLS 20
 #define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
 #define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
-// # define WINDOW_WIDTH 800
-// # define WINDOW_HEIGHT 600
 
 # define FOV_ANGLE (60 * (PI / 180))
 # define NUM_RAYS (WINDOW_WIDTH)
