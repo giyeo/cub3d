@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/03 17:41:41 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/03 17:47:58 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,23 @@ int	load_game(t_config *config)
 				map_x++;
 			
 			if (map_x < config->map_num_cols)
-				render_map(config, map_y, map_x, pixel_i, pixel_j);
+				render_map(
+					config,
+					map_y,
+					map_x,
+					MINIMAP_SCALE_FACTOR * pixel_i,
+					MINIMAP_SCALE_FACTOR * pixel_j);
 
 			// render player
 			if(this_point_is_in_a_circle(pixel_i, pixel_j, config->player.x * TILE_SIZE, config->player.y * TILE_SIZE, 10))
 			{
 				// wall collision
 				if (config->map[map_y][map_x] != '1')
-					img_pix_put(&config->img, pixel_i, pixel_j, YELLOW_PIXEL);
+					img_pix_put(&config->img, 
+						MINIMAP_SCALE_FACTOR * pixel_i,
+						MINIMAP_SCALE_FACTOR * pixel_j,
+						YELLOW_PIXEL
+					);
 				else
 				{
 					config->player.x = backup_x;
@@ -66,8 +75,8 @@ int	load_game(t_config *config)
 	render_line(config,
 			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE) + cos(config->player.rotation_angle) * 20,
-			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE) + sin(config->player.rotation_angle) * 20,
+			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE) + cos(config->player.rotation_angle) * (MINIMAP_SCALE_FACTOR * 20),
+			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE) + sin(config->player.rotation_angle) * (MINIMAP_SCALE_FACTOR * 20),
 			RED_PIXEL
 		);
 	mlx_put_image_to_window(config->conn_mlx.mlx_ptr,
