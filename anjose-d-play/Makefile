@@ -106,7 +106,7 @@ valgrind:
 	@make -C $(LIBFT_DIR)
 	@make -C $(MLX_DIR)
 	$(CC) -g $(SRCS_PTH) $(CFLAGS) $(INC_FLAGS) $(LINK_FLAGS) -o $@
-	valgrind --leak-check=full --track-origins=yes ./$@ ../maps_for_test/simple/subject.cub
+	valgrind --leak-check=full --track-origins=yes ./$@ rendermap.cub
 
 minilibx_clean:
 	@make clean -C $(MLX_DIR)

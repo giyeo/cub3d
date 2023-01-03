@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/02 22:04:43 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/03 17:41:41 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ int	load_game(t_config *config)
 			//create horizontal grid lines
 			if(pixel_i % (TILE_SIZE) == 0 && pixel_i != 0)
 				map_x++;
-			render_map(config, map_y, map_x, pixel_i, pixel_j);
-
+			
+			if (map_x < config->map_num_cols)
+				render_map(config, map_y, map_x, pixel_i, pixel_j);
 
 			// render player
 			if(this_point_is_in_a_circle(pixel_i, pixel_j, config->player.x * TILE_SIZE, config->player.y * TILE_SIZE, 10))
