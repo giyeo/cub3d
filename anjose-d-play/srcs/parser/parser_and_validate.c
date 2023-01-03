@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:09:44 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/02 21:42:09 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:01:54 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	player_init(t_config *config)
 	config->player.walk_direction = 0;
 	config->player.rotation_angle = PI / 2; // pointing down
 	config->player.walk_speed = 100;
-	config->player.turn_speed = 45 * (PI / 180); // ((PI / 180)) == converting to radians
+	config->player.turn_speed = 10 * (PI / 180); // ((PI / 180)) == converting to radians
 }
 
 void	mlx_conn_init(t_config *config)

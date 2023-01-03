@@ -6,13 +6,14 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/03 17:47:58 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:01:37 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 int	this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int radius);
+void	update(t_config *config);
 
 int	load_game(t_config *config)
 {
@@ -23,14 +24,15 @@ int	load_game(t_config *config)
 
 	float	backup_y = config->player.y;
 	float	backup_x = config->player.x;
-	if (config->player.walk_direction == 1)
-	{
-		config->player.y += 1 * 0.1;
-	}
-	else if (config->player.walk_direction == -1)
-	{
-		config->player.y -= 1 * 0.1;
-	}
+	// if (config->player.walk_direction == 1)
+	// {
+	// 	config->player.y += 1 * 0.1;
+	// }
+	// else if (config->player.walk_direction == -1)
+	// {
+	// 	config->player.y -= 1 * 0.1;
+	// }
+	update(config);
 	//the collision detector should be here!
 	while(map_y < config->map_num_rows)
 	{
@@ -91,4 +93,11 @@ int	this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int 
 	if(((i - x_position) * (i - x_position)) + ((j - y_position) * (j - y_position)) < (radius * radius))
 		return 1;
 	return 0; 
+}
+
+void	update(t_config *config)
+{
+	config->player.rotation_angle += config->player.turn_direction * config->player.turn_speed;
+
+	
 }
