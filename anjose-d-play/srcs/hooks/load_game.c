@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/03 18:01:37 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/03 18:24:08 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,7 @@ int	load_game(t_config *config)
 
 	float	backup_y = config->player.y;
 	float	backup_x = config->player.x;
-	// if (config->player.walk_direction == 1)
-	// {
-	// 	config->player.y += 1 * 0.1;
-	// }
-	// else if (config->player.walk_direction == -1)
-	// {
-	// 	config->player.y -= 1 * 0.1;
-	// }
+
 	update(config);
 	//the collision detector should be here!
 	while(map_y < config->map_num_rows)
@@ -55,7 +48,7 @@ int	load_game(t_config *config)
 			{
 				// wall collision
 				if (config->map[map_y][map_x] != '1')
-					img_pix_put(&config->img, 
+					img_pix_put(&config->img,
 						MINIMAP_SCALE_FACTOR * pixel_i,
 						MINIMAP_SCALE_FACTOR * pixel_j,
 						YELLOW_PIXEL
@@ -97,7 +90,20 @@ int	this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int 
 
 void	update(t_config *config)
 {
+	float	new_x;
+	float	new_y;
+	float	move_step;
+	t_player	*player;
+
+	player = &config->player;
 	config->player.rotation_angle += config->player.turn_direction * config->player.turn_speed;
 
+	move_step = player->walk_direction * 0.1;
+
+	new_x = player->x + cos(player->rotation_angle) * move_step;
+	new_y = player->y + sin(player->rotation_angle) * move_step;
+
+	player->x = new_x;
+	player->y = new_y;
 	
 }
