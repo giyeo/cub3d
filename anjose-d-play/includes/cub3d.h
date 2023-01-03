@@ -97,7 +97,7 @@ int		load_game(t_config *config);
 
 // render
 int		render_background(t_config *config, int color, t_img *img);
-void	render_map(t_config *config);
+void	render_map(t_config *config, int map_y, int map_x, int pixel_i, int pixel_j);
 void	render_player(t_config *config);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int		render_rect(t_conn conn_mlx, int x, int y, int rect_height, int rect_width, int color, t_img *img);

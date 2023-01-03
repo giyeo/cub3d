@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:09:44 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/30 20:25:01 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:42:09 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	player_init(t_config *config)
 {
 	config->player.x = config->player_position[1];
 	config->player.y = config->player_position[0];
-	config->player.height = 1;
-	config->player.width = 1;
+	config->player.height = 50;
+	config->player.width = 50;
 	config->player.turn_direction = 0;
 	config->player.walk_direction = 0;
 	config->player.rotation_angle = PI / 2; // pointing down

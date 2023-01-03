@@ -6,47 +6,16 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:20:32 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/30 20:43:29 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:22:40 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	render_map(t_config *config)
+void	render_map(t_config *config, int map_y, int map_x, int pixel_i, int pixel_j)
 {
-	char **map;
-	int	i;
-	int	j;
-
-	map = config->map;
-
-	if (config->conn_mlx.win_ptr != NULL)
-	{
-		i = 0;
-		while (config->map[i])
-		{
-			j = 0;
-			while (config->map[i][j]) 
-			{
-				int	tileX = j * TILE_SIZE;
-				int	tileY = i * TILE_SIZE;
-				int	tileColor = map[i][j] != 0 ? 255 : 0;
-
-				if (config->map[i][j] == '1')
-				{
-					render_rect(config->conn_mlx,
-						MINIMAP_SCALE_FACTOR * tileX,
-						MINIMAP_SCALE_FACTOR * tileY,
-						MINIMAP_SCALE_FACTOR * TILE_SIZE,
-						MINIMAP_SCALE_FACTOR * TILE_SIZE,
-						WHITE_PIXEL,
-						&config->img
-					);
-				}
-				j++;
-			}
-			i++;
-		}
-	}
+	if (config->map[map_y][map_x] == '1')
+		img_pix_put(&config->img, pixel_i, pixel_j, WHITE_PIXEL);
+	else
+		img_pix_put(&config->img, pixel_i, pixel_j, BLACK_PIXEL);
 }
-

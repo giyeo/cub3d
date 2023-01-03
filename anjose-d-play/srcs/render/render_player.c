@@ -6,11 +6,13 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:12:18 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/30 21:25:05 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:28:59 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	render_circle(t_conn conn_mlx, int x, int y, int rect_height, int rect_width, int color, t_img *img);
 
 void	render_player(t_config *config)
 {
@@ -30,23 +32,21 @@ void	render_player(t_config *config)
 			{
 				int	tileX = config->player.x * TILE_SIZE;
 				int	tileY = config->player.y * TILE_SIZE;
-				int	tileColor = map[i][j] != 0 ? 255 : 0;
 
-				if (config->map[i][j] == 'N')
-				{
-					render_rect(config->conn_mlx,
-						MINIMAP_SCALE_FACTOR * tileX,
-						MINIMAP_SCALE_FACTOR * tileY,
-						MINIMAP_SCALE_FACTOR * config->player.height,
-						MINIMAP_SCALE_FACTOR * config->player.width,
-						YELLOW_PIXEL,
-						&config->img
-					);
-				}
+				// if (config->map[i][j] == 'N')
+				// {
+				// 	render_rect(config->conn_mlx,
+				// 		MINIMAP_SCALE_FACTOR * tileX,
+				// 		MINIMAP_SCALE_FACTOR * tileY,
+				// 		MINIMAP_SCALE_FACTOR * config->player.height,
+				// 		MINIMAP_SCALE_FACTOR * config->player.width,
+				// 		YELLOW_PIXEL,
+				// 		&config->img
+				// 	);
+				// }
 				j++;
 			}
 			i++;
 		}
 	}
 }
-

@@ -42,7 +42,7 @@
 // TIRAR DAQUI
 #define MAP_NUM_ROWS 7
 #define MAP_NUM_COLS 20
-#define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
+#define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE) // deixar fixo
 #define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
 
 # define FOV_ANGLE (60 * (PI / 180))
