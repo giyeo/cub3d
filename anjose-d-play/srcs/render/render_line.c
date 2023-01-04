@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 19:47:33 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/04 05:08:08 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/04 05:16:57 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		render_line(t_config *config, float x1, float y1, float x2, float y2, int c
 	while (pixels)
 	{
 		if (config->map[(int)(pixelY / TILE_SIZE / MINIMAP_SCALE_FACTOR )][(int)(pixelX / TILE_SIZE / MINIMAP_SCALE_FACTOR)] == '1')
-			return (distance_between_points(x1, y1, pixelX, pixelY)); // retornar a distancia do player e a parede
+			return (distance_between_points(x1, y1, pixelX, pixelY));
 		if (pixelX < 0 || pixelY < 0)
 			return (1);
 		img_pix_put(&config->img, pixelX, pixelY, color);
