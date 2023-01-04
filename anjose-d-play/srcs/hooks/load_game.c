@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/04 18:00:34 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/04 20:40:16 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,11 @@ int	load_game(t_config *config)
 	float distance;
 	float wallstrip;
 	float angle = config->player.rotation_angle - (FOV / 2.0);
-	int	i = 0;
 	int	ray_range;
 
 	ray_range = config->window_width;
-	while (i < config->window_width)
+	int	i = 0;
+	while (i < config->num_rays) // num_rays
 	{
 		distance =
 		render_line(config,
@@ -97,15 +97,18 @@ int	load_game(t_config *config)
 			MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (ray_range / MINIMAP_SCALE_FACTOR)),
 			create_trgb(1, 128, 0, 0)
 		);
-		if(i == config->window_width / 2)
+		
+		// why?
+		if(i == config->num_rays / 2)
 		{
-			wallstrip = TILE_SIZE / distance * ((config->window_width / 2) / tan(FOV / 2)) * MINIMAP_SCALE_FACTOR;
+			wallstrip = TILE_SIZE / distance * ((config->num_rays / 2) / tan(FOV / 2)) * MINIMAP_SCALE_FACTOR;
 			// printf("%f\n", wallstrip);
 		}
 		i++;
 		angle += (FOV / config->window_width);
 	}
 	//float wallstrip = TILE_SIZE / distances[i] * ((config->window_width / 2) / tan(FOV / 2))
+	
 	mlx_put_image_to_window(config->conn_mlx.mlx_ptr,
 		config->conn_mlx.win_ptr,
 		config->img.mlx_img, 0, 0

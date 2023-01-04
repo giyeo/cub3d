@@ -57,6 +57,7 @@ typedef struct	s_config
 	int		map_num_cols;
 	int		window_width;
 	int		window_height;
+	int		num_rays;
 	int		player_position[2];
 	char	player_direction;
 	t_conn	conn_mlx;

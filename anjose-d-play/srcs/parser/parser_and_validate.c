@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:09:44 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/04 18:02:10 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/04 20:06:48 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	parser_and_validate(char **buffer, t_config *config)
 	config->map_num_cols = ft_mtx_biggest_strlen(config->map);
 	config->window_height = config->map_num_rows * TILE_SIZE;
 	config->window_width = config->map_num_cols * TILE_SIZE;
+	config->num_rays = config->window_width;
 
 	player_init(config);
 	mlx_conn_init(config);
