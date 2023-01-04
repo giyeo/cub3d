@@ -39,7 +39,7 @@
 # define TWO_PI 6.283185306
 
 # define TILE_SIZE 64
-# define MINIMAP_SCALE_FACTOR 1
+# define MINIMAP_SCALE_FACTOR 0.5
 
 // TIRAR DAQUI
 #define MAP_NUM_ROWS 7

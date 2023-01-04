@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/03 22:50:30 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/04 04:55:30 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int	load_game(t_config *config)
 		render_line(config,
 			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE) + cos(angle) * (MINIMAP_SCALE_FACTOR * 1000),
-			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE) + sin(angle) * (MINIMAP_SCALE_FACTOR * 1000),
+			MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (MINIMAP_SCALE_FACTOR * 1000)),
+			MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (MINIMAP_SCALE_FACTOR * 1000)),
 			create_trgb(1, 128, 0, 0)
 		);
 		i++;
@@ -118,7 +118,7 @@ void	update(t_config *config)
 	player = &config->player;
 	player->rotation_angle += player->turn_direction * player->turn_speed;
 
-	move_step = player->walk_direction * 0.1;
+	move_step = player->walk_direction * config->player.walk_speed;
 
 	new_x = player->x + cos(player->rotation_angle) * move_step;
 	new_y = player->y + sin(player->rotation_angle) * move_step;

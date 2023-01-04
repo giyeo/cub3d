@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_and_validate.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:09:44 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/03 18:16:16 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/04 04:44:10 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	player_init(t_config *config)
 	config->player.turn_direction = 0;
 	config->player.walk_direction = 0;
 	config->player.rotation_angle = PI / 2; // pointing down
-	config->player.walk_speed = 100;
-	config->player.turn_speed = 10 * (PI / 180); // ((PI / 180)) == converting to radians
+	config->player.walk_speed = 1.0 / 40.0;
+	config->player.turn_speed = 1 * (PI / 180); // ((PI / 180)) == converting to radians
 }
 
 void	mlx_conn_init(t_config *config)
