@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/04 05:23:28 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/04 06:05:29 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,10 +80,13 @@ int	load_game(t_config *config)
 	
 	float FOV = 60.0 * (PI / 180);
 
+	float distance;
+	float wallstrip;
 	float angle = config->player.rotation_angle - (FOV / 2.0);
 	int	i = 0;
 	while (i < WINDOW_WIDTH)
 	{
+		distance =
 		render_line(config,
 			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
@@ -91,9 +94,15 @@ int	load_game(t_config *config)
 			MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
 			create_trgb(1, 128, 0, 0)
 		);
+		if(i == WINDOW_WIDTH / 2)
+		{
+			wallstrip = TILE_SIZE / distance * ((WINDOW_WIDTH / 2) / tan(FOV / 2)) * MINIMAP_SCALE_FACTOR;
+			printf("%f\n", wallstrip);
+		}
 		i++;
 		angle += (FOV / WINDOW_WIDTH);
 	}
+	//float wallstrip = TILE_SIZE / distances[i] * ((WINDOW_WIDTH / 2) / tan(FOV / 2))
 	mlx_put_image_to_window(config->conn_mlx.mlx_ptr,
 		config->conn_mlx.win_ptr,
 		config->img.mlx_img, 0, 0
