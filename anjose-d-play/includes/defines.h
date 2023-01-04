@@ -11,6 +11,8 @@
 #define WHITE_PIXEL 0xFFFFFF
 #define BLACK_PIXEL 0x0
 #define YELLOW_PIXEL 0xFFFF00
+#define BLUE_PIXEL 0x0000FF
+#define GREY_PIXEL 0xAAAAAA
 
 
 /* type identifiers */

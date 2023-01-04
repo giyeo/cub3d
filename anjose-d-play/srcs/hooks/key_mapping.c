@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 23:55:22 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/30 21:24:48 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/03 22:12:10 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	key_pressed(int keysym, t_config *config)
 		config->player.turn_direction = -1;
 	if (keysym == RIGHT_ARROW || keysym == D)
 		config->player.turn_direction = 1;
-	printf("%d\n", keysym);
 	return (0);
 }
 
