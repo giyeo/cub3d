@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/04 06:05:29 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:00:34 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	load_game(t_config *config)
 			{
 				// wall collision
 				if (config->map[map_y][map_x] != '1')
-					img_pix_put(&config->img,
+					img_pix_put(config,
 						MINIMAP_SCALE_FACTOR * pixel_i,
 						MINIMAP_SCALE_FACTOR * pixel_j,
 						YELLOW_PIXEL
@@ -84,25 +84,28 @@ int	load_game(t_config *config)
 	float wallstrip;
 	float angle = config->player.rotation_angle - (FOV / 2.0);
 	int	i = 0;
-	while (i < WINDOW_WIDTH)
+	int	ray_range;
+
+	ray_range = config->window_width;
+	while (i < config->window_width)
 	{
 		distance =
 		render_line(config,
 			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
-			MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
+			MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (ray_range / MINIMAP_SCALE_FACTOR)),
+			MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (ray_range / MINIMAP_SCALE_FACTOR)),
 			create_trgb(1, 128, 0, 0)
 		);
-		if(i == WINDOW_WIDTH / 2)
+		if(i == config->window_width / 2)
 		{
-			wallstrip = TILE_SIZE / distance * ((WINDOW_WIDTH / 2) / tan(FOV / 2)) * MINIMAP_SCALE_FACTOR;
-			printf("%f\n", wallstrip);
+			wallstrip = TILE_SIZE / distance * ((config->window_width / 2) / tan(FOV / 2)) * MINIMAP_SCALE_FACTOR;
+			// printf("%f\n", wallstrip);
 		}
 		i++;
-		angle += (FOV / WINDOW_WIDTH);
+		angle += (FOV / config->window_width);
 	}
-	//float wallstrip = TILE_SIZE / distances[i] * ((WINDOW_WIDTH / 2) / tan(FOV / 2))
+	//float wallstrip = TILE_SIZE / distances[i] * ((config->window_width / 2) / tan(FOV / 2))
 	mlx_put_image_to_window(config->conn_mlx.mlx_ptr,
 		config->conn_mlx.win_ptr,
 		config->img.mlx_img, 0, 0

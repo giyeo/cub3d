@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_and_validate.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:09:44 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/04 04:44:10 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:02:10 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	parser_and_validate(char **buffer, t_config *config)
 
 	config->map_num_rows = ft_mtxlen(config->map);
 	config->map_num_cols = ft_mtx_biggest_strlen(config->map);
+	config->window_height = config->map_num_rows * TILE_SIZE;
+	config->window_width = config->map_num_cols * TILE_SIZE;
 
 	player_init(config);
 	mlx_conn_init(config);
@@ -50,13 +52,13 @@ void	mlx_conn_init(t_config *config)
 {
 	config->conn_mlx.mlx_ptr = mlx_init();
 	config->conn_mlx.win_ptr = mlx_new_window(config->conn_mlx.mlx_ptr,
-		WINDOW_WIDTH, WINDOW_HEIGHT, "TEST");
+		config->window_width, config->window_height, "TEST");
 }
 void	img_init(t_config *config)
 {
 	config->img.mlx_img = mlx_new_image(config->conn_mlx.mlx_ptr,
-		WINDOW_WIDTH,
-		WINDOW_HEIGHT
+		config->window_width,
+		config->window_height
 	);
 	config->img.addr = mlx_get_data_addr(config->img.mlx_img,
 		&config->img.bpp,

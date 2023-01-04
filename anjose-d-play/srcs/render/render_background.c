@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 11:52:13 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/30 12:47:28 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:02:32 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int	render_background(t_config *config, int color, t_img *img)
 	if (config->conn_mlx.win_ptr == NULL)
 		return (1);
 	i = 0;
-	while (i < WINDOW_HEIGHT)
+	while (i < config->window_height)
 	{
 		j = 0;
-		while (j < WINDOW_WIDTH)
+		while (j < config->window_height)
 		{
-			img_pix_put(img, j, i, color);
+			img_pix_put(config, j, i, color);
 			j++;
 		}
 		i++;
