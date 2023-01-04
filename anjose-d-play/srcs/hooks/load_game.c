@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/03 18:24:08 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/03 22:50:30 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 
 int	this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int radius);
 void	update(t_config *config);
+
+int    mlx_get_hex_trgb(int r, int g, int b)
+{
+    return ((r << 16) | (g << 8) | (b));
+}
+
+int	create_trgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r << 16 | g << 8 | b);
+}
 
 int	load_game(t_config *config)
 {
@@ -67,13 +77,23 @@ int	load_game(t_config *config)
 		if(pixel_j % (TILE_SIZE) == 0)
 			map_y++;
 	}
-	render_line(config,
+	
+	float FOV = 60.0 * (PI / 180);
+
+	float angle = config->player.rotation_angle - (FOV / 2.0);
+	int	i = 0;
+	while (i < WINDOW_WIDTH)
+	{
+		render_line(config,
 			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE) + cos(config->player.rotation_angle) * (MINIMAP_SCALE_FACTOR * 20),
-			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE) + sin(config->player.rotation_angle) * (MINIMAP_SCALE_FACTOR * 20),
-			RED_PIXEL
+			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE) + cos(angle) * (MINIMAP_SCALE_FACTOR * 1000),
+			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE) + sin(angle) * (MINIMAP_SCALE_FACTOR * 1000),
+			create_trgb(1, 128, 0, 0)
 		);
+		i++;
+		angle += (FOV / WINDOW_WIDTH);
+	}
 	mlx_put_image_to_window(config->conn_mlx.mlx_ptr,
 		config->conn_mlx.win_ptr,
 		config->img.mlx_img, 0, 0
@@ -96,7 +116,7 @@ void	update(t_config *config)
 	t_player	*player;
 
 	player = &config->player;
-	config->player.rotation_angle += config->player.turn_direction * config->player.turn_speed;
+	player->rotation_angle += player->turn_direction * player->turn_speed;
 
 	move_step = player->walk_direction * 0.1;
 
@@ -105,5 +125,4 @@ void	update(t_config *config)
 
 	player->x = new_x;
 	player->y = new_y;
-	
 }
