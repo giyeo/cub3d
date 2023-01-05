@@ -2,7 +2,7 @@
 # MAIN VARIABLES
 NAME		:=	cub3d
 CC			:=	cc
-CFLAGS		:= -O3 #-Wall -Wextra -Werror
+CFLAGS		:=  -O3 #-Wall -Wextra -Werror
 
 # LIBRARIES
 ## libft

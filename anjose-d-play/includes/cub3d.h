@@ -32,15 +32,15 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	float	x;
-	float	y;
-	float	width;
-	float	height;
+	double	x;
+	double	y;
+	double	width;
+	double	height;
 	int		turn_direction; // -1 for left, +1 for right | 0 to still
 	int		walk_direction; // -1 for back, +1 for front | 0 to still
-	float	rotation_angle;
-	float	walk_speed;
-	float	turn_speed;
+	double	rotation_angle;
+	double	walk_speed;
+	double	turn_speed;
 }				t_player;
 
 
@@ -101,7 +101,7 @@ void	render_map(t_config *config, int map_y, int map_x, int pixel_i, int pixel_j
 void	render_player(t_config *config);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int		render_rect(t_conn conn_mlx, int x, int y, int rect_height, int rect_width, int color, t_img *img);
-int		render_line(t_config *config, float x1, float y1, float x2, float y2, int color);
+int		render_line(t_config *config, double x1, double y1, double x2, double y2, int color, int c);
 
 // player
 void	move_player(t_config *config);

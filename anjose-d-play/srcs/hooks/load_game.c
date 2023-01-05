@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/04 06:05:29 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/04 23:13:08 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,37 +32,22 @@ int	load_game(t_config *config)
 	int map_y = 0;
 	int map_x = 0;
 
-	float	backup_y = config->player.y;
-	float	backup_x = config->player.x;
+	double	backup_y = config->player.y;
+	double	backup_x = config->player.x;
 
 	update(config);
-	//the collision detector should be here!
 	while(map_y < config->map_num_rows)
 	{
 		while(map_x < config->map_num_cols)
 		{
-			//create horizontal grid lines
 			if(pixel_i % (TILE_SIZE) == 0 && pixel_i != 0)
 				map_x++;
-			
-			if (map_x < config->map_num_cols)
-				render_map(
-					config,
-					map_y,
-					map_x,
-					MINIMAP_SCALE_FACTOR * pixel_i,
-					MINIMAP_SCALE_FACTOR * pixel_j);
-
-			// render player
+			// if (map_x < config->map_num_cols)
+			// 	render_map(config, map_y, map_x, MINIMAP_SCALE_FACTOR * pixel_i, MINIMAP_SCALE_FACTOR * pixel_j);
 			if(this_point_is_in_a_circle(pixel_i, pixel_j, config->player.x * TILE_SIZE, config->player.y * TILE_SIZE, 10))
 			{
-				// wall collision
 				if (config->map[map_y][map_x] != '1')
-					img_pix_put(&config->img,
-						MINIMAP_SCALE_FACTOR * pixel_i,
-						MINIMAP_SCALE_FACTOR * pixel_j,
-						YELLOW_PIXEL
-					);
+					img_pix_put(&config->img, MINIMAP_SCALE_FACTOR * pixel_i, MINIMAP_SCALE_FACTOR * pixel_j, YELLOW_PIXEL);
 				else
 				{
 					config->player.x = backup_x;
@@ -77,32 +62,63 @@ int	load_game(t_config *config)
 		if(pixel_j % (TILE_SIZE) == 0)
 			map_y++;
 	}
-	
-	float FOV = 60.0 * (PI / 180);
+	// int i = 0;
+	// double FOV = 60.0 * (PI / 180);
+	// double angle = config->player.rotation_angle - (FOV / 2.0);
+	// while(i < WINDOW_WIDTH)
+	// {
+	// 	render_line(config,
+	// 		MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
+	// 		MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
+	// 		MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
+	// 		MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
+	// 		create_trgb(1, 255, 0, 0),
+	// 		1
+	// 	);
+	// 	angle += (FOV / WINDOW_WIDTH);
+	// 	i++;
+	// }
+		
+	double FOV = 60.0 * (PI / 180);
 
-	float distance;
-	float wallstrip;
-	float angle = config->player.rotation_angle - (FOV / 2.0);
-	int	i = 0;
-	while (i < WINDOW_WIDTH)
+	double distances;
+	double angle = config->player.rotation_angle - (FOV / 2.0);
+	double wallstrip;
+	int y = 0;
+	int x = 0;
+	int offsize = 0;
+	while(x < WINDOW_WIDTH)
 	{
-		distance =
+		distances =
 		render_line(config,
 			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
 			MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
-			create_trgb(1, 128, 0, 0)
+			create_trgb(1, 0, 0, 0),
+			0
 		);
-		if(i == WINDOW_WIDTH / 2)
-		{
-			wallstrip = TILE_SIZE / distance * ((WINDOW_WIDTH / 2) / tan(FOV / 2)) * MINIMAP_SCALE_FACTOR;
-			printf("%f\n", wallstrip);
-		}
-		i++;
 		angle += (FOV / WINDOW_WIDTH);
+		wallstrip = (TILE_SIZE / distances) * ((WINDOW_WIDTH / 2) / tan(FOV / 2)) * MINIMAP_SCALE_FACTOR;
+		while(y < WINDOW_HEIGHT)
+		{
+			offsize = (WINDOW_HEIGHT - wallstrip) / 2;
+			if(x == 0 && y == 0)
+				printf("offsize = %d, WINDOW_HEIGHT:%d - WALLSTRIP:%f\n", offsize, WINDOW_HEIGHT, wallstrip );
+			//if(y < (int)(WINDOW_HEIGHT * MINIMAP_SCALE_FACTOR) && x < (int)(WINDOW_WIDTH * MINIMAP_SCALE_FACTOR));
+			if(offsize <= 0)
+				img_pix_put(&config->img, x, y, YELLOW_PIXEL);
+			else if(y < offsize)
+				img_pix_put(&config->img, x, y, BLACK_PIXEL);
+			else if(y < offsize + wallstrip)
+				img_pix_put(&config->img, x, y, YELLOW_PIXEL);
+			else
+				img_pix_put(&config->img, x, y, BLACK_PIXEL);
+			y++;
+		}
+		y = 0;
+		x++;
 	}
-	//float wallstrip = TILE_SIZE / distances[i] * ((WINDOW_WIDTH / 2) / tan(FOV / 2))
 	mlx_put_image_to_window(config->conn_mlx.mlx_ptr,
 		config->conn_mlx.win_ptr,
 		config->img.mlx_img, 0, 0
@@ -119,9 +135,9 @@ int	this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int 
 
 void	update(t_config *config)
 {
-	float	new_x;
-	float	new_y;
-	float	move_step;
+	double	new_x;
+	double	new_y;
+	double	move_step;
 	t_player	*player;
 
 	player = &config->player;

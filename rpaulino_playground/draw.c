@@ -52,18 +52,12 @@ int update(t_data *img)
 	img->old_player_y = img->player_y;
 
 	if(img->walk_fb != 0)
-	{
 		img->player_y += img->walk_fb * img->player_speed;
-	}
 	if(img->walk_lr != 0)
-	{
 		img->player_x += img->walk_lr * img->player_speed;
-	}
 	if(img->turn_dr != 0)
-	{
 		img->rotation_angle += img->turn_dr * img->rotation_speed;
-	}
-		return (0);
+	return (0);
 }
 
 int	draw(t_data *img)
