@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/04 23:13:08 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/05 07:02:56 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ int	load_game(t_config *config)
 		);
 		angle += (FOV / WINDOW_WIDTH);
 		wallstrip = (TILE_SIZE / distances) * ((WINDOW_WIDTH / 2) / tan(FOV / 2)) * MINIMAP_SCALE_FACTOR;
+		int total_dist = WINDOW_WIDTH * 1.42;
 		while(y < WINDOW_HEIGHT)
 		{
 			offsize = (WINDOW_HEIGHT - wallstrip) / 2;
@@ -107,13 +108,13 @@ int	load_game(t_config *config)
 				printf("offsize = %d, WINDOW_HEIGHT:%d - WALLSTRIP:%f\n", offsize, WINDOW_HEIGHT, wallstrip );
 			//if(y < (int)(WINDOW_HEIGHT * MINIMAP_SCALE_FACTOR) && x < (int)(WINDOW_WIDTH * MINIMAP_SCALE_FACTOR));
 			if(offsize <= 0)
-				img_pix_put(&config->img, x, y, YELLOW_PIXEL);
+				img_pix_put(&config->img, x, y, mlx_get_hex_trgb(0, 255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist)));
 			else if(y < offsize)
-				img_pix_put(&config->img, x, y, BLACK_PIXEL);
+				img_pix_put(&config->img, x, y, mlx_get_hex_trgb(0, 0, 255));
 			else if(y < offsize + wallstrip)
-				img_pix_put(&config->img, x, y, YELLOW_PIXEL);
+				img_pix_put(&config->img, x, y, mlx_get_hex_trgb(0, 255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist)));
 			else
-				img_pix_put(&config->img, x, y, BLACK_PIXEL);
+				img_pix_put(&config->img, x, y, mlx_get_hex_trgb(0, 0, 0));
 			y++;
 		}
 		y = 0;
