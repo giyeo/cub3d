@@ -41,17 +41,16 @@ int	create_trgb(int t, int r, int g, int b)
 int	find_color_wall(int side[2], double distances)
 {
 	int total_dist = WINDOW_WIDTH * 1.42;
-
+	int color;
+	//as vezes fica bugado com 1, -1  1, 1    -1 -1, para arrumar preciso do angulo dps faço
 	if(side[1] == 1)//norte
-		return mlx_get_hex_trgb(0, 0, 125 - (distances * 125 / total_dist));
+		return mlx_get_hex_trgb(0, 0, 125 - (distances * 125 / total_dist));//azul
 	else if(side[1] == -1 )//sul
-			return mlx_get_hex_trgb(0, 255 - (distances * 254 / total_dist), 0);
+		return mlx_get_hex_trgb(0, 255 - (distances * 254 / total_dist), 0);//green
 	else if(side[0] == 1)//oeste
-		return mlx_get_hex_trgb(0, 255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist));
-	else if(side[0] == -1)//leste
-		return mlx_get_hex_trgb(255 - (distances * 254 / total_dist), 0, 255 - (distances * 254 / total_dist));
-	else
-		return mlx_get_hex_trgb(255 , 255 , 255 );
+		return mlx_get_hex_trgb(255 - (distances * 254 / total_dist), 0, 0);//red
+	else if(side[0] == -1)//leste white
+		return mlx_get_hex_trgb(255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist));
 }
 
 int	load_game(t_config *config)
@@ -131,15 +130,19 @@ int	load_game(t_config *config)
 			);
 		}
 		angle += normalize_angle((FOV / WINDOW_WIDTH));
+		//fix fishball effect
+		distances = distances * cos(angle - config->player.rotation_angle);
 		wallstrip = (TILE_SIZE / distances) * ((WINDOW_WIDTH / 2) / tan(FOV / 2)) * MINIMAP_SCALE_FACTOR;
-
-		int colorwall = find_color_wall(config->side, distances);
+		//wallstrip = wallstrip * cos(angle);
+		int colorwall = BLACK_PIXEL;
+		if (x != (WINDOW_WIDTH / 2))
+			colorwall = find_color_wall(config->side, distances);
 		
 		while(y < WINDOW_HEIGHT)
 		{
-			offsize = (WINDOW_HEIGHT - wallstrip) / 2;
+			offsize = (WINDOW_HEIGHT - wallstrip) / 2.0;
 			if(x == WINDOW_WIDTH / 2 && y == WINDOW_HEIGHT / 2)
-				printf("offsize = %d, WINDOW_HEIGHT:%d - WALLSTRIP:%f #ANGLE:%f @SIDE:[%d,%d]\n", offsize, WINDOW_HEIGHT, wallstrip, angle, config->side[0], config->side[1] );
+				printf("#ANGLE:%f @SIDE:[%d,%d]\n", angle, config->side[0], config->side[1] );
 			//if(y < (int)(WINDOW_HEIGHT * MINIMAP_SCALE_FACTOR) && x < (int)(WINDOW_WIDTH * MINIMAP_SCALE_FACTOR));
 			if(offsize <= 0)
 				img_pix_put(&config->img, x, y, colorwall);
@@ -148,7 +151,7 @@ int	load_game(t_config *config)
 			else if(y < offsize + wallstrip)
 				img_pix_put(&config->img, x, y, colorwall);
 			else
-				img_pix_put(&config->img, x, y, mlx_get_hex_trgb(50, 50, 50));
+				img_pix_put(&config->img, x, y, mlx_get_hex_trgb(150, 150, 150));
 			y++;
 		}
 		y = 0;
