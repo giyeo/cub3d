@@ -37,6 +37,8 @@ int		render_line(t_config *config, double x1, double y1, double x2, double y2, i
 		posY = pixelY / TILE_SIZE / MINIMAP_SCALE_FACTOR;
 		if (config->map[posY][posX] == '1')
 		{
+			config->texture_col[0] = (int)((int)pixelX % 64);
+			config->texture_col[1] = (int)((int)pixelY % 64);
 			config->side[0] = (posX_old - posX);
 			config->side[1] = (posY_old - posY);
 			return (distance_between_points(x1, y1, pixelX, pixelY));

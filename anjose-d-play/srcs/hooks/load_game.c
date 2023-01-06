@@ -142,7 +142,7 @@ int	load_game(t_config *config)
 		{
 			offsize = (WINDOW_HEIGHT - wallstrip) / 2.0;
 			if(x == WINDOW_WIDTH / 2 && y == WINDOW_HEIGHT / 2)
-				printf("#ANGLE:%f @SIDE:[%d,%d]\n", angle, config->side[0], config->side[1] );
+				printf("#ANGLE:%f @SIDE:[%d,%d] &Text_col:%d:%d\n", angle, config->side[0], config->side[1], config->texture_col[0], config->texture_col[1]);
 			//if(y < (int)(WINDOW_HEIGHT * MINIMAP_SCALE_FACTOR) && x < (int)(WINDOW_WIDTH * MINIMAP_SCALE_FACTOR));
 			if(offsize <= 0)
 				img_pix_put(&config->img, x, y, colorwall);
