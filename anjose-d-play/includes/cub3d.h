@@ -53,6 +53,7 @@ typedef struct	s_config
 	int		F[3];
 	int		C[3];
 	char	**map;
+	int		side[2];
 	int		map_num_rows;
 	int		map_num_cols;
 	int		player_position[2];

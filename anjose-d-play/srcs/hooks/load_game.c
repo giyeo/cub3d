@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/05 07:02:56 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/06 00:39:22 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,38 @@ int    mlx_get_hex_trgb(int r, int g, int b)
     return ((r << 16) | (g << 8) | (b));
 }
 
+double	dg_to_rad(double dg)
+{
+	return (PI / 180 * dg);
+}
+
+static double    normalize_angle(double angle)
+{
+    angle = remainder(angle, TWO_PI);
+    if (angle < 0)
+        angle = TWO_PI + angle;
+    return (angle);
+}
+
 int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+int	find_color_wall(int side[2], double distances)
+{
+	int total_dist = WINDOW_WIDTH * 1.42;
+
+	if(side[1] == 1)//norte
+		return mlx_get_hex_trgb(0, 0, 125 - (distances * 125 / total_dist));
+	else if(side[1] == -1 )//sul
+			return mlx_get_hex_trgb(0, 255 - (distances * 254 / total_dist), 0);
+	else if(side[0] == 1)//oeste
+		return mlx_get_hex_trgb(0, 255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist));
+	else if(side[0] == -1)//leste
+		return mlx_get_hex_trgb(255 - (distances * 254 / total_dist), 0, 255 - (distances * 254 / total_dist));
+	else
+		return mlx_get_hex_trgb(255 , 255 , 255 );
 }
 
 int	load_game(t_config *config)
@@ -82,39 +111,44 @@ int	load_game(t_config *config)
 	double FOV = 60.0 * (PI / 180);
 
 	double distances;
-	double angle = config->player.rotation_angle - (FOV / 2.0);
+	double angle = normalize_angle(config->player.rotation_angle - (FOV / 2.0));
 	double wallstrip;
 	int y = 0;
 	int x = 0;
 	int offsize = 0;
-	while(x < WINDOW_WIDTH)
+	while(x < WINDOW_WIDTH) //pegar angulo e ver em qual parte do circulo trig ele fica.
 	{
-		distances =
-		render_line(config,
-			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
-			MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
-			create_trgb(1, 0, 0, 0),
-			0
-		);
-		angle += (FOV / WINDOW_WIDTH);
+		if(x % 1 == 0)
+		{
+			distances =
+			render_line(config,
+				MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
+				MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
+				MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
+				MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
+				create_trgb(1, 0, 0, 0),
+				0
+			);
+		}
+		angle += normalize_angle((FOV / WINDOW_WIDTH));
 		wallstrip = (TILE_SIZE / distances) * ((WINDOW_WIDTH / 2) / tan(FOV / 2)) * MINIMAP_SCALE_FACTOR;
-		int total_dist = WINDOW_WIDTH * 1.42;
+
+		int colorwall = find_color_wall(config->side, distances);
+		
 		while(y < WINDOW_HEIGHT)
 		{
 			offsize = (WINDOW_HEIGHT - wallstrip) / 2;
-			if(x == 0 && y == 0)
-				printf("offsize = %d, WINDOW_HEIGHT:%d - WALLSTRIP:%f\n", offsize, WINDOW_HEIGHT, wallstrip );
+			if(x == WINDOW_WIDTH / 2 && y == WINDOW_HEIGHT / 2)
+				printf("offsize = %d, WINDOW_HEIGHT:%d - WALLSTRIP:%f #ANGLE:%f @SIDE:[%d,%d]\n", offsize, WINDOW_HEIGHT, wallstrip, angle, config->side[0], config->side[1] );
 			//if(y < (int)(WINDOW_HEIGHT * MINIMAP_SCALE_FACTOR) && x < (int)(WINDOW_WIDTH * MINIMAP_SCALE_FACTOR));
 			if(offsize <= 0)
-				img_pix_put(&config->img, x, y, mlx_get_hex_trgb(0, 255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist)));
+				img_pix_put(&config->img, x, y, colorwall);
 			else if(y < offsize)
-				img_pix_put(&config->img, x, y, mlx_get_hex_trgb(0, 0, 255));
+				img_pix_put(&config->img, x, y, mlx_get_hex_trgb(50, 50, 50));
 			else if(y < offsize + wallstrip)
-				img_pix_put(&config->img, x, y, mlx_get_hex_trgb(0, 255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist)));
+				img_pix_put(&config->img, x, y, colorwall);
 			else
-				img_pix_put(&config->img, x, y, mlx_get_hex_trgb(0, 0, 0));
+				img_pix_put(&config->img, x, y, mlx_get_hex_trgb(50, 50, 50));
 			y++;
 		}
 		y = 0;
