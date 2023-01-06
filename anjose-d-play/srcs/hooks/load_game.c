@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/04 20:40:16 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/06 20:35:09 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,37 +77,36 @@ int	load_game(t_config *config)
 		if(pixel_j % (TILE_SIZE) == 0)
 			map_y++;
 	}
-	
-	float FOV = 60.0 * (PI / 180);
-
-	float distance;
-	float wallstrip;
-	float angle = config->player.rotation_angle - (FOV / 2.0);
-	int	ray_range;
-
-	ray_range = config->window_width;
-	int	i = 0;
-	while (i < config->num_rays) // num_rays
-	{
-		distance =
-		render_line(config,
+	render_line(config,
 			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (ray_range / MINIMAP_SCALE_FACTOR)),
-			MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (ray_range / MINIMAP_SCALE_FACTOR)),
-			create_trgb(1, 128, 0, 0)
+			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE + cos(config->player.rotation_angle) * 20),
+			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE + sin(config->player.rotation_angle) * 20),
+			RED_PIXEL
 		);
-		
-		// why?
-		if(i == config->num_rays / 2)
-		{
-			wallstrip = TILE_SIZE / distance * ((config->num_rays / 2) / tan(FOV / 2)) * MINIMAP_SCALE_FACTOR;
-			// printf("%f\n", wallstrip);
-		}
-		i++;
-		angle += (FOV / config->window_width);
-	}
-	//float wallstrip = TILE_SIZE / distances[i] * ((config->window_width / 2) / tan(FOV / 2))
+	
+	// float FOV = 60.0 * (PI / 180);
+
+	// float distance;
+	// // float wallstrip;
+	// float angle = config->player.rotation_angle - (FOV / 2.0);
+	// int	ray_range;
+
+	// ray_range = config->window_width;
+	// int	i = 0;
+	// while (i < config->num_rays) // num_rays
+	// {
+	// 	distance =
+	// 	render_line(config,
+	// 		MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
+	// 		MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
+	// 		MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (ray_range / MINIMAP_SCALE_FACTOR)),
+	// 		MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (ray_range / MINIMAP_SCALE_FACTOR)),
+	// 		create_trgb(1, 128, 0, 0)
+	// 	);
+	// 	i++;
+	// 	angle += (FOV / config->window_width);
+	// }
 	
 	mlx_put_image_to_window(config->conn_mlx.mlx_ptr,
 		config->conn_mlx.win_ptr,

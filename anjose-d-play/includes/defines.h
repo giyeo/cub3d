@@ -39,7 +39,7 @@
 # define TWO_PI 6.283185306
 
 # define TILE_SIZE 32
-# define MINIMAP_SCALE_FACTOR 0.5
+# define MINIMAP_SCALE_FACTOR 1
 
 // TIRAR DAQUI
 # define FOV_ANGLE (60 * (PI / 180))
