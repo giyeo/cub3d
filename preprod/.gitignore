@@ -1,0 +1,6 @@
+*.o
+cub3d
+.vscode
+*.a
+atomic_tests.c
+valgrind

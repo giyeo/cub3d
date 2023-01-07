@@ -1,0 +1,1 @@
+when doing sprites, look for delta time in games
