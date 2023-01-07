@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:09:44 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/04 04:44:10 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:05:23 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	player_init(t_config *config)
 	config->player.rotation_angle = PI / 2; // pointing down
 	config->player.walk_speed = 1.0 / 40.0;
 	config->player.turn_speed = 1 * (PI / 180); // ((PI / 180)) == converting to radians
-	config->player.interact = 1;
+	config->player.interact = 0;
 }
 
 void	mlx_conn_init(t_config *config)

@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/06 00:39:22 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/07 18:09:08 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,31 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-int	find_color_wall(int side[2], double distances)
+int	find_color_wall(int side[2], double distances, double angle)
 {
 	int total_dist = WINDOW_WIDTH * 1.42;
-	int color;
-	//as vezes fica bugado com 1, -1  1, 1    -1 -1, para arrumar preciso do angulo dps faço
+	//cores serão trocadas pela textura dps
+	int red = mlx_get_hex_trgb(255 - (distances * 254 / total_dist), 0, 0);
+	int green = mlx_get_hex_trgb(0, 255 - (distances * 254 / total_dist), 0);
+	int blue = mlx_get_hex_trgb(0, 0, 125 - (distances * 125 / total_dist));
+	int white = mlx_get_hex_trgb(255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist));
+	//AQUI EXISTE UMA AMBIGUIDADE, precisamos de um 3° fator para colocar a cor certa.
+	if(side[0] == 1 && side[1] == 1)
+		return white;
+	if(side[0] == 1 && side[1] == -1)
+		return white;
+	if(side[0] == -1 && side[1] == 1)
+		return white;
+	if(side[0] == -1 && side[1] == -1)
+		return white;
 	if(side[1] == 1)//norte
-		return mlx_get_hex_trgb(0, 0, 125 - (distances * 125 / total_dist));//azul
+		return blue;
 	else if(side[1] == -1 )//sul
-		return mlx_get_hex_trgb(0, 255 - (distances * 254 / total_dist), 0);//green
+		return green;
 	else if(side[0] == 1)//oeste
-		return mlx_get_hex_trgb(255 - (distances * 254 / total_dist), 0, 0);//red
-	else if(side[0] == -1)//leste white
-		return mlx_get_hex_trgb(255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist));
+		return red;
+	else if(side[0] == -1)//leste
+		return white;
 }
 void	raycaster(t_config *config);
 int	load_game(t_config *config)
@@ -115,17 +127,24 @@ int	load_game(t_config *config)
 	return (0);
 }
 
-void	raycaster(t_config *config)
+double	fov_zoom_handler(t_config *config)
 {
 	double FOV;
 
 	FOV = config->FOV * (PI / 180);
 	if(config->FOV < 60.0 && config->FOV > 20.0)
 		config->FOV -= 1;
-	
+	return FOV;
+}
+
+void	raycaster(t_config *config)
+{
 	double distances;
-	double angle = normalize_angle(config->player.rotation_angle - (FOV / 2.0));
 	double wallstrip;
+	double FOV;
+
+	FOV = fov_zoom_handler(config);
+	double angle = normalize_angle(config->player.rotation_angle - (FOV / 2.0));
 	int y = 0;
 	int x = 0;
 	int non_wall_strip = 0;
@@ -155,13 +174,12 @@ void	raycaster(t_config *config)
 		//COLOR
 		int colorwall = BLACK_PIXEL;
 		if (x != (WINDOW_WIDTH / 2))//faz a linha preta no meio
-			colorwall = find_color_wall(config->side, distances);
+			colorwall = find_color_wall(config->side, distances, angle);
 
-		// if(x == WINDOW_WIDTH / 2)
-		// 		printf("#ANGLE:%f @SIDE:[%d,%d] &Text_col:%d:%d gap (%d - %f) / 2 = %f, %d\n",
-		// 		angle, config->side[0], config->side[1],
-		// 		 config->texture_col[0], config->texture_col[1],
-		// 		WINDOW_HEIGHT, wallstrip, (WINDOW_HEIGHT - wallstrip) / 2, non_wall_strip);
+		if(x == WINDOW_WIDTH / 2)
+				printf("#ANGLE:%f @SIDE:[%d,%d] &Text_col:%d:%d fov:%f \n",
+				angle, config->side[0], config->side[1],
+				 config->texture_col[0], config->texture_col[1], FOV);
 		while(y < WINDOW_HEIGHT)
 		{
 			if(non_wall_strip <= 0)
