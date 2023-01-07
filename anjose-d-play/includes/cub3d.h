@@ -47,6 +47,14 @@ typedef struct s_player
 typedef	struct s_ray
 {
 	float	angle;
+	int		wall_hit_x;
+	int		wall_hit_y;
+	float	distance; // between player and the collision coordinate
+
+	int		is_fdown;
+	int		is_fup;
+	int		is_fright;
+	int		is_fleft;
 }				t_ray;
 
 typedef struct	s_config

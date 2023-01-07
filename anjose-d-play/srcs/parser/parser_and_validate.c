@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:09:44 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/06 21:12:42 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/07 16:17:29 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	player_init(t_config *config)
 	config->player.walk_direction = 0;
 	config->player.rotation_angle = PI / 2; // pointing down
 	config->player.walk_speed = 1.0 / 40.0;
-	config->player.turn_speed = 1 * (PI / 180); // ((PI / 180)) == converting to radians
+	config->player.turn_speed = 0.05 * (PI / 180); // ((PI / 180)) == converting to radians
 	config->player.fov = 60.0 * (PI / 180);
 }
 

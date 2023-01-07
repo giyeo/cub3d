@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/07 11:43:40 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/07 16:51:38 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 
 int	this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int radius);
 void	update(t_config *config);
+float	normalize_angle(float angle)
+{
+	angle = remainder(angle, (2 * PI));
+	if (angle < 0)
+		angle = angle + (2 * PI);
+	return angle;
+}
 
 int    mlx_get_hex_trgb(int r, int g, int b)
 {
@@ -24,6 +31,8 @@ int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
+
+void	raycast_calc(t_config *config, t_ray *ray);
 
 int	load_game(t_config *config)
 {
@@ -78,13 +87,13 @@ int	load_game(t_config *config)
 			map_y++;
 	}
 	
-	render_line(config,
-			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE + cos(config->player.rotation_angle) * 50),
-			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE + sin(config->player.rotation_angle) * 50),
-			RED_PIXEL
-		);
+	// render_line(config,
+	// 		MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
+	// 		MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
+	// 		MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE + cos(config->player.rotation_angle) * 50),
+	// 		MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE + sin(config->player.rotation_angle) * 50),
+	// 		RED_PIXEL
+	// 	);
 	
 	//cast_all_rays
 	int i = 0;
@@ -92,9 +101,9 @@ int	load_game(t_config *config)
 	float	ray_angle = config->player.rotation_angle - (config->player.fov / 2);
 	while (i < 1)
 	{
-		config->rays[i].angle = ray_angle;
+		config->rays[i].angle = normalize_angle(ray_angle);
 		// CAST A RAY
-		// raycast_calc(&config->ray[i]);
+		raycast_calc(config, config->rays + i);
 		render_line(config,
 			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
@@ -164,4 +173,69 @@ void	update(t_config *config)
 
 	player->x = new_x;
 	player->y = new_y;
+}
+
+void	raycast_calc(t_config *config, t_ray *ray)
+{
+	t_player	*player;
+	float	xintercept, yintercept;
+	float	xstep, ystep;
+
+
+	player = &config->player; 
+	ray->is_fdown = ray->angle > 0 && ray->angle < PI;
+	ray->is_fup = !ray->is_fdown;
+	ray->is_fleft = ray->angle > PI * 0.5 && ray->angle < PI * 1.5;
+	ray->is_fright = !ray->is_fleft;
+
+	
+	
+	// horizontal distance hit checking
+		
+		//find coordinates of the intersection (x and y of A)
+		// find the y-coordinate of the closest horizontal grid intersection
+		yintercept = floor(player->y / TILE_SIZE) * TILE_SIZE;
+		// compensation depending where the ray is facing
+		if (ray->is_fdown)
+			yintercept += TILE_SIZE;
+		// find the x-coordinate of the closest horizontal grid intersection
+		xintercept = player->x + ((yintercept - player->y) / tan(ray->angle)); // pq a subtração não é ao contrario?
+		
+		// find ystep and xstep (coordinates of every intersection) | delta distance between intersections;
+		ystep = TILE_SIZE;
+		if (ray->is_fup)
+			ystep *= -1;
+		xstep = TILE_SIZE / tan(ray->angle);
+	printf("is facing right? %d\n|tan: %f | xstep: %f\n",
+		ray->is_fright,
+		tan(ray->angle),
+		xstep);
+		if (ray->is_fleft && xstep > 0)
+			xstep *= -1;
+		if (ray->is_fright && xstep < 0)
+			xstep *= -1;
+		// if (ray->is_fup)
+		// {
+		// 	if (ray->is_fright) {/* +xstep */}
+		// 	else {/* -xstep */}
+		// }
+		// else
+		// {
+		// 	if (ray->is_fright) {/* +xstep */}
+		// 	else {/* -xstep */}
+		// }
+	
+		// convert intersection point (x,y) into map_index[i,j]
+		// there is a wall?
+			// store horizontal hit distance
+			// stop
+		// else
+			// find next horizontal intersection
+		
+	// vertical distance hit checking
+		// there is a wall?
+		 	// stops
+	
+	// compare both
+	// choose the closest one
 }
