@@ -38,7 +38,7 @@
 # define PI 3.141592653
 # define TWO_PI 6.283185306
 
-# define TILE_SIZE 32
+# define TILE_SIZE 64
 # define MINIMAP_SCALE_FACTOR 1
 
 

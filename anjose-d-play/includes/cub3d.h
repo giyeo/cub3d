@@ -55,6 +55,7 @@ typedef	struct s_ray
 	int		is_fup;
 	int		is_fright;
 	int		is_fleft;
+
 }				t_ray;
 
 typedef struct	s_config
@@ -100,6 +101,8 @@ void	config_init(t_config *config);
 void	check_struct(t_config *config, int i);
 int		is_one_of_these(char c, char *these);
 int		find_player(char **buffer, int first_line, t_config *config);
+int		map_has_wall_at(t_config *config, float x, float y);
+float	distance_between_points(float x1, float y1, float x2, float y2);
 
 /* VALIDATE*/
 int		validate_config(char **buffer, t_config *config);

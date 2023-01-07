@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/07 16:51:38 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/07 19:15:44 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ int	this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int 
 void	update(t_config *config);
 float	normalize_angle(float angle)
 {
-	angle = remainder(angle, (2 * PI));
+	angle = remainder(angle, TWO_PI);
 	if (angle < 0)
-		angle = angle + (2 * PI);
+		angle = TWO_PI + angle;
 	return angle;
 }
 
@@ -32,7 +32,7 @@ int	create_trgb(int t, int r, int g, int b)
 	return (t << 24 | r << 16 | g << 8 | b);
 }
 
-void	raycast_calc(t_config *config, t_ray *ray);
+void	raycast_calc(t_config *config, int i);
 
 int	load_game(t_config *config)
 {
@@ -87,13 +87,13 @@ int	load_game(t_config *config)
 			map_y++;
 	}
 	
-	// render_line(config,
-	// 		MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
-	// 		MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
-	// 		MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE + cos(config->player.rotation_angle) * 50),
-	// 		MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE + sin(config->player.rotation_angle) * 50),
-	// 		RED_PIXEL
-	// 	);
+	render_line(config,
+			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
+			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
+			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE + cos(config->player.rotation_angle) * 50),
+			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE + sin(config->player.rotation_angle) * 50),
+			RED_PIXEL
+		);
 	
 	//cast_all_rays
 	int i = 0;
@@ -103,12 +103,14 @@ int	load_game(t_config *config)
 	{
 		config->rays[i].angle = normalize_angle(ray_angle);
 		// CAST A RAY
-		raycast_calc(config, config->rays + i);
+		raycast_calc(config, i);
 		render_line(config,
 			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE + cos(config->rays[i].angle) * 50),
-			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE + sin(config->rays[i].angle) * 50),
+			MINIMAP_SCALE_FACTOR * (config->rays[i].wall_hit_x * TILE_SIZE),
+			MINIMAP_SCALE_FACTOR * (config->rays[i].wall_hit_y * TILE_SIZE),
+			// MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE + cos(config->rays[i].angle) * 50),
+			// MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE + sin(config->rays[i].angle) * 50),
 			RED_PIXEL
 		);
 		
@@ -175,13 +177,17 @@ void	update(t_config *config)
 	player->y = new_y;
 }
 
-void	raycast_calc(t_config *config, t_ray *ray)
+void	raycast_calc(t_config *config, int i)
 {
 	t_player	*player;
+	t_ray		*ray;
 	float	xintercept, yintercept;
 	float	xstep, ystep;
-
-
+	int		foundHorzWallHit = FALSE;
+	float	horzWallHitX = 0;
+	float 	horzwallHitY = 0;
+	
+	ray = &config->rays[i];
 	player = &config->player; 
 	ray->is_fdown = ray->angle > 0 && ray->angle < PI;
 	ray->is_fup = !ray->is_fdown;
@@ -189,15 +195,16 @@ void	raycast_calc(t_config *config, t_ray *ray)
 	ray->is_fright = !ray->is_fleft;
 
 	
-	
 	// horizontal distance hit checking
 		
 		//find coordinates of the intersection (x and y of A)
 		// find the y-coordinate of the closest horizontal grid intersection
 		yintercept = floor(player->y / TILE_SIZE) * TILE_SIZE;
 		// compensation depending where the ray is facing
-		if (ray->is_fdown)
-			yintercept += TILE_SIZE;
+		yintercept += ray->is_fdown ? TILE_SIZE : 0;
+		// if (ray->is_fdown)
+		// 	yintercept += TILE_SIZE;
+		
 		// find the x-coordinate of the closest horizontal grid intersection
 		xintercept = player->x + ((yintercept - player->y) / tan(ray->angle)); // pq a subtração não é ao contrario?
 		
@@ -206,14 +213,13 @@ void	raycast_calc(t_config *config, t_ray *ray)
 		if (ray->is_fup)
 			ystep *= -1;
 		xstep = TILE_SIZE / tan(ray->angle);
-	printf("is facing right? %d\n|tan: %f | xstep: %f\n",
-		ray->is_fright,
-		tan(ray->angle),
-		xstep);
-		if (ray->is_fleft && xstep > 0)
-			xstep *= -1;
-		if (ray->is_fright && xstep < 0)
-			xstep *= -1;
+		xstep *= ray->is_fleft && xstep > 0 ? -1 : 0;
+		xstep *= ray->is_fright && xstep < 0 ? -1 : 0;
+		// if (ray->is_fleft && xstep > 0)
+		// 	xstep *= -1;
+		// if (ray->is_fright && xstep < 0)
+		// 	xstep *= -1;
+		
 		// if (ray->is_fup)
 		// {
 		// 	if (ray->is_fright) {/* +xstep */}
@@ -226,16 +232,89 @@ void	raycast_calc(t_config *config, t_ray *ray)
 		// }
 	
 		// convert intersection point (x,y) into map_index[i,j]
+		float	nextHorzTouchX = xintercept;
+		float	nextHorzTouchY = yintercept;
+
+		// if (ray->is_fup)
+		// 	nextHorzTouchY--;
+		while (nextHorzTouchX >= 0 && nextHorzTouchX < config->window_width
+			&& nextHorzTouchY >= 0 && nextHorzTouchY < config->window_height)
+		{
 		// there is a wall?
-			// store horizontal hit distance
-			// stop
-		// else
+			int decrement = 0;
+			if (ray->is_fup)
+				decrement = 1;
+			if (map_has_wall_at(config, nextHorzTouchX, nextHorzTouchY - (ray->is_fup ? 1 : 0)))
+				//config->map[ (int)floor(nextHorzTouchY / TILE_SIZE) ][(int)floor(nextHorzTouchX / TILE_SIZE)] == '1')
+			{
+				foundHorzWallHit = TRUE;
+				// store horizontal hit distance
+				horzWallHitX = nextHorzTouchX;
+				horzwallHitY = nextHorzTouchY;
+				// stop
+				break ;
+			}
+				// else
+			else
+			{
 			// find next horizontal intersection
-		
+				nextHorzTouchX += xstep;
+				nextHorzTouchY += ystep;
+			}
+		}
 	// vertical distance hit checking
+	int	foundVertWallHit = FALSE;
+	float	vertWallHitX = 0;
+	float	vertWallHitY = 0;
+	
+	xintercept = floor(player->x / TILE_SIZE) * TILE_SIZE;
+	xintercept += ray->is_fright ? TILE_SIZE : 0;
+
+	yintercept = player->y + (xintercept - player->x) * tan(ray->angle);
+
+
+	xstep = TILE_SIZE;
+	xstep *= ray->is_fleft ? -1 : 1;
+	
+	ystep = TILE_SIZE * tan(ray->angle);
+	ystep *= (ray->is_fup && ystep > 0) ? -1 : 1;
+	ystep *= (ray->is_fdown && ystep < 0) ? -1 : 1;
+
+	float	nextVertTouchX = xintercept;
+	float	nextVertTouchY = yintercept;
+
+	while (nextVertTouchX >= 0 && nextVertTouchX <= config->window_width
+		&& nextVertTouchY >= 0 && nextVertTouchY <= config->window_height)
+	{
 		// there is a wall?
+		if (map_has_wall_at(config, nextVertTouchX, nextVertTouchY))
+		{
+			foundVertWallHit = TRUE;
+			vertWallHitX = nextVertTouchX;
+			vertWallHitY = nextVertTouchY;
 		 	// stops
+			break ;
+		}
+		else
+		{
+			nextVertTouchX += xstep;
+			nextVertTouchY += ystep;
+		}
+	}
+
+	float horzHitDistance = (foundHorzWallHit)
+		? distance_between_points(player->x, player->y, horzWallHitX, horzwallHitY) 
+		: __INT_MAX__;
+	float vertHitDistance = (foundVertWallHit)
+		? distance_between_points(player->x, player->y, vertWallHitX, vertWallHitY)
+		: __INT_MAX__;
+	
+	ray->wall_hit_x = (horzHitDistance < vertHitDistance) ? horzWallHitX : vertWallHitX;
+	ray->wall_hit_y = (horzHitDistance < vertHitDistance) ? horzwallHitY : vertWallHitY;
+	ray->distance = (horzHitDistance < vertHitDistance) ? horzHitDistance : vertHitDistance;
 	
 	// compare both
 	// choose the closest one
+	
+	
 }

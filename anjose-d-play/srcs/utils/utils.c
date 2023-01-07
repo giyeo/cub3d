@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:32:11 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/28 16:34:21 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/07 19:17:30 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,28 @@ void	print_struct(t_config *config)
 	while(config->map && config->map[i])
 		printf("%s\n", config->map[i++]);
 	printf("------END MAP------\n");
+}
+
+int	map_has_wall_at(t_config *config, float x, float y)
+{
+	int	map_index_x;
+	int	map_index_y;
+
+	if (x < 0 || x >= config->window_width
+		|| y < 0 || y >= config->window_height)
+			return (1);
+	map_index_x = floor(x / TILE_SIZE);
+	map_index_y = floor(y / TILE_SIZE);
+	if (config->map[map_index_y][map_index_x] != '0')
+		return (1);
+	return (0);
+	
+}
+
+float	distance_between_points(float x1, float y1, float x2, float y2)
+{
+	float	distance;
+
+	distance = sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+	return (distance);
 }
