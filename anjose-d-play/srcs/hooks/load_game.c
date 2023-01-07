@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/06 21:19:18 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/07 11:43:40 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int	load_game(t_config *config)
 	render_line(config,
 			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE + cos(config->player.rotation_angle) * 20),
-			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE + sin(config->player.rotation_angle) * 20),
+			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE + cos(config->player.rotation_angle) * 50),
+			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE + sin(config->player.rotation_angle) * 50),
 			RED_PIXEL
 		);
 	

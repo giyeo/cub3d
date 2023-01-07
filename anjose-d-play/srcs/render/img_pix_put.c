@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:52:47 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/04 18:02:28 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/07 11:40:54 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void	img_pix_put(t_config *config, int x, int y, int color)
 	t_img *img;
 
 	img = &config->img;
-
 	if (y < config->window_height && x < config->window_width)
 	{
 		pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
