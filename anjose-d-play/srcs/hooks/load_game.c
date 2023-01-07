@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/06 21:12:59 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/06 21:19:18 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	load_game(t_config *config)
 	int i = 0;
 	// start first ray subtracting half of the FOV
 	float	ray_angle = config->player.rotation_angle - (config->player.fov / 2);
-	while (i < config->num_rays)
+	while (i < 1)
 	{
 		config->rays[i].angle = ray_angle;
 		// CAST A RAY
