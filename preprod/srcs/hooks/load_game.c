@@ -117,7 +117,11 @@ int	load_game(t_config *config)
 
 void	raycaster(t_config *config)
 {
-	double FOV = 60.0 * (PI / 180);
+	double FOV;
+	if(config->FOV)
+		FOV = 20.0 * (PI / 180);
+	else
+		FOV = 60.0 * (PI / 180);
 	double distances;
 	double angle = normalize_angle(config->player.rotation_angle - (FOV / 2.0));
 	double wallstrip;
@@ -189,15 +193,17 @@ void	update(t_config *config)
 	t_player	*player;
 	player = &config->player;
 	
+	double turn_speed = player->turn_speed;
+	if(config->FOV)
+		turn_speed /= 4;
 	int x, y;
 	mlx_mouse_get_pos(config->conn_mlx.mlx_ptr, config->conn_mlx.win_ptr, &x, &y);
 	if(x < 50)
-		config->player.rotation_angle += config->player.turn_speed * -1;
+		config->player.rotation_angle += turn_speed * -1;
 	if(x > WINDOW_WIDTH - 50)
-		config->player.rotation_angle += config->player.turn_speed;
-	printf("x:%d y:%d \n", x,y );
+		config->player.rotation_angle += turn_speed;
 	
-	player->rotation_angle += player->turn_direction * player->turn_speed;
+	player->rotation_angle += player->turn_direction * turn_speed;
 
 	move_step = player->walk_direction * config->player.walk_speed;
 

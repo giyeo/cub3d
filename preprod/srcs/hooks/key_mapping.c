@@ -14,7 +14,8 @@
 
 int	key_pressed(int keysym, t_config *config)
 {
-	if (keysym == ESC)
+	printf("%d\n", keysym);
+	if (keysym == ESC || keysym == Q)
 		end_game(config);
 	if (keysym == UP_ARROW || keysym == W)
 		config->player.walk_direction = 1;
@@ -24,8 +25,15 @@ int	key_pressed(int keysym, t_config *config)
 		config->player.turn_direction = -1;
 	if (keysym == RIGHT_ARROW || keysym == D)
 		config->player.turn_direction = 1;
-	if (keysym == Q)
+	if (keysym == 32)
 		config->player.interact = 1;
+	if (keysym == 101)
+	{
+		if(config->FOV)
+			config->FOV = 0;
+		else
+			config->FOV = 1;
+	}
 	return (0);
 }
 

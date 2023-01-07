@@ -63,6 +63,7 @@ typedef struct	s_config
 	int		map_num_cols;
 	int		player_position[2];
 	char	player_direction;
+	int 	FOV;
 	t_conn	conn_mlx;
 	t_img	img;
 	t_player	player;
