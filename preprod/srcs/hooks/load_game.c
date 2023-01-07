@@ -118,10 +118,11 @@ int	load_game(t_config *config)
 void	raycaster(t_config *config)
 {
 	double FOV;
-	if(config->FOV)
-		FOV = 20.0 * (PI / 180);
-	else
-		FOV = 60.0 * (PI / 180);
+
+	FOV = config->FOV * (PI / 180);
+	if(config->FOV < 60.0 && config->FOV > 20.0)
+		config->FOV -= 1;
+	
 	double distances;
 	double angle = normalize_angle(config->player.rotation_angle - (FOV / 2.0));
 	double wallstrip;
@@ -194,7 +195,7 @@ void	update(t_config *config)
 	player = &config->player;
 	
 	double turn_speed = player->turn_speed;
-	if(config->FOV)
+	if(config->FOV == 20.0)
 		turn_speed /= 4;
 	int x, y;
 	mlx_mouse_get_pos(config->conn_mlx.mlx_ptr, config->conn_mlx.win_ptr, &x, &y);

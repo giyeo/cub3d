@@ -29,10 +29,9 @@ int	key_pressed(int keysym, t_config *config)
 		config->player.interact = 1;
 	if (keysym == 101)
 	{
-		if(config->FOV)
-			config->FOV = 0;
-		else
-			config->FOV = 1;
+		config->FOV -= 1;
+		if(config->FOV == 19.0)
+			config->FOV = 60.0;
 	}
 	return (0);
 }
