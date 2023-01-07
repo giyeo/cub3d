@@ -41,8 +41,13 @@ typedef struct s_player
 	float	rotation_angle;
 	float	walk_speed;
 	float	turn_speed;
+	float	fov;
 }				t_player;
 
+typedef	struct s_ray
+{
+	float	angle;
+}				t_ray;
 
 typedef struct	s_config
 {
@@ -63,8 +68,12 @@ typedef struct	s_config
 	t_conn	conn_mlx;
 	t_img	img;
 	t_player	player;
+	t_ray	*rays;
 
 }			t_config;
+
+
+
 
 /* PARSER */
 int		file_validate(char *file, int argc);

@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 01:12:15 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/06 20:35:09 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/06 21:12:59 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	load_game(t_config *config)
 		if(pixel_j % (TILE_SIZE) == 0)
 			map_y++;
 	}
+	
 	render_line(config,
 			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
@@ -84,6 +85,30 @@ int	load_game(t_config *config)
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE + sin(config->player.rotation_angle) * 20),
 			RED_PIXEL
 		);
+	
+	//cast_all_rays
+	int i = 0;
+	// start first ray subtracting half of the FOV
+	float	ray_angle = config->player.rotation_angle - (config->player.fov / 2);
+	while (i < config->num_rays)
+	{
+		config->rays[i].angle = ray_angle;
+		// CAST A RAY
+		// raycast_calc(&config->ray[i]);
+		render_line(config,
+			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
+			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
+			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE + cos(config->rays[i].angle) * 50),
+			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE + sin(config->rays[i].angle) * 50),
+			RED_PIXEL
+		);
+		
+		// trace the ray until it intersects with a wall
+		// record the intersection (x, y) and the distance (ray length)
+		// add the angle increment so the ray moves to the right (rayAngle += 60(convert_radians)/320 == FOV / NUM_RAYS)
+		ray_angle += config->player.fov / config->num_rays;
+		i++;
+	}
 	
 	// float FOV = 60.0 * (PI / 180);
 

@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:09:44 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/04 20:06:48 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/06 21:12:42 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	parser_and_validate(char **buffer, t_config *config)
 	config->window_height = config->map_num_rows * TILE_SIZE;
 	config->window_width = config->map_num_cols * TILE_SIZE;
 	config->num_rays = config->window_width;
+	config->rays = malloc(sizeof(t_ray) * config->num_rays);
 
 	player_init(config);
 	mlx_conn_init(config);
@@ -47,6 +48,7 @@ void	player_init(t_config *config)
 	config->player.rotation_angle = PI / 2; // pointing down
 	config->player.walk_speed = 1.0 / 40.0;
 	config->player.turn_speed = 1 * (PI / 180); // ((PI / 180)) == converting to radians
+	config->player.fov = 60.0 * (PI / 180);
 }
 
 void	mlx_conn_init(t_config *config)
