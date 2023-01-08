@@ -87,6 +87,8 @@ void	config_init(t_config *config);
 void	check_struct(t_config *config, int i);
 int		is_one_of_these(char c, char *these);
 int		find_player(char **buffer, int first_line, t_config *config);
+int		mlx_get_hex_trgb(int r, int g, int b);
+double	normalize_angle(double angle);
 
 /* VALIDATE*/
 int		validate_config(char **buffer, t_config *config);
@@ -113,5 +115,8 @@ double	render_line(t_config *config, double x1, double y1, double x2, double y2,
 double	render_line2(t_config *config, double x1, double y1, double angle);
 // player
 void	move_player(t_config *config);
-
+//execution
+void	update(t_config *config);
+void	raycaster(t_config *config);
+void	minimap(t_config *config);
 #endif

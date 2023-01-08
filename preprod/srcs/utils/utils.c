@@ -73,3 +73,16 @@ void	print_struct(t_config *config)
 		printf("%s\n", config->map[i++]);
 	printf("------END MAP------\n");
 }
+
+int    mlx_get_hex_trgb(int r, int g, int b)
+{
+    return ((r << 16) | (g << 8) | (b));
+}
+
+double	normalize_angle(double angle)
+{
+    angle = remainder(angle, TWO_PI);
+    if (angle < 0)
+        angle = TWO_PI + angle;
+    return (angle);
+}
