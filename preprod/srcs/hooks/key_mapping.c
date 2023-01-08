@@ -14,7 +14,6 @@
 
 int	key_pressed(int keysym, t_config *config)
 {
-	printf("%d\n", keysym);
 	if (keysym == ESC || keysym == Q)
 		end_game(config);
 	if (keysym == UP_ARROW || keysym == W)

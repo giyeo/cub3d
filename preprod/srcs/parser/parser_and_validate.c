@@ -44,7 +44,7 @@ void	player_init(t_config *config)
 	config->player.rotation_angle = PI / 2; // pointing down
 	config->player.walk_speed = 1.0 / 40.0;
 	config->player.turn_speed = 1 * (PI / 180); // ((PI / 180)) == converting to radians
-	config->player.interact = 1;
+	config->player.interact = 0;
 }
 
 void	mlx_conn_init(t_config *config)

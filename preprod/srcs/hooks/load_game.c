@@ -12,17 +12,12 @@
 
 #include "cub3d.h"
 
-int	this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int radius);
+int		this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int radius);
 void	update(t_config *config);
 
 int    mlx_get_hex_trgb(int r, int g, int b)
 {
     return ((r << 16) | (g << 8) | (b));
-}
-
-double	dg_to_rad(double dg)
-{
-	return (PI / 180 * dg);
 }
 
 static double    normalize_angle(double angle)
@@ -31,11 +26,6 @@ static double    normalize_angle(double angle)
     if (angle < 0)
         angle = TWO_PI + angle;
     return (angle);
-}
-
-int	create_trgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r << 16 | g << 8 | b);
 }
 
 int	find_color_wall(int side[2], double distances)
@@ -52,61 +42,14 @@ int	find_color_wall(int side[2], double distances)
 	else if(side[0] == -1)//leste white
 		return mlx_get_hex_trgb(255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist), 255 - (distances * 254 / total_dist));
 }
+
+void	minimap(t_config *config);
 void	raycaster(t_config *config);
+
 int	load_game(t_config *config)
-{
-	int pixel_i = 0;
-	int pixel_j = 0;
-	int map_y = 0;
-	int map_x = 0;
-
-	double	backup_y = config->player.y;
-	double	backup_x = config->player.x;
-
+{	
 	update(config);
-	
-	while(map_y < config->map_num_rows)
-	{
-		while(map_x < config->map_num_cols)
-		{
-			if(pixel_i % (TILE_SIZE) == 0 && pixel_i != 0)
-				map_x++;
-			// if (map_x < config->map_num_cols)
-			// 	render_map(config, map_y, map_x, MINIMAP_SCALE_FACTOR * pixel_i, MINIMAP_SCALE_FACTOR * pixel_j);
-			if(this_point_is_in_a_circle(pixel_i, pixel_j, config->player.x * TILE_SIZE, config->player.y * TILE_SIZE, 10))
-			{
-				if (config->map[map_y][map_x] != '1')
-					img_pix_put(&config->img, MINIMAP_SCALE_FACTOR * pixel_i, MINIMAP_SCALE_FACTOR * pixel_j, YELLOW_PIXEL);
-				else
-				{
-					config->player.x = backup_x;
-					config->player.y = backup_y;
-				}
-			}
-			pixel_i++;
-		}
-		map_x = 0;
-		pixel_i = 0;
-		pixel_j++;
-		if(pixel_j % (TILE_SIZE) == 0)
-			map_y++;
-	}
-	// int i = 0;
-	// double FOV = 60.0 * (PI / 180);
-	// double angle = config->player.rotation_angle - (FOV / 2.0);
-	// while(i < WINDOW_WIDTH)
-	// {
-	// 	render_line(config,
-	// 		MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
-	// 		MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
-	// 		MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
-	// 		MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
-	// 		create_trgb(1, 255, 0, 0),
-	// 		1
-	// 	);
-	// 	angle += (FOV / WINDOW_WIDTH);
-	// 	i++;
-	// }
+	//minimap(config);
 	raycaster(config);
 	mlx_put_image_to_window(config->conn_mlx.mlx_ptr,
 		config->conn_mlx.win_ptr,
@@ -115,13 +58,55 @@ int	load_game(t_config *config)
 	return (0);
 }
 
+void	minimap(t_config *config)
+{
+	int pixel_i = 0;
+	int pixel_j = 0;
+	int map_y = 0;
+	int map_x = 0;
+
+	while(map_y < config->map_num_rows)
+	{
+		while(map_x < config->map_num_cols)
+		{
+			if(pixel_i % (TILE_SIZE) == 0 && pixel_i != 0)
+				map_x++;
+			if (map_x < config->map_num_cols)
+				render_map(config, map_y, map_x, MINIMAP_SCALE_FACTOR * pixel_i, MINIMAP_SCALE_FACTOR * pixel_j);
+			if(this_point_is_in_a_circle(pixel_i, pixel_j, config->player.x * TILE_SIZE, config->player.y * TILE_SIZE, 10))
+				img_pix_put(&config->img, MINIMAP_SCALE_FACTOR * pixel_i, MINIMAP_SCALE_FACTOR * pixel_j, YELLOW_PIXEL);
+			pixel_i++;
+		}
+		map_x = 0;
+		pixel_i = 0;
+		pixel_j++;
+		if(pixel_j % (TILE_SIZE) == 0)
+			map_y++;
+	}
+
+	int i = 0;
+	double FOV = 60.0 * (PI / 180);
+	double angle = config->player.rotation_angle - (FOV / 2.0);
+	while(i < WINDOW_WIDTH)
+	{
+		render_line(config,
+			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
+			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
+			MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
+			MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
+			mlx_get_hex_trgb(255, 0, 0),
+			1
+		);
+		angle += (FOV / WINDOW_WIDTH);
+		i++;
+	}
+}
+
 void	raycaster(t_config *config)
 {
 	double FOV;
 
 	FOV = config->FOV * (PI / 180);
-	if(config->FOV < 60.0 && config->FOV > 20.0)
-		config->FOV -= 1;
 	
 	double distances;
 	double angle = normalize_angle(config->player.rotation_angle - (FOV / 2.0));
@@ -141,7 +126,7 @@ void	raycaster(t_config *config)
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
 			MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
-			create_trgb(1, 0, 0, 0),
+			mlx_get_hex_trgb(0, 0, 0),
 			0
 		);
 		//FISHBALL EFFECT FIX
@@ -185,32 +170,74 @@ int	this_point_is_in_a_circle(int i, int j, int x_position, int y_position, int 
 		return 1;
 	return 0; 
 }
+/////////////////////////////////PLAYER RELATED BELOW
+void	collision_detected(t_config *config, double backup_x, double backup_y)
+{
+	char	**map = config->map;
+	double	px = config->player.x;
+	double	py = config->player.y;
+	double player_square = 0.2;
+
+	if (map[(int)(py + player_square)][(int)(px + player_square)] == '1'
+	|| map[(int)(py + player_square)][(int)(px - player_square)] == '1'
+	|| map[(int)(py - player_square)][(int)(px + player_square)] == '1'
+	|| map[(int)(py - player_square)][(int)(px - player_square)] == '1')
+	{
+		config->player.x = backup_x;
+		config->player.y = backup_y;
+	}
+}
+
+void	turn_with_mouse(t_config *config)
+{
+	int x;
+	int y;
+	t_player *player = &config->player;
+
+	mlx_mouse_get_pos(config->conn_mlx.mlx_ptr, config->conn_mlx.win_ptr, &x, &y);
+	if(x < 50)
+		player->rotation_angle += player->turn_speed * -1;
+	if(x > WINDOW_WIDTH - 50)
+		player->rotation_angle += player->turn_speed;
+}
+
+double	zoom_control(t_config *config)
+{
+	double turn_speed = config->player.turn_speed;
+
+	if(config->FOV < 60.0 && config->FOV > 20.0)
+		config->FOV -= 1;
+	if(config->FOV == 20.0)
+		return turn_speed /= 4;
+	return turn_speed;
+}
+
+void	player_moviments(t_config *config, double turn_speed)
+{
+	double		move_step;
+	t_player	*player;
+
+	player = &config->player;
+	player->rotation_angle += player->turn_direction * turn_speed;
+	move_step = player->walk_direction * player->walk_speed;
+
+	player->x += cos(player->rotation_angle) * move_step;
+	player->y += sin(player->rotation_angle) * move_step;
+}
 
 void	update(t_config *config)
 {
-	double	new_x;
-	double	new_y;
-	double	move_step;
 	t_player	*player;
+	double		backup_y;
+	double		backup_x;
+	double  	turn_speed;
+
 	player = &config->player;
-	
-	double turn_speed = player->turn_speed;
-	if(config->FOV == 20.0)
-		turn_speed /= 4;
-	int x, y;
-	mlx_mouse_get_pos(config->conn_mlx.mlx_ptr, config->conn_mlx.win_ptr, &x, &y);
-	if(x < 50)
-		config->player.rotation_angle += turn_speed * -1;
-	if(x > WINDOW_WIDTH - 50)
-		config->player.rotation_angle += turn_speed;
-	
-	player->rotation_angle += player->turn_direction * turn_speed;
+	backup_y = player->y;
+	backup_x = player->x;
 
-	move_step = player->walk_direction * config->player.walk_speed;
-
-	new_x = player->x + cos(player->rotation_angle) * move_step;
-	new_y = player->y + sin(player->rotation_angle) * move_step;
-
-	player->x = new_x;
-	player->y = new_y;
+	turn_with_mouse(config);
+	turn_speed = zoom_control(config);
+	player_moviments(config, turn_speed);
+	collision_detected(config, backup_x, backup_y);
 }

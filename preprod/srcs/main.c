@@ -14,6 +14,7 @@
 
 void	img_init(t_img *img, t_config *config);
 
+
 int	main(int argc, char *argv[])
 {
 	t_config	config;
@@ -33,6 +34,5 @@ int	main(int argc, char *argv[])
 	mlx_mouse_hook(config.conn_mlx.win_ptr, &mouse_handler, &config);
 	mlx_loop_hook(config.conn_mlx.mlx_ptr, &load_game, &config);
 	mlx_loop(config.conn_mlx.mlx_ptr);
-
 	return (0);
 }
