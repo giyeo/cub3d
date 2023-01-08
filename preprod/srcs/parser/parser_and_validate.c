@@ -41,7 +41,7 @@ void	player_init(t_config *config)
 	config->player.width = 50;
 	config->player.turn_direction = 0;
 	config->player.walk_direction = 0;
-	config->player.rotation_angle = PI / 2; // pointing down
+	config->player.rotation_angle = PI; // pointing down
 	config->player.walk_speed = 1.0 / 40.0;
 	config->player.turn_speed = 1 * (PI / 180); // ((PI / 180)) == converting to radians
 	config->player.interact = 0;
