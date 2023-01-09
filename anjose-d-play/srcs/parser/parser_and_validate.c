@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_and_validate.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:09:44 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/04 04:44:10 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:14:58 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

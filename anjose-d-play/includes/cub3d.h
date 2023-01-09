@@ -47,6 +47,22 @@ typedef struct s_player
 	int		mouse_y;
 }				t_player;
 
+typedef	struct t_ray
+{
+	double	angle;
+	double	wallHitX;
+	double	wallHitY;
+	double	distance;
+	int		wasHitVertical;
+	double	hitWallColor;
+
+	int		is_fdown;
+	int		is_fup;
+
+	int		is_fright;
+	int		is_fleft;
+}				t_ray;
+
 
 typedef struct	s_config
 {
@@ -67,6 +83,10 @@ typedef struct	s_config
 	t_conn	conn_mlx;
 	t_img	img;
 	t_player	player;
+	t_ray	*rays;
+
+	int		window_width;
+	int		window_height;
 
 }			t_config;
 
@@ -89,6 +109,7 @@ int		is_one_of_these(char c, char *these);
 int		find_player(char **buffer, int first_line, t_config *config);
 int		mlx_get_hex_trgb(int r, int g, int b);
 double	normalize_angle(double angle);
+double	distance_between_points(double x1, double y1, double x2, double y2);
 
 /* VALIDATE*/
 int		validate_config(char **buffer, t_config *config);
@@ -112,7 +133,7 @@ void	render_player(t_config *config);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int		render_rect(t_conn conn_mlx, int x, int y, int rect_height, int rect_width, int color, t_img *img);
 double	render_line(t_config *config, double x1, double y1, double x2, double y2, int color, int c);
-double	render_line2(t_config *config, double x1, double y1, double angle);
+
 // player
 void	move_player(t_config *config);
 //execution

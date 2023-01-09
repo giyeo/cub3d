@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:32:11 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/28 16:34:21 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/09 14:40:10 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,12 @@ double	normalize_angle(double angle)
     if (angle < 0)
         angle = TWO_PI + angle;
     return (angle);
+}
+
+double	distance_between_points(double x1, double y1, double x2, double y2)
+{
+	double	distance;
+
+	distance = sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
+	return (distance);
 }
