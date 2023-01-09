@@ -6,11 +6,13 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:12:18 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/04 17:58:04 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/02 21:28:59 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	render_circle(t_conn conn_mlx, int x, int y, int rect_height, int rect_width, int color, t_img *img);
 
 void	render_player(t_config *config)
 {

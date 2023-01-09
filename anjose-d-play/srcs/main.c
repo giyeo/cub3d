@@ -14,6 +14,7 @@
 
 void	img_init(t_img *img, t_config *config);
 
+
 int	main(int argc, char *argv[])
 {
 	t_config	config;
@@ -30,8 +31,8 @@ int	main(int argc, char *argv[])
 	mlx_hook(config.conn_mlx.win_ptr, KeyPress, KeyPressMask, &key_pressed, &config);
 	mlx_hook(config.conn_mlx.win_ptr, KeyRelease, KeyReleaseMask, &key_released, &config);
 	mlx_hook(config.conn_mlx.win_ptr, DestroyNotify, NoEventMask, &end_game, &config);
+	mlx_mouse_hook(config.conn_mlx.win_ptr, &mouse_handler, &config);
 	mlx_loop_hook(config.conn_mlx.mlx_ptr, &load_game, &config);
 	mlx_loop(config.conn_mlx.mlx_ptr);
-
 	return (0);
 }

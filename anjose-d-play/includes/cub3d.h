@@ -32,31 +32,21 @@ typedef struct s_img
 
 typedef struct s_player
 {
-	float	x;
-	float	y;
-	float	width;
-	float	height;
+	double	x;
+	double	y;
+	double	width;
+	double	height;
 	int		turn_direction; // -1 for left, +1 for right | 0 to still
 	int		walk_direction; // -1 for back, +1 for front | 0 to still
-	float	rotation_angle;
-	float	walk_speed;
-	float	turn_speed;
-	float	fov;
+	double	rotation_angle;
+	double	walk_speed;
+	double	turn_speed;
+	int		interact;
+	int		is_middle;
+	int		mouse_x;
+	int		mouse_y;
 }				t_player;
 
-typedef	struct s_ray
-{
-	float	angle;
-	int		wall_hit_x;
-	int		wall_hit_y;
-	float	distance; // between player and the collision coordinate
-
-	int		is_fdown;
-	int		is_fup;
-	int		is_fright;
-	int		is_fleft;
-
-}				t_ray;
 
 typedef struct	s_config
 {
@@ -67,22 +57,18 @@ typedef struct	s_config
 	int		F[3];
 	int		C[3];
 	char	**map;
+	int		side[2];
+	int		texture_col[2];
 	int		map_num_rows;
 	int		map_num_cols;
-	int		window_width;
-	int		window_height;
-	int		num_rays;
 	int		player_position[2];
 	char	player_direction;
+	double 	FOV;
 	t_conn	conn_mlx;
 	t_img	img;
 	t_player	player;
-	t_ray	*rays;
 
 }			t_config;
-
-
-
 
 /* PARSER */
 int		file_validate(char *file, int argc);
@@ -101,8 +87,8 @@ void	config_init(t_config *config);
 void	check_struct(t_config *config, int i);
 int		is_one_of_these(char c, char *these);
 int		find_player(char **buffer, int first_line, t_config *config);
-int		map_has_wall_at(t_config *config, float x, float y);
-float	distance_between_points(float x1, float y1, float x2, float y2);
+int		mlx_get_hex_trgb(int r, int g, int b);
+double	normalize_angle(double angle);
 
 /* VALIDATE*/
 int		validate_config(char **buffer, t_config *config);
@@ -117,16 +103,20 @@ int		key_pressed(int keysym, t_config *config);
 int		key_released(int keysym, t_config *config);
 int		end_game(t_config *config);
 int		load_game(t_config *config);
+int		mouse_handler(int button, int x, int y, t_config *config);
 
 // render
 int		render_background(t_config *config, int color, t_img *img);
 void	render_map(t_config *config, int map_y, int map_x, int pixel_i, int pixel_j);
 void	render_player(t_config *config);
-void	img_pix_put(t_config *config, int x, int y, int color);
-int	render_rect(t_config *config, int x, int y, int rect_height, int rect_width, int color);
-int		render_line(t_config *config, float x1, float y1, float x2, float y2, int color);
-
+void	img_pix_put(t_img *img, int x, int y, int color);
+int		render_rect(t_conn conn_mlx, int x, int y, int rect_height, int rect_width, int color, t_img *img);
+double	render_line(t_config *config, double x1, double y1, double x2, double y2, int color, int c);
+double	render_line2(t_config *config, double x1, double y1, double angle);
 // player
 void	move_player(t_config *config);
-
+//execution
+void	update(t_config *config);
+void	raycaster(t_config *config);
+void	minimap(t_config *config);
 #endif

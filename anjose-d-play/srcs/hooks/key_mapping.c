@@ -24,6 +24,14 @@ int	key_pressed(int keysym, t_config *config)
 		config->player.turn_direction = -1;
 	if (keysym == RIGHT_ARROW || keysym == D)
 		config->player.turn_direction = 1;
+	if (keysym == 32)
+		config->player.interact = 1;
+	if (keysym == 101)
+	{
+		config->FOV -= 1;
+		if(config->FOV == 19.0)
+			config->FOV = 60.0;
+	}
 	return (0);
 }
 
@@ -38,4 +46,9 @@ int	key_released(int keysym, t_config *config)
 	if (keysym == RIGHT_ARROW || keysym == D)
 		config->player.turn_direction = 0;
 	return (0);
+}
+
+int mouse_handler(int button, int x, int y, t_config *config)
+{
+
 }

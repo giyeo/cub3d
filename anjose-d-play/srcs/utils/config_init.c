@@ -16,6 +16,7 @@ void	config_init(t_config *config)
 	config->conn_mlx.win_ptr = NULL;
 	config->img.addr = NULL;
 	config->img.mlx_img = NULL;
+	config->FOV = 60.0;
 
 	// config->errors[ERR_OK] = "Success";
 	// config->errors[ERR_NO_FD] = "can't get file descriptor";

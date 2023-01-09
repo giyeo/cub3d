@@ -2,7 +2,7 @@
 # MAIN VARIABLES
 NAME		:=	cub3d
 CC			:=	cc
-CFLAGS		:= -O3 #-Wall -Wextra -Werror
+CFLAGS		:=  -O3 #-Wall -Wextra -Werror
 
 # LIBRARIES
 ## libft
@@ -62,13 +62,19 @@ UTILS_SRCS	:=	utils.c \
 FREE_DIR	:=	free
 FREE_SRCS	:=	free_config.c
 
+EXECUTION_DIR	:= 	execution
+EXECUTION_SRCS	:= 	minimap.c \
+					raycasting.c \
+					update.c
+
 SRCS_DIR	:=	srcs
 SRCS		:=	main.c \
 				$(addprefix $(PARSER_DIR)/, $(PARSER_SRCS)) \
 				$(addprefix $(UTILS_DIR)/, $(UTILS_SRCS)) \
 				$(addprefix $(FREE_DIR)/, $(FREE_SRCS)) \
 				$(addprefix $(HOOKS_DIR)/, $(HOOKS_SRCS)) \
-				$(addprefix $(RENDER_DIR)/, $(RENDER_SRCS))
+				$(addprefix $(RENDER_DIR)/, $(RENDER_SRCS)) \
+				$(addprefix $(EXECUTION_DIR)/, $(EXECUTION_SRCS))
 
 SRCS_PTH	:=	$(addprefix $(SRCS_DIR)/, $(SRCS)) \
 				libft/srcs/ft_mtxcpy.c
