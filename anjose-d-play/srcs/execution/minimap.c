@@ -110,8 +110,10 @@ double	find_horizontal_distance(t_config *config, t_ray *ray)
 	while(next_touch_x >= 0 && next_touch_x <= WINDOW_WIDTH
 		&& next_touch_y >= 0 && next_touch_y <= WINDOW_HEIGHT)
 	{
-		char grid_content = get_map_at(config->map, next_touch_x, next_touch_y + (ray->is_fup ? 1: 0)); // if ray is fup, force one pixel up, so we are inside a grid cell
-		if (grid_content == '1')
+		double x_check = next_touch_x;
+		double y_check = next_touch_y + ray->is_fup ? -1 : 0;
+		char grid_content = get_map_at(config->map, x_check, y_check); // if ray is fup, force one pixel up, so we are inside a grid cell
+		if (grid_content != '0' && !is_one_of_these(grid_content, PLAYER_DIRECTIONS))
 		{
 			found_wall_hit = TRUE;
 			break ;
@@ -176,8 +178,10 @@ void	find_vertical_distance(t_config *config, t_ray *ray)
 	while(next_touch_x >= 0 && next_touch_x <= WINDOW_WIDTH
 		&& next_touch_y >= 0 && next_touch_y <= WINDOW_HEIGHT)
 	{
-		char grid_content = get_map_at(config->map, next_touch_x + (ray->is_fleft ? 1 : 0), next_touch_y); // if ray is fup, force one pixel up, so we are inside a grid cell
-		if (grid_content == '1')
+		double x_check = next_touch_x + (ray->is_fleft ? -1 : 0);
+		double y_check = next_touch_y;
+		char grid_content = get_map_at(config->map, x_check, y_check); // if ray is fup, force one pixel up, so we are inside a grid cell
+		if (grid_content != '0' && !is_one_of_these(grid_content, PLAYER_DIRECTIONS))
 		{
 			found_wall_hit = TRUE;
 			break ;
@@ -220,8 +224,6 @@ double	ray_calc(t_config *config, t_ray *ray)
 
 	ray->is_fright = ray->angle < 0.5 * PI || ray->angle > 1.5 * PI;
 	ray->is_fleft = !ray->is_fright;
-
-	
 
 	horz_hit.angle = ray->angle;
 	horz_hit.is_fdown = ray->is_fdown;
@@ -302,7 +304,8 @@ char	get_map_at(char **map, double next_touch_x, double next_touch_y)
 	int	x;
 	int	y;
 
-	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
+	if (next_touch_x < 0 || next_touch_x > WINDOW_WIDTH
+		|| next_touch_y < 0 || next_touch_y > WINDOW_HEIGHT)
 		return (0);
 	// printf("next_y: %f next_x: %f\n", next_touch_y, next_touch_x);
 	x = (int)floor(next_touch_x / TILE_SIZE);
