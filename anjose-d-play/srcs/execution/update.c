@@ -48,6 +48,7 @@ void	player_moviments(t_config *config, double turn_speed)
 
 	player = &config->player;
 	player->rotation_angle += player->turn_direction * turn_speed;
+	player->rotation_angle = normalize_angle(player->rotation_angle);
 	move_step = player->walk_direction * player->walk_speed;
 
 	player->x += cos(player->rotation_angle) * move_step;

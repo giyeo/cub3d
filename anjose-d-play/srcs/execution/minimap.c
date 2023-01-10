@@ -55,9 +55,9 @@ void	minimap(t_config *config)
 		config->rays[i].angle = normalize_angle(angle1);
 
 		ray_calc(config, &config->rays[i]);
-		printf("y: %f x: %f\n",
-			config->rays[i].wallHitX,
-			config->rays[i].wallHitY);
+		// printf("y: %f x: %f\n",
+		// 	config->rays[i].wallHitX,
+		// 	config->rays[i].wallHitY);
 		render_line2(config,
 			MINIMAP_SCALE_FACTOR * (TILE_SIZE * config->player.x),
 			MINIMAP_SCALE_FACTOR * (TILE_SIZE * config->player.y),
@@ -110,8 +110,8 @@ double	find_horizontal_distance(t_config *config, t_ray *ray)
 	while(next_touch_x >= 0 && next_touch_x <= WINDOW_WIDTH
 		&& next_touch_y >= 0 && next_touch_y <= WINDOW_HEIGHT)
 	{
-		char grid_content = get_map_at(config->map, next_touch_x, next_touch_y + (ray->is_fup ? -1: 0)); // if ray is fup, force one pixel up, so we are inside a grid cell
-		if (grid_content != '0')
+		char grid_content = get_map_at(config->map, next_touch_x, next_touch_y + (ray->is_fup ? 1: 0)); // if ray is fup, force one pixel up, so we are inside a grid cell
+		if (grid_content == '1')
 		{
 			found_wall_hit = TRUE;
 			break ;
@@ -154,14 +154,14 @@ void	find_vertical_distance(t_config *config, t_ray *ray)
 
 	t_player	*player = &config->player;
 
-	printf("px: %d py: %d\n", (int)floor(config->player.x), (int)floor(config->player.y));
+	// printf("px: %d py: %d\n", (int)floor(config->player.x), (int)floor(config->player.y));
 	// find the y-coordinate of the closest horizontal grid intersection
 	x_intercept = floor(player->x / TILE_SIZE) * TILE_SIZE;
 	x_intercept += ray->is_fright ? TILE_SIZE : 0;
 
 	// find the x-coordinate of the closest horizontal grid intersection
 	y_intercept = player->y + ((x_intercept - player->x) * tan(ray->angle));
-
+	
 	// calculate the increment xstep and ystep
 	x_step = TILE_SIZE;
 	x_step *= ray->is_fleft ? -1: 1;
@@ -176,8 +176,8 @@ void	find_vertical_distance(t_config *config, t_ray *ray)
 	while(next_touch_x >= 0 && next_touch_x <= WINDOW_WIDTH
 		&& next_touch_y >= 0 && next_touch_y <= WINDOW_HEIGHT)
 	{
-		char grid_content = get_map_at(config->map, next_touch_x + (ray->is_fleft ? -1 : 0), next_touch_y); // if ray is fup, force one pixel up, so we are inside a grid cell
-		if (grid_content != '0')
+		char grid_content = get_map_at(config->map, next_touch_x + (ray->is_fleft ? 1 : 0), next_touch_y); // if ray is fup, force one pixel up, so we are inside a grid cell
+		if (grid_content == '1')
 		{
 			found_wall_hit = TRUE;
 			break ;
@@ -221,6 +221,8 @@ double	ray_calc(t_config *config, t_ray *ray)
 	ray->is_fright = ray->angle < 0.5 * PI || ray->angle > 1.5 * PI;
 	ray->is_fleft = !ray->is_fright;
 
+	
+
 	horz_hit.angle = ray->angle;
 	horz_hit.is_fdown = ray->is_fdown;
 	horz_hit.is_fup = ray->is_fup;
@@ -250,6 +252,14 @@ double	ray_calc(t_config *config, t_ray *ray)
 		ray->distance = horz_hit.distance;
 		ray->wasHitVertical = FALSE;	
 	}
+	printf("up: %d | down: %d | left: %d | right: %d\n",
+		ray->is_fup,
+		ray->is_fdown,
+		ray->is_fleft,
+		ray->is_fright
+	);
+	printf("ray_angle: %f | player_angle: %f\n", ray->angle, config->player.rotation_angle);
+	printf("hit_y: %f | hit_x: %f\n", ray->wallHitY, ray->wallHitX);
 	// printf("angle %f\n", ray->angle);
 	// printf("hit_x: %f | hit_y: %f\n", ray->wallHitX, ray->wallHitY);
 	// render_line2(config,
@@ -292,9 +302,11 @@ char	get_map_at(char **map, double next_touch_x, double next_touch_y)
 	int	x;
 	int	y;
 
-	// if (x < 0 || x < WINDOW_WIDTH || y < 0 || y < WINDOW_HEIGHT)
-	// 	return (0);
-	x = next_touch_x / TILE_SIZE / MINIMAP_SCALE_FACTOR;
-	y = next_touch_y / TILE_SIZE / MINIMAP_SCALE_FACTOR;
-	return (map[y][x]);
+	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
+		return (0);
+	// printf("next_y: %f next_x: %f\n", next_touch_y, next_touch_x);
+	x = (int)floor(next_touch_x / TILE_SIZE);
+	y = (int)floor(next_touch_y / TILE_SIZE);
+	// printf("y: %d x: %d\n", y, x);
+	return (map[(int)floor(y)][(int)floor(x)]);
 }

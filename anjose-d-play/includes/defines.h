@@ -48,7 +48,7 @@
 #define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
 # define RAY_RANGE (WINDOW_WIDTH * 1.5)
 # define FOV_ANGLE (60 * (PI / 180))
-# define NUM_RAYS (WINDOW_WIDTH / 10)
+# define NUM_RAYS (WINDOW_WIDTH)
 
 
 #endif
