@@ -42,7 +42,7 @@
 # define MINIMAP_SCALE_FACTOR 1
 
 // TIRAR DAQUI
-# define WINDOW_WIDTH (1024) // deixar fixo
+# define WINDOW_WIDTH (1024)
 # define WINDOW_HEIGHT (600)
 # define RAY_RANGE (WINDOW_WIDTH * 2)
 # define FOV_ANGLE (60 * (PI / 180))

@@ -6,13 +6,13 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 18:36:20 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/29 00:52:41 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:34:30 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		**ft_mtxcpy(char **mtx_root)
+char	**ft_mtxcpy(char **mtx_root)
 {
 	char	**mtx_ret;
 	int		mtx_len;

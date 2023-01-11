@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/11 23:24:46 by anjose-d          #+#    #+#             */
+/*   Updated: 2023/01/11 23:24:46 by anjose-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int		get_color_from_texture(t_config *config, double wall_strip, int x_hit,
@@ -93,12 +105,17 @@ int	get_color_from_texture(t_config *config, double wall_strip, int x, int *y)
 
 int	*find_wall_texture(t_config *config)
 {
-	if(config->side[1] == 1)
-		return config->textures.NO;
-	else if(config->side[1] == -1 )
-		return config->textures.SO;
-	else if(config->side[0] == 1)
-		return config->textures.WE;
-	else if(config->side[0] == -1)
-		return config->textures.EA;
+	if (config->side[1] == 1)
+	{
+		if (config->ciclo < 50)
+			return (config->textures.NO);
+		else
+			return (config->textures.SO);
+	}
+	else if (config->side[1] == -1)
+		return (config->textures.SO);
+	else if (config->side[0] == 1)
+		return (config->textures.WE);
+	else if (config->side[0] == -1)
+		return (config->textures.EA);
 }
