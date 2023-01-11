@@ -47,6 +47,13 @@ typedef struct s_player
 	int		mouse_y;
 }				t_player;
 
+typedef struct	s_textures
+{
+	int	*NO;
+	int	*SO;
+	int	*WE;
+	int	*EA;
+}			t_textures;
 
 typedef struct	s_config
 {
@@ -67,6 +74,7 @@ typedef struct	s_config
 	t_conn	conn_mlx;
 	t_img	img;
 	t_player	player;
+	t_textures	textures;
 	int		*texture_test;
 }			t_config;
 

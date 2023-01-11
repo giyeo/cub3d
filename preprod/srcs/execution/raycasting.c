@@ -3,7 +3,8 @@
 int		get_color_from_texture(t_config *config, double wall_strip, int x_hit,
 			int *y_wall);
 void	paint_wall(t_config *config, int x, double wall_strip, int x_hit);
-int		ray_trace(t_config *config, double angle);
+int		ray_cast(t_config *config, double angle);
+int		*find_wall_texture(t_config *config);
 
 void	raycaster(t_config *config)
 {
@@ -21,7 +22,7 @@ void	raycaster(t_config *config)
 		config->player.is_middle = 0;
 		if (x == WINDOW_WIDTH / 2)
 			config->player.is_middle = 1;
-		distances = ray_trace(config, angle);
+		distances = ray_cast(config, angle);
 		distances *= cos(angle - config->player.rotation_angle);
 		angle += normalize_angle((fov / WINDOW_WIDTH));
 		wall_strip = (TILE_SIZE / distances)
@@ -34,7 +35,7 @@ void	raycaster(t_config *config)
 	}
 }
 
-int	ray_trace(t_config *config, double angle)
+int	ray_cast(t_config *config, double angle)
 {
 	return (render_line(config,
 			(config->player.x * TILE_SIZE), (config->player.y * TILE_SIZE),
@@ -76,6 +77,7 @@ int	get_color_from_texture(t_config *config, double wall_strip, int x, int *y)
 	int		is_over_screen;
 	int		column;
 	int		line;
+	int		*texture;
 
 	is_over_screen = 0;
 	if (wall_strip > WINDOW_HEIGHT)
@@ -84,5 +86,18 @@ int	get_color_from_texture(t_config *config, double wall_strip, int x, int *y)
 	column = x % 64;
 	line = (int)(offset / wall_strip * 64);
 	*y += 1;
-	return (*(config->texture_test + column + line * 64));
+	texture = find_wall_texture(config);
+	return (*(texture + column + line * 64));
+}
+
+int	*find_wall_texture(t_config *config)
+{
+	if(config->side[1] == 1)
+		return config->textures.NO;
+	else if(config->side[1] == -1 )
+		return config->textures.SO;
+	else if(config->side[0] == 1)
+		return config->textures.WE;
+	else if(config->side[0] == -1)
+		return config->textures.EA;
 }

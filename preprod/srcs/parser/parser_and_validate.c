@@ -35,14 +35,14 @@ void	parser_and_validate(char **buffer, t_config *config)
 
 void	player_init(t_config *config)
 {
-	config->player.x = config->player_position[1];
-	config->player.y = config->player_position[0];
+	config->player.x = config->player_position[1] + 0.5;
+	config->player.y = config->player_position[0] + 0.5;
 	config->player.height = 50;
 	config->player.width = 50;
 	config->player.turn_direction = 0;
 	config->player.walk_direction = 0;
 	config->player.rotation_angle = PI; // pointing down
-	config->player.walk_speed = 1.0 / 40.0;
+	config->player.walk_speed = 1.0 / 20.0;
 	config->player.turn_speed = 1 * (PI / 180); // ((PI / 180)) == converting to radians
 	config->player.interact = 0;
 }

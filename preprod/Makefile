@@ -1,6 +1,6 @@
 
 # MAIN VARIABLES
-NAME		:=	cub3d
+NAME		:=	cub3D
 CC			:=	cc
 CFLAGS		:=  -O3 #-Wall -Wextra -Werror
 
