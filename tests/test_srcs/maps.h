@@ -2,6 +2,7 @@
 # define MAPS_H
 /* maps */
 // SIMPLE
+
 # define SUBJECT_MAP "maps_for_test/simple/subject.cub"
 # define DOUBLE_ROOM_MAP "maps_for_test/simple/DOUBLE_ROOM_SIMPLE_MAP.cub"
 # define DOUBLE_HOLE_MAP "maps_for_test/simple/BIG_ROOM_HOLES_SIMPLE_MAP.cub"
@@ -19,5 +20,8 @@
 # define OPEN_INVREAD_MAP "maps_for_test/wrong/map_open_invalidread.cub"
 # define TWO_PLAYERS_MAP "maps_for_test/wrong/SUBJECT_TWO_PLAYERS.cub"
 # define GLUED_MAP "maps_for_test/simple/glued-map.cub"
+
+// config
+# define WRONG_CONFIG1 "maps_for_test/wrong/wrong_config1.cub"
 
 #endif

@@ -45,11 +45,11 @@ int		file_check(char *file);
 int		extension_check(char *file);
 char	**read_file(int	fd, char *file);
 int		line_count(char *file);
-void	parser_and_validate(char **buffer, t_config *config);
-int		find_split_line(char **read_file);
+int		parser_and_validate(char **buffer, t_config *config);
+int		find_map_start(char **read_file);
 
 /* UTILS */
-void	throw_error(char *error);
+int		throw_error(char *error);
 int		only_these(char *str, char *needles);
 void	config_init(t_config *config);
 void	print_struct(t_config *config);

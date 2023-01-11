@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate_config.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:49:51 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/27 22:27:20 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:51:55 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,56 +59,57 @@ void	parse_color(char *file_content, char type, t_config *config)
 	free(color);
 }
 
-void	test_path(char *path)
+int	test_path(char *path)
 {
 	int		fd;
 	char	*temp;
+	char	*msg;
 
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
 	{
 		temp = ft_strjoin(path, ": ");
-		throw_error(ft_strjoin(temp, strerror(errno)));
+		msg = ft_strjoin(temp, strerror(errno));
+		throw_error(msg);
+		free(temp);
+		free(msg);
+		return (-1);
 	}
 	close(fd);
+	return (0);
 }
 
-void	assign_config(char *path, char type, t_config *config)
+int	assign_config(char *path, char type, t_config *config)
 {
 	if (type == 'N' && config->NO == NULL)
-		config->NO = path;
+		config->NO = ft_strdup(path);
 	else if (type == 'W' && config->WE == NULL)
-		config->WE = path;
+		config->WE = ft_strdup(path);
 	else if (type == 'S' && config->SO == NULL)
-		config->SO = path;
+		config->SO = ft_strdup(path);
 	else if (type == 'E' && config->EA == NULL)
-		config->EA = path;
+		config->EA = ft_strdup(path);
 	else
-		throw_error("More Than one Texture");
+		return (ERR_CONFIG_TEXT_DUP);
+		// throw_error("More Than one Texture");
+	return (0);
 }
 
-void	parse_path(char *file_content, char type, t_config *config)
+int	parse_path(char *file_content, char type, t_config *config)
 {
 	char	*path;
 	char	*trimmed_path;
+	int		err_ret;
 
+	err_ret = 0;
 	path = ft_substr(file_content, 0, ft_str_find_idx(file_content, '\n'));
 	trimmed_path = ft_strtrim(path, " ");
-	test_path(trimmed_path);
-	assign_config(trimmed_path, type, config);
+	err_ret = test_path(trimmed_path);
+	if (!err_ret)
+		err_ret = assign_config(trimmed_path, type, config);
 	free(path);
-}
-
-int	check_invalid_char_or_map_start(char c)
-{
-	if (c == '1')
-		return (1);
-	if (c != 'N' && c != 'O' && c != 'S'
-		&& c != 'W' && c != 'E' && c != 'A'
-		&& c != 'F' && c != 'C' && c != ' '
-		&& c != '\n' && c != '\r')
-		throw_error("Not Allowed Char in .cub file");
-	return (0);
+	free(trimmed_path);
+	return (err_ret);
 }
 
 int	can_parse(char *line_content, int i)
@@ -121,7 +122,8 @@ int	can_parse(char *line_content, int i)
 	next = line_content[i + 1];
 	after_next = line_content[i + 2];
 	if (next == '\0' || after_next == '\0')
-		throw_error("File not Completed");
+		return (-1);
+		//throw_error("File not Completed");
 	if (((current == 'N' && next == 'O')
 			|| (current == 'S' && next == 'O')
 			|| (current == 'W' && next == 'E')
@@ -134,7 +136,7 @@ int	can_parse(char *line_content, int i)
 	return (0);
 }
 
-void	color_error_handling(char *line_content)
+int	color_error_handling(char *line_content)
 {
 	int	count_commas;
 	int	has_digit;
@@ -148,33 +150,56 @@ void	color_error_handling(char *line_content)
 		if (!ft_isdigit(line_content[i])
 			&& line_content[i] != ' '
 			&& line_content[i] != ',')
-			throw_error("Invalid Char on Color");
+				return (ERR_INV_CHAR_COLOR);
+				//throw_error("Invalid Char on Color");
 		if (ft_isdigit(line_content[i]))
 			has_digit = 1;
 		if (line_content[i] == ',')
 		{
 			if (has_digit == 0)
-				throw_error("Not enough digits");
+				return (ERR_NOT_ENOUGH_DIGITS);
+				//throw_error("Not enough digits");
 			count_commas++;
 			has_digit = 0;
 		}
 		i++;
 	}
 	if (has_digit == 0)
-		throw_error("Not enough digits");
+		return (ERR_NOT_ENOUGH_DIGITS);
+		//throw_error("Not enough digits");
 	if (count_commas != 2)
-		throw_error("Only 2 commas allowed");
+		return (ERR_INV_CHAR_COLOR);
+		//throw_error("Only 2 commas allowed");
+	return (0);
 }
 
-void	parse_line_content(char *line_content, char type, t_config *config)
+int	parse_line_content(char *line_content, char type, t_config *config)
 {
+	int	err_ret;
+
+	err_ret = 0;
 	if (type == 'F' || type == 'C')
 	{
-		color_error_handling(line_content + 1);
-		parse_color(line_content + 1, type, config);
+		err_ret = color_error_handling(line_content + 1);
+		if (!err_ret)
+			parse_color(line_content + 1, type, config);
 	}
 	else
-		parse_path(line_content + 2, type, config);
+		err_ret = parse_path(line_content + 2, type, config);
+	return (err_ret);
+}
+
+int	check_invalid_char(char c)
+{
+	if (c == '1')
+		return (1);
+	if (c != 'N' && c != 'O' && c != 'S'
+		&& c != 'W' && c != 'E' && c != 'A'
+		&& c != 'F' && c != 'C' && c != ' '
+		&& c != '\n' && c != '\r')
+			return (ERR_INV_CHAR_IN_FILE);
+		// throw_error("Not Allowed Char in .cub file");
+	return (0);
 }
 
 int	validate_config(char **buffer, t_config *config)
@@ -183,20 +208,24 @@ int	validate_config(char **buffer, t_config *config)
 	int		line;
 	int		column;
 	int		type;
+	int		err_ret;
 
 	line = 0;
-	while (buffer[line] != NULL)
+	err_ret = 0;
+	while (buffer[line] != NULL && !err_ret)
 	{
 		line_content = buffer[line];
 		column = 0;
 		while (line_content[column] != '\0')
 		{
-			if (check_invalid_char_or_map_start(line_content[column]))
-				return (line);
+			if (check_invalid_char(line_content[column]))
+				return (ERR_INV_CHAR_IN_FILE);
 			type = can_parse(line_content, column);
-			if (type != 0)
+			if (type < 0)
+				return (ERR_FILE_INCOMPLETE);
+			else if (type != 0)
 			{
-				parse_line_content(line_content + column, (char)type, config);
+				err_ret = parse_line_content(line_content + column, (char)type, config);
 				break ;
 			}
 			column++;
@@ -204,5 +233,5 @@ int	validate_config(char **buffer, t_config *config)
 		line++;
 	}
 	throw_error("Map not found");
-	return (line);
+	return (err_ret);
 }

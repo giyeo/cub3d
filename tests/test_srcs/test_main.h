@@ -26,14 +26,16 @@ void	read_file_test_check_subject_lines();
 void	read_file_test_check_several_blines();
 void	read_file_test_invalid_map();
 
-void	find_split_line_test_subject_mapfile();
-void	find_split_line_test_doubleroom_mapfile();
-void	find_split_line_test_doublehole_mapfile();
-void	find_split_line_test_many_blines_mapfile();
-void	find_split_line_test_invalid_mapfile();
+void	find_map_start_test_subject_mapfile();
+void	find_map_start_test_doubleroom_mapfile();
+void	find_map_start_test_doublehole_mapfile();
+void	find_map_start_test_many_blines_mapfile();
+void	find_map_start_test_invalid_mapfile();
 
+// validate_config
 void	validate_config_test_not_null();
 void	validate_config_test_values_check();
+void	validate_config_test_rgb_wrong();
 
 void	validate_map_test_invalid_char_in_map();
 void	validate_map_test_valid_map();

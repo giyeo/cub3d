@@ -34,17 +34,18 @@ void	validate_config_test_values_check()
 	TEST_ASSERT_EQUAL(225,config.C[0]);
 	TEST_ASSERT_EQUAL(30,config.C[1]);
 	TEST_ASSERT_EQUAL(0,config.C[2]);
-	// TEST_ASSERT_EQUAL_STRING(config.map);
+	
 }
 
-// separar mapa de config
-	//começa do final da matrix
-	// linha tem APENAS
-		// 1, 0, N, S, E, W
-		// e não é '\0'
-			// se sim
-				// linha de mapa
-				// veja a proxima linha
-			// se não
-				// separação entre mapa e config foi encontrada
-	// 
+void	validate_config_test_rgb_wrong()
+{
+	t_config	config;
+	int			ret;
+
+	int	fd = file_check(WRONG_CONFIG1);
+	file_read = read_file(fd, WRONG_CONFIG1);
+	config_init(&config);
+	ret = validate_config(file_read, &config);
+
+	TEST_ASSERT_EQUAL(ERR_FILE_INCOMPLETE, ret);
+}

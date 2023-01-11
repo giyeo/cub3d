@@ -1,36 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_and_validate.c                              :+:      :+:    :+:   */
+/*   find_map_start.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/20 12:09:44 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/11 17:55:34 by anjose-d         ###   ########.fr       */
+/*   Created: 2022/12/14 17:27:10 by anjose-d          #+#    #+#             */
+/*   Updated: 2023/01/11 17:25:15 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_invalid_char_or_map_start(char c);
+int	check_line(char *line);
 
-int	parser_and_validate(char **buffer, t_config *config)
+int	find_map_start(char **read_file)
 {
-	int line_start_map;
-	int	ret;
+	int	map_start;
 
-	ret = validate_config(buffer, config);
-	if (ret)
+	map_start = 0;
+	while (read_file[map_start] != NULL)
 	{
-		if (ret < 0)
-			return (-1);
-		else
-			return (throw_error("erro correspondente ao ret"));
-		// deu erro
+		if (check_line(read_file[map_start]))
+			break ;
+		map_start++;
 	}
-	line_start_map = find_map_start(buffer);
-	check_struct(config, 0);
-	validate_map(buffer + line_start_map, config);
-	check_struct(config, 1);
+	// e quando o mapa não é encontrado?
+	// read_file == map_start?
+	return (map_start);
+}
+
+int	check_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '1')
+			return (1);
+		if (ft_isspace(line[i]))
+			i++;
+		else
+			break ;
+	}
 	return (0);
 }

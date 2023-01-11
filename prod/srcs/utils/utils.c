@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:32:11 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/20 11:56:24 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:38:59 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	init(t_config *config)
 	config->player_direction = 'Z';
 }
 
-void	throw_error(char *error)
+int	throw_error(char *error)
 {
 	printf("Error\n%s.\n", error);
-	//exit(1);
+	return (-1);
 }
 
 int		is_one_of_these(char c, char *these)

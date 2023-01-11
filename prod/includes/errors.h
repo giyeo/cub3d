@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 10:46:45 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/16 10:59:56 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/11 17:29:10 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ enum e_errors
 	ERR_FILE_EXT_INVALID,			// invalid file extension
 	ERR_CONFIG_MISSING,				// configuration missing
 	ERR_CONFIG_COLOR_DUP,			// duplicate of colors
-	ERR_CONFIG_TEXT_DUP				// more than one texture
+	ERR_CONFIG_TEXT_DUP,			// more than one texture
+	ERR_INV_CHAR_COLOR,				// Invalid Char on Color
+	ERR_NOT_ENOUGH_DIGITS			// Not enough digits
 };
 
 #endif

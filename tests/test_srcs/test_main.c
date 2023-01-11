@@ -38,17 +38,12 @@ int	main()
 
 	// // verificar se quebra de linha está no meio do mapa (invalido)
 	// 	// esta validação será feita na validação da config
-	ft_printf("\033[1;33m find_split_line_tests \033[0m\n");
-	RUN_TEST(find_split_line_test_subject_mapfile);
-	RUN_TEST(find_split_line_test_doubleroom_mapfile);
-	RUN_TEST(find_split_line_test_doublehole_mapfile);
-	RUN_TEST(find_split_line_test_many_blines_mapfile);
-	RUN_TEST(find_split_line_test_invalid_mapfile);
-
-	ft_printf("\033[1;33m validate_config_tests \033[0m\n");
-	//	validate_config function is breaking tests because of the 'throws'
-	RUN_TEST(validate_config_test_not_null);
-	RUN_TEST(validate_config_test_values_check);
+	ft_printf("\033[1;33m find_map_start_tests \033[0m\n");
+	RUN_TEST(find_map_start_test_subject_mapfile);
+	RUN_TEST(find_map_start_test_doubleroom_mapfile);
+	RUN_TEST(find_map_start_test_doublehole_mapfile);
+	RUN_TEST(find_map_start_test_many_blines_mapfile);
+	RUN_TEST(find_map_start_test_invalid_mapfile);
 
 	ft_printf("\033[1;33m validate_map_tests \033[0m\n");
 	RUN_TEST(validate_map_test_invalid_char_in_map);
@@ -64,9 +59,14 @@ int	main()
 	RUN_TEST(validate_map_test_two_players_map);
 	RUN_TEST(validate_map_test_glued_map);
 
+	ft_printf("\033[1;33m validate_config_tests \033[0m\n");
+		// validate_config function is breaking tests because of the 'throws'
+	RUN_TEST(validate_config_test_not_null);
+	RUN_TEST(validate_config_test_values_check);
+	RUN_TEST(validate_config_test_rgb_wrong);
 
-	// ft_printf("\033[1;33m libft_tests \033[0m\n");
-	// RUN_TEST(ft_mtxcpy_not_null);
+	ft_printf("\033[1;33m libft_tests \033[0m\n");
+	RUN_TEST(ft_mtxcpy_not_null);
 	return (UNITY_END());
 }
 

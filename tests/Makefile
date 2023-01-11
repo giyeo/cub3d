@@ -36,7 +36,7 @@ INCLUDE		=	-I $(UNITY_DIR)/ \
 
 all:
 	@make -C $(MAIN_PJ)/libft
-	@gcc -g $(INCLUDE) $(SRCS) $(UNITY_SRCS) $(LIBFT_LINK) -o $(BIN)
+	gcc -g $(INCLUDE) $(SRCS) $(UNITY_SRCS) $(LIBFT_LINK) -o $(BIN)
 	./$(BIN)
 
 clean:
