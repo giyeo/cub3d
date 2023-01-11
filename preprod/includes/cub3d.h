@@ -67,7 +67,7 @@ typedef struct	s_config
 	t_conn	conn_mlx;
 	t_img	img;
 	t_player	player;
-
+	int		*texture_test;
 }			t_config;
 
 /* PARSER */
