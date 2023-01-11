@@ -13,6 +13,7 @@ void	raycaster(t_config *config)
 	double	wall_strip;
 	double	angle;
 	int		x;
+	int		x_hit;
 
 	x = 0;
 	fov = config->FOV * (PI / 180);
@@ -26,10 +27,10 @@ void	raycaster(t_config *config)
 		distances *= cos(angle - config->player.rotation_angle);
 		angle += normalize_angle((fov / WINDOW_WIDTH));
 		wall_strip = (TILE_SIZE / distances)
-			* (WINDOW_WIDTH / 2)
-			/ tan(fov / 2);
-		int	x_hit = config->texture_col[1];
-		if (config->texture_col[1] == 0 || config->texture_col[1] == 63)
+			* (WINDOW_WIDTH / 2) / tan(fov / 2);
+		if(angle > 0 && angle < PI)
+			x_hit = config->texture_col[1];
+		if(angle < 0.5 * PI || angle > 1.5 * PI)
 			x_hit = config->texture_col[0];
 		paint_wall(config, x++, wall_strip, x_hit);
 	}
