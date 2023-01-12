@@ -78,6 +78,8 @@ double	render_line2(t_config *config, double player_x, double player_y, double a
 	double x_intercept;
 	double y_step;
 	double x_step;
+	double next_horz_touch_x;
+	double next_horz_touch_y;
 	double distance;
 
 	is_ray_down = 0;
@@ -101,8 +103,29 @@ double	render_line2(t_config *config, double player_x, double player_y, double a
 
 	y_step = TILE_SIZE;
 	y_step *= is_ray_up ? -1 : 1;
+
 	x_step = TILE_SIZE / tan(angle);
 	x_step *= (is_ray_left && x_step > 0) ? -1 : 1;
 	x_step *= (is_ray_right && x_step < 0) ? -1: 1;
+
+	next_horz_touch_x = x_intercept;
+	next_horz_touch_y = y_intercept;
+
+	if(is_ray_up)
+		next_horz_touch_y--;
 	
+	while(next_horz_touch_x >= 0 && next_horz_touch_x <= WINDOW_WIDTH
+	&& next_horz_touch_y >= 0 &&  next_horz_touch_y <= WINDOW_HEIGHT)
+	{
+		if(config->map[(int)(next_horz_touch_y / TILE_SIZE)][(int)(next_horz_touch_x / TILE_SIZE)])
+		{
+			printf("x:%f, y:%f, dist: %f\n", next_horz_touch_x,
+			next_horz_touch_y,
+			distance_between_points(player_x,player_y, next_horz_touch_x, next_horz_touch_y));
+			return(0);
+		}
+		next_horz_touch_x += x_step;
+		next_horz_touch_y += y_step;
+	}
+
 }

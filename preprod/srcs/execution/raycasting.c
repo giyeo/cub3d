@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 23:24:46 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/11 23:24:46 by anjose-d         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "cub3d.h"
 
 int		get_color_from_texture(t_config *config, double wall_strip, int x_hit,
@@ -26,7 +14,7 @@ void	raycaster(t_config *config)
 	double	angle;
 	int		x;
 	int		x_hit;
-
+	
 	x = 0;
 	fov = config->FOV * (PI / 180);
 	angle = normalize_angle(config->player.rotation_angle - (fov / 2.0));
@@ -34,15 +22,18 @@ void	raycaster(t_config *config)
 	{
 		config->player.is_middle = 0;
 		if (x == WINDOW_WIDTH / 2)
+		{
 			config->player.is_middle = 1;
+			//render_line2(config, config->player.x, config->player.y, angle);
+		}
 		distances = ray_cast(config, angle);
 		distances *= cos(angle - config->player.rotation_angle);
 		angle += normalize_angle((fov / WINDOW_WIDTH));
 		wall_strip = (TILE_SIZE / distances)
-			* (WINDOW_WIDTH / 2) / tan(fov / 2);
-		if(angle > 0 && angle < PI)
-			x_hit = config->texture_col[1];
-		if(angle < 0.5 * PI || angle > 1.5 * PI)
+			* (WINDOW_WIDTH / 2)
+			/ tan(fov / 2);
+		int	x_hit = config->texture_col[1];
+		if (config->texture_col[1] == 0 || config->texture_col[1] == 63)
 			x_hit = config->texture_col[0];
 		paint_wall(config, x++, wall_strip, x_hit);
 	}
@@ -112,10 +103,10 @@ int	*find_wall_texture(t_config *config)
 		else
 			return (config->textures.SO);
 	}
-	else if (config->side[1] == -1)
-		return (config->textures.SO);
-	else if (config->side[0] == 1)
-		return (config->textures.WE);
-	else if (config->side[0] == -1)
-		return (config->textures.EA);
+	else if(config->side[1] == -1 )
+		return config->textures.SO;
+	else if(config->side[0] == 1)
+		return config->textures.WE;
+	else if(config->side[0] == -1)
+		return config->textures.EA;
 }

@@ -21,31 +21,30 @@ void	img_init(t_img *img, t_config *config);
 
 void	load_textures(t_config *config, void *mlx)
 {
-	int		w;
-	int		h;
-	int		*addr;
-	int		bpp;
-	int		s_line;
-	int		endian;
-	int		color;
-	void	*img1;
-	void	*img2;
-	void	*img3;
-	void	*img4;
+	int	no_use;
 
-	img1 = mlx_xpm_file_to_image(config->conn_mlx.mlx_ptr, "./textures/mine/1.xpm", &w, &h);
-	config->textures.NO = (int32_t *)mlx_get_data_addr(img1, &bpp, &s_line, &endian);
-	img2 = mlx_xpm_file_to_image(config->conn_mlx.mlx_ptr, "./textures/mine/2.xpm", &w, &h);
-	config->textures.SO = (int32_t *)mlx_get_data_addr(img2, &bpp, &s_line, &endian);
-	img3 = mlx_xpm_file_to_image(config->conn_mlx.mlx_ptr, "./textures/mine/3.xpm", &w, &h);
-	config->textures.WE = (int32_t *)mlx_get_data_addr(img3, &bpp, &s_line, &endian);
-	img4 = mlx_xpm_file_to_image(config->conn_mlx.mlx_ptr, "./textures/mine/4.xpm", &w, &h);
-	config->textures.EA = (int32_t *)mlx_get_data_addr(img4, &bpp, &s_line, &endian);
-	if (!img1 || !img2 || !img3 || !img4)
+	config->textures.img_NO = mlx_xpm_file_to_image(
+		config->conn_mlx.mlx_ptr,"./textures/mine/1.xpm", &no_use, &no_use);
+	config->textures.img_SO = mlx_xpm_file_to_image(
+		config->conn_mlx.mlx_ptr, "./textures/mine/2.xpm", &no_use, &no_use);
+	config->textures.img_WE = mlx_xpm_file_to_image(
+		config->conn_mlx.mlx_ptr, "./textures/mine/3.xpm", &no_use, &no_use);
+	config->textures.img_EA = mlx_xpm_file_to_image(
+		config->conn_mlx.mlx_ptr, "./textures/mine/4.xpm", &no_use, &no_use);
+	if (!config->textures.img_NO || !config->textures.img_SO
+	 || !config->textures.img_WE || !config->textures.img_EA)
 	{
-		ft_putendl_fd("No texture was found", 0);
-		exit(0);
+		throw_error("Texture not found");
+		exit(1);
 	}
+	config->textures.NO = (int32_t *)mlx_get_data_addr(
+		config->textures.img_NO, &no_use, &no_use, &no_use);
+	config->textures.SO = (int32_t *)mlx_get_data_addr(
+		config->textures.img_SO, &no_use, &no_use, &no_use);
+	config->textures.WE = (int32_t *)mlx_get_data_addr(
+		config->textures.img_WE, &no_use, &no_use, &no_use);
+	config->textures.EA = (int32_t *)mlx_get_data_addr(
+		config->textures.img_EA, &no_use, &no_use, &no_use);
 }
 
 int	main(int argc, char *argv[])

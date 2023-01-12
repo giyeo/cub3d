@@ -49,10 +49,14 @@ typedef struct s_player
 
 typedef struct	s_textures
 {
-	int	*NO;
-	int	*SO;
-	int	*WE;
-	int	*EA;
+	int		*NO;
+	int		*SO;
+	int		*WE;
+	int		*EA;
+	void	*img_NO;
+	void	*img_SO;
+	void	*img_WE;
+	void	*img_EA;
 }			t_textures;
 
 typedef struct	s_config
@@ -121,7 +125,8 @@ void	render_player(t_config *config);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int		render_rect(t_conn conn_mlx, int x, int y, int rect_height, int rect_width, int color, t_img *img);
 double	render_line(t_config *config, double x1, double y1, double x2, double y2, int color, int c);
-double	render_line2(t_config *config, double x1, double y1, double angle);
+double	render_line2(t_config *config, double player_x, double player_y, double angle);
+
 // player
 void	move_player(t_config *config);
 //execution

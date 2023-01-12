@@ -35,7 +35,7 @@
 # define RIGHT_ARROW 65363
 # define ESC 65307
 
-# define PI 3.141592653589793
+# define PI 3.141592653
 # define TWO_PI 6.283185306
 
 # define TILE_SIZE 64
