@@ -43,7 +43,7 @@
 
 # define WINDOW_WIDTH (1024)
 # define WINDOW_HEIGHT (600)
-# define RAY_RANGE (WINDOW_WIDTH * 2)
+# define RAY_RANGE ((WINDOW_WIDTH + WINDOW_HEIGHT) * 1.5)
 # define FOV_ANGLE (60 * (PI / 180))
 
 #endif

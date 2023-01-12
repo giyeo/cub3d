@@ -46,6 +46,8 @@ double	zoom_control(t_config *config)
 {
 	double turn_speed = config->player.turn_speed;
 
+	if(config->FOV == 19.0)
+		config->FOV = 60.0;
 	if(config->FOV < 60.0 && config->FOV > 20.0)
 		config->FOV -= 1;
 	if(config->FOV == 20.0)
@@ -60,13 +62,9 @@ void	player_moviments(t_config *config, double turn_speed)
 	t_player	*player;
 
 	player = &config->player;
-
 	player->rotation_angle += player->turn_direction * turn_speed;
 	move_step = player->walk_direction * player->walk_speed;
-
 	move_side = player->walk_side_direction * player->walk_speed;
-	printf("direct:%d, move_side:%f value:%f\n", player->walk_side_direction, move_side, PI/2);
-	
 	player->x += cos(player->rotation_angle) * move_step;
 	player->y += sin(player->rotation_angle) * move_step;
 	player->x += cos(player->rotation_angle + PI / 2) * move_side;
