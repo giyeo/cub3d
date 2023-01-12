@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:09:44 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/12 08:01:38 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/12 08:09:55 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	player_init(t_config *config)
 	config->player.width = 50;
 	config->player.turn_direction = 0;
 	config->player.walk_direction = 0;
+	config->player.walk_side_direction = 0;
 	config->player.rotation_angle = PI; // pointing down
 	config->player.walk_speed = 1.0 / 10.0;
 	config->player.turn_speed = 2 * (PI / 180); // ((PI / 180)) == converting to radians

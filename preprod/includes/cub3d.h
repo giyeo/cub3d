@@ -38,6 +38,7 @@ typedef struct s_player
 	double	height;
 	int		turn_direction; // -1 for left, +1 for right | 0 to still
 	int		walk_direction; // -1 for back, +1 for front | 0 to still
+	int		walk_side_direction; // -1 for left, +1 for right |
 	double	rotation_angle;
 	double	walk_speed;
 	double	turn_speed;

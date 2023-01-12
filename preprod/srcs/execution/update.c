@@ -56,14 +56,21 @@ double	zoom_control(t_config *config)
 void	player_moviments(t_config *config, double turn_speed)
 {
 	double		move_step;
+	double		move_side;
 	t_player	*player;
 
 	player = &config->player;
+
 	player->rotation_angle += player->turn_direction * turn_speed;
 	move_step = player->walk_direction * player->walk_speed;
 
+	move_side = player->walk_side_direction * player->walk_speed;
+	printf("direct:%d, move_side:%f value:%f\n", player->walk_side_direction, move_side, PI/2);
+	
 	player->x += cos(player->rotation_angle) * move_step;
 	player->y += sin(player->rotation_angle) * move_step;
+	player->x += cos(player->rotation_angle + PI / 2) * move_side;
+	player->y += sin(player->rotation_angle + PI / 2) * move_side;
 }
 
 void	update(t_config *config)
