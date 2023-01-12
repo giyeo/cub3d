@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 23:55:22 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/12 07:59:30 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/12 08:00:54 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	key_pressed(int keysym, t_config *config)
 {
-	printf("%d\n", keysym);
 	if (keysym == ESC || keysym == Q)
 		end_game(config);
 	if (keysym == UP_ARROW || keysym == W)
