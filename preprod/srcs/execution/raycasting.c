@@ -34,10 +34,7 @@ void	raycaster(t_config *config)
 	{
 		config->player.is_middle = 0;
 		if (x == WINDOW_WIDTH / 2)
-		{
 			config->player.is_middle = 1;
-			//render_line2(config, config->player.x, config->player.y, angle);
-		}
 		distances = ray_cast(config, angle);
 		distances *= cos(angle - config->player.rotation_angle);
 		angle += normalize_angle((fov / WINDOW_WIDTH));

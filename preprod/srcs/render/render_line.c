@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 19:47:33 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/12 07:54:29 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/12 08:37:33 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,66 +112,4 @@ double	distance_between_points(double x1, double y1, double x2, double y2)
 
 	distance = sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
 	return (distance);
-}
-
-double	render_line2(t_config *config, double player_x, double player_y, double angle)
-{
-	int is_ray_down;
-	int is_ray_up;
-	int is_ray_left;
-	int is_ray_right;
-	double y_intercept;
-	double x_intercept;
-	double y_step;
-	double x_step;
-	double next_horz_touch_x;
-	double next_horz_touch_y;
-	double distance;
-
-	is_ray_down = 0;
-	is_ray_up = 0;
-	is_ray_left = 0;
-	is_ray_right = 0;
-
-	if(angle > 0 && angle < PI)
-		is_ray_down = 1;
-	else
-		is_ray_up = 1;
-	if(angle < 0.5 * PI || angle > 1.5 * PI)
-		is_ray_right = 1;
-	else
-		is_ray_left = 1;
-	
-	y_intercept = floor(player_y / TILE_SIZE) * TILE_SIZE;
-	y_intercept += is_ray_down ? TILE_SIZE : 0;
-
-	x_intercept = player_x + (y_intercept - player_y) / tan(angle);
-
-	y_step = TILE_SIZE;
-	y_step *= is_ray_up ? -1 : 1;
-
-	x_step = TILE_SIZE / tan(angle);
-	x_step *= (is_ray_left && x_step > 0) ? -1 : 1;
-	x_step *= (is_ray_right && x_step < 0) ? -1: 1;
-
-	next_horz_touch_x = x_intercept;
-	next_horz_touch_y = y_intercept;
-
-	if(is_ray_up)
-		next_horz_touch_y--;
-	
-	while(next_horz_touch_x >= 0 && next_horz_touch_x <= WINDOW_WIDTH
-	&& next_horz_touch_y >= 0 &&  next_horz_touch_y <= WINDOW_HEIGHT)
-	{
-		if(config->map[(int)(next_horz_touch_y / TILE_SIZE)][(int)(next_horz_touch_x / TILE_SIZE)])
-		{
-			printf("x:%f, y:%f, dist: %f\n", next_horz_touch_x,
-			next_horz_touch_y,
-			distance_between_points(player_x,player_y, next_horz_touch_x, next_horz_touch_y));
-			return(0);
-		}
-		next_horz_touch_x += x_step;
-		next_horz_touch_y += y_step;
-	}
-
 }

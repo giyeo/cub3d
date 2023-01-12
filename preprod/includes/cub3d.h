@@ -128,7 +128,6 @@ void	img_pix_put(t_img *img, int x, int y, int color);
 int		render_rect(t_conn conn_mlx, int x, int y, int rect_height, int rect_width, int color, t_img *img);
 double	render_line(t_config *config, double x1, double y1, double x2, double y2, int color, int c);
 double render_line_minimap(t_config *config, double x1, double y1, double x2, double y2, int color, int c);
-double	render_line2(t_config *config, double player_x, double player_y, double angle);
 
 // player
 void	move_player(t_config *config);
