@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 19:47:33 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/12 07:38:44 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/12 07:54:29 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,15 @@ double render_line_minimap(t_config *config, double x1, double y1, double x2, do
 
 	double pixelX = x1;
 	double pixelY = y1;
-	int posX = pixelX / TILE_SIZE / MINIMAP_SCALE_FACTOR;
-	int posY = pixelY / TILE_SIZE / MINIMAP_SCALE_FACTOR;
+	int posX = pixelX / TILE_SIZE / config->scale;
+	int posY = pixelY / TILE_SIZE / config->scale;
 	int iterator = pixels * 2;
 	while (iterator)
 	{
 		int posX_old =  posX;
 		int posY_old =  posY;
-		posX = (pixelX / TILE_SIZE / MINIMAP_SCALE_FACTOR);
-		posY = (pixelY / TILE_SIZE / MINIMAP_SCALE_FACTOR);
+		posX = (pixelX / TILE_SIZE / config->scale);
+		posY = (pixelY / TILE_SIZE / config->scale);
 		if((posX != posX_old || posY != posY_old) && config->player.interact &&
 		config->player.is_middle)
 		{

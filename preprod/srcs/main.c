@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:02:23 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/11 23:41:00 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/12 07:43:34 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	load_textures(t_config *config, void *mlx)
 	int	no_use;
 
 	config->textures.img_NO = mlx_xpm_file_to_image(
-		config->conn_mlx.mlx_ptr,"./textures/mine/1.xpm", &no_use, &no_use);
+		config->conn_mlx.mlx_ptr,"./textures/mine/wall1.xpm", &no_use, &no_use);
 	config->textures.img_SO = mlx_xpm_file_to_image(
-		config->conn_mlx.mlx_ptr, "./textures/mine/2.xpm", &no_use, &no_use);
+		config->conn_mlx.mlx_ptr, "./textures/mine/wall2.xpm", &no_use, &no_use);
 	config->textures.img_WE = mlx_xpm_file_to_image(
 		config->conn_mlx.mlx_ptr, "./textures/mine/3.xpm", &no_use, &no_use);
 	config->textures.img_EA = mlx_xpm_file_to_image(

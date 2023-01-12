@@ -39,12 +39,11 @@
 # define TWO_PI 6.283185306
 
 # define TILE_SIZE 64
-# define MINIMAP_SCALE_FACTOR 0.3
+# define MINIMAP_SCALE_FACTOR 0.2
 
 # define WINDOW_WIDTH (1024)
 # define WINDOW_HEIGHT (600)
 # define RAY_RANGE (WINDOW_WIDTH * 2)
 # define FOV_ANGLE (60 * (PI / 180))
-# define NUM_RAYS (WINDOW_WIDTH / 10)
 
 #endif

@@ -28,9 +28,9 @@ void	minimap(t_config *config)
 			if(pixel_i % (TILE_SIZE) == 0 && pixel_i != 0)
 				map_x++;
 			if (map_x < config->map_num_cols)
-				render_map(config, map_y, map_x, MINIMAP_SCALE_FACTOR * pixel_i, MINIMAP_SCALE_FACTOR * pixel_j);
+				render_map(config, map_y, map_x, config->scale * pixel_i, config->scale * pixel_j);
 			if(this_point_is_in_a_circle(pixel_i, pixel_j, config->player.x * TILE_SIZE, config->player.y * TILE_SIZE, 10))
-				img_pix_put(&config->img, MINIMAP_SCALE_FACTOR * pixel_i, MINIMAP_SCALE_FACTOR * pixel_j, YELLOW_PIXEL);
+				img_pix_put(&config->img, config->scale * pixel_i, config->scale * pixel_j, YELLOW_PIXEL);
 			pixel_i++;
 		}
 		map_x = 0;
@@ -46,10 +46,10 @@ void	minimap(t_config *config)
 	while(i < WINDOW_WIDTH)
 	{
 		render_line_minimap(config,
-			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
-			MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
-			MINIMAP_SCALE_FACTOR * ((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
+			config->scale * (config->player.x * TILE_SIZE),
+			config->scale * (config->player.y * TILE_SIZE),
+			config->scale * ((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE / config->scale)),
+			config->scale * ((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE / config->scale)),
 			mlx_get_hex_trgb(255, 0, 0),
 			1
 		);

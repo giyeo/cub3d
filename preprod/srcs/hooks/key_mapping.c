@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_mapping.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 23:55:22 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/11 23:24:31 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/12 07:59:30 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	key_pressed(int keysym, t_config *config)
 {
+	printf("%d\n", keysym);
 	if (keysym == ESC || keysym == Q)
 		end_game(config);
 	if (keysym == UP_ARROW || keysym == W)
@@ -32,6 +33,10 @@ int	key_pressed(int keysym, t_config *config)
 		if(config->FOV == 19.0)
 			config->FOV = 60.0;
 	}
+	if (keysym == 117 && config->scale < 1.0)
+		config->scale += 0.05;
+	if (keysym == 121 && config->scale > 0.1)
+		config->scale -= 0.05;
 	return (0);
 }
 

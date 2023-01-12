@@ -81,6 +81,7 @@ typedef struct	s_config
 	t_textures	textures;
 	int		ciclo;
 	int		*texture_test;
+	double	scale;
 }			t_config;
 
 /* PARSER */

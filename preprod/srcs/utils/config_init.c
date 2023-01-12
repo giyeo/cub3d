@@ -2,6 +2,7 @@
 
 void	config_init(t_config *config)
 {
+	config->scale = MINIMAP_SCALE_FACTOR;
 	config->NO = NULL;
 	config->WE = NULL;
 	config->SO = NULL;
