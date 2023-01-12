@@ -6,11 +6,16 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:02:23 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/11 23:14:07 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:41:00 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int		mouse_handler(int button, int x, int y, t_config *config)
+{
+	return (0);
+}
 
 void	img_init(t_img *img, t_config *config);
 
