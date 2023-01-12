@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 23:55:22 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/12 08:12:02 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/12 08:33:24 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	key_pressed(int keysym, t_config *config)
 		end_game(config);
 	if (keysym == UP_ARROW || keysym == W)
 		config->player.walk_direction = 1;
-	if (keysym == DOWN_ARROW)
+	if (keysym == DOWN_ARROW || keysym == S)
 		config->player.walk_direction = -1;
 	if (keysym == LEFT_ARROW)
 		config->player.turn_direction = -1;
