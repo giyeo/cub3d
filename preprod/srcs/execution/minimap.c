@@ -45,7 +45,7 @@ void	minimap(t_config *config)
 	double angle = config->player.rotation_angle - (FOV / 2.0);
 	while(i < WINDOW_WIDTH)
 	{
-		render_line(config,
+		render_line_minimap(config,
 			MINIMAP_SCALE_FACTOR * (config->player.x * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * (config->player.y * TILE_SIZE),
 			MINIMAP_SCALE_FACTOR * ((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE / MINIMAP_SCALE_FACTOR)),
@@ -53,8 +53,8 @@ void	minimap(t_config *config)
 			mlx_get_hex_trgb(255, 0, 0),
 			1
 		);
-		angle += (FOV / WINDOW_WIDTH);
-		i++;
+		angle += (FOV / WINDOW_WIDTH) * 32;
+		i += 32;
 	}
 }
 
