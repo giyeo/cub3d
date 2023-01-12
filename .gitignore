@@ -2,3 +2,5 @@
 prod/libft/libft.a
 tests/a.out
 maps_for_test/wrong/noperm.cub
+*/.gitignore
+*/cub3d_destroyer

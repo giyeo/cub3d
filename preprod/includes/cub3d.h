@@ -75,6 +75,7 @@ typedef struct	s_config
 	t_img	img;
 	t_player	player;
 	t_textures	textures;
+	int		ciclo;
 	int		*texture_test;
 }			t_config;
 
