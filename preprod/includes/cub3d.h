@@ -14,7 +14,7 @@
 # include <string.h>
 // strerror();
 # include <errno.h>
-
+#include <time.h> //REMOVE!
 typedef struct s_conn
 {
 	void	*mlx_ptr;
@@ -83,6 +83,7 @@ typedef struct	s_config
 	int		ciclo;
 	int		*texture_test;
 	double	scale;
+	time_t	start_time;
 }			t_config;
 
 /* PARSER */

@@ -2,6 +2,7 @@
 
 void	config_init(t_config *config)
 {
+	time(&config->start_time);
 	config->scale = MINIMAP_SCALE_FACTOR;
 	config->NO = NULL;
 	config->WE = NULL;
