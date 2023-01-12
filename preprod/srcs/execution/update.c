@@ -31,14 +31,15 @@ void	collision_detected(t_config *config, double backup_x, double backup_y)
 
 void	turn_with_mouse(t_config *config)
 {
+	t_player *player;
 	int x;
 	int y;
-	t_player *player = &config->player;
-
+	
+	player = &config->player;
 	mlx_mouse_get_pos(config->conn_mlx.mlx_ptr, config->conn_mlx.win_ptr, &x, &y);
-	if(x < 50)
+	if(x < 25)
 		player->rotation_angle += player->turn_speed * -1;
-	if(x > WINDOW_WIDTH - 50)
+	if(x > WINDOW_WIDTH - 25)
 		player->rotation_angle += player->turn_speed;
 }
 
