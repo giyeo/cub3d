@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:49:51 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/11 17:51:55 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:36:26 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,8 +191,8 @@ int	parse_line_content(char *line_content, char type, t_config *config)
 
 int	check_invalid_char(char c)
 {
-	if (c == '1')
-		return (1);
+	// if (c == '1')
+	// 	return (0);
 	if (c != 'N' && c != 'O' && c != 'S'
 		&& c != 'W' && c != 'E' && c != 'A'
 		&& c != 'F' && c != 'C' && c != ' '
@@ -219,7 +219,10 @@ int	validate_config(char **buffer, t_config *config)
 		while (line_content[column] != '\0')
 		{
 			if (check_invalid_char(line_content[column]))
+			{
+				printf("char == %c\n", line_content[column]);
 				return (ERR_INV_CHAR_IN_FILE);
+			}
 			type = can_parse(line_content, column);
 			if (type < 0)
 				return (ERR_FILE_INCOMPLETE);
@@ -232,6 +235,6 @@ int	validate_config(char **buffer, t_config *config)
 		}
 		line++;
 	}
-	throw_error("Map not found");
+	// throw_error("Map not found");
 	return (err_ret);
 }

@@ -44,6 +44,7 @@ int	main()
 	RUN_TEST(find_map_start_test_doublehole_mapfile);
 	RUN_TEST(find_map_start_test_many_blines_mapfile);
 	RUN_TEST(find_map_start_test_invalid_mapfile);
+	RUN_TEST(find_map_start_test_no_map);
 
 	ft_printf("\033[1;33m validate_map_tests \033[0m\n");
 	RUN_TEST(validate_map_test_invalid_char_in_map);

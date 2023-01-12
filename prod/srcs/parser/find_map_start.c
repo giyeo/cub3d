@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:27:10 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/11 17:25:15 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/11 21:05:27 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int	find_map_start(char **read_file)
 			break ;
 		map_start++;
 	}
+	if (map_start == ft_mtxlen(read_file))
+		return (-1);
 	// e quando o mapa não é encontrado?
 	// read_file == map_start?
 	return (map_start);

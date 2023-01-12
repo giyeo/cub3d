@@ -23,5 +23,5 @@
 
 // config
 # define WRONG_CONFIG1 "maps_for_test/wrong/wrong_config1.cub"
-
+# define NO_MAP "maps_for_test/wrong/no_map.cub"
 #endif

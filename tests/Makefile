@@ -16,7 +16,9 @@ MAIN_PJ		=	../prod
 SRC_DIR		=	$(addprefix $(MAIN_PJ)/, srcs)
 SRC_MODULE	=	$(SRC_DIR)/parser/*.c \
 				$(SRC_DIR)/utils/*.c \
-				$(SRC_DIR)/free/*.c
+				$(SRC_DIR)/free/*.c \
+				../prod/libft/srcs/ft_mtxcpy.c \
+				../prod/libft/srcs/ft_destroy_matrix.c
 
 # MODULO PARA ANJOSE (O VÁLIDO PARA O PROJETO PRINCIPAL É O DE CIMA)
 # SRC_DIR		=	./srcs

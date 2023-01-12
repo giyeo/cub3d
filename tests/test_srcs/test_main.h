@@ -31,6 +31,7 @@ void	find_map_start_test_doubleroom_mapfile();
 void	find_map_start_test_doublehole_mapfile();
 void	find_map_start_test_many_blines_mapfile();
 void	find_map_start_test_invalid_mapfile();
+void	find_map_start_test_no_map();
 
 // validate_config
 void	validate_config_test_not_null();

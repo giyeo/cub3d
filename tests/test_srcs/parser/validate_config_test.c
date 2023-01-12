@@ -2,8 +2,6 @@
 
 void	validate_config_test_not_null()
 {
-	t_config	config;
-
 	int	fd = file_check(SUBJECT_MAP);
 	file_read = read_file(fd, SUBJECT_MAP);
 	config_init(&config);
@@ -17,7 +15,6 @@ void	validate_config_test_not_null()
 
 void	validate_config_test_values_check()
 {
-	t_config	config;
 
 	int	fd = file_check(SUBJECT_MAP);
 	file_read = read_file(fd, SUBJECT_MAP);
@@ -39,7 +36,6 @@ void	validate_config_test_values_check()
 
 void	validate_config_test_rgb_wrong()
 {
-	t_config	config;
 	int			ret;
 
 	int	fd = file_check(WRONG_CONFIG1);

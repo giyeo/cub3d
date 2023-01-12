@@ -61,3 +61,16 @@ void	find_map_start_test_invalid_mapfile()
 	split_line = find_map_start(file_read);
 	TEST_ASSERT_EQUAL(8, split_line);
 }
+
+void	find_map_start_test_no_map()
+{
+	int		fd;
+	int		split_line;
+
+	fd = open(NO_MAP, O_RDONLY);
+	file_read = read_file(fd, NO_MAP);
+	close_fd(fd);
+	split_line = find_map_start(file_read);
+	TEST_ASSERT_EQUAL(-1, split_line);
+}
+
