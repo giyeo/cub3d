@@ -30,6 +30,7 @@ void	raycaster(t_config *config)
 	x = 0;
 	fov = config->FOV * (PI / 180);
 	angle = normalize_angle(config->player.rotation_angle - (fov / 2.0));
+	config->operations = 0;
 	while (x < WINDOW_WIDTH)
 	{
 		config->player.is_middle = 0;
@@ -69,6 +70,7 @@ void	paint_wall(t_config *config, int x, double wall_strip, int x_hit)
 	y_end_wall = y_start_wall + wall_strip;
 	y_wall = 0;
 	y = 0;
+
 	while (y < WINDOW_HEIGHT)
 	{
 		if (y < y_start_wall)

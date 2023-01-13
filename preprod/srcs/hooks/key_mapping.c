@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 23:55:22 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/12 08:46:11 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/12 10:42:49 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	key_pressed(int keysym, t_config *config)
 		config->player.interact = 1;
 	if (keysym == 101)
 		config->FOV -= 1;
-	if (keysym == 117 && config->scale < 1.0)
+	if (keysym == 117 && config->scale < 0.5)
 		config->scale += 0.05;
 	if (keysym == 121 && config->scale > 0.1)
 		config->scale -= 0.05;

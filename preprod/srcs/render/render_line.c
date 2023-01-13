@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 19:47:33 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/12 09:51:54 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/12 10:41:14 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ double render_line(t_config *config, double x1, double y1, double x2, double y2,
 	int posX = pixelX / TILE_SIZE;
 	int posY = pixelY / TILE_SIZE;
 	int iterator = pixels * 2;
-	int num_op = 0;
 	while (iterator)
 	{
 		int posX_old =  posX;
@@ -49,29 +48,26 @@ double render_line(t_config *config, double x1, double y1, double x2, double y2,
 			config->texture_col[1] = (int)((int)pixelY % 64);
 			config->side[0] = (posX_old - posX);
 			config->side[1] = (posY_old - posY);
-			// if(config->player.is_middle)
-			// 	printf("%d\n", num_op);
-			
 			return (distance_between_points(x1, y1, pixelX, pixelY));
 		}
 		if (c == 1)
 			img_pix_put(&config->img, pixelX, pixelY, color);
 		
-		int jump = 63;
+		int ite = 63;
 		if((posX_old != posX || posY_old != posY)
-			&& (posX == (int)((pixelX + deltaX * jump) / TILE_SIZE))
-			&& (posY == (int)((pixelY + deltaY * jump) / TILE_SIZE)))
+			&& (posX == (int)((pixelX + deltaX * ite) / TILE_SIZE))
+			&& (posY == (int)((pixelY + deltaY * ite) / TILE_SIZE)))
 		{
-			pixelX += deltaX * jump;
-			pixelY += deltaY * jump;
+			pixelX += deltaX * ite;
+			pixelY += deltaY * ite;
 		}
 		
 		if(iterator % 2 == 0)
 			pixelX += deltaX;
 		else
 			pixelY += deltaY;
-		num_op++;
 		iterator--;
+		config->operations++;
 	}
 	return (0);
 }
@@ -113,6 +109,16 @@ double render_line_minimap(t_config *config, double x1, double y1, double x2, do
 		}
 		if (c == 1)
 			img_pix_put(&config->img, pixelX, pixelY, color);
+		
+		int ite = 63;
+		if((posX_old != posX || posY_old != posY)
+			&& (posX == (int)((pixelX + deltaX * ite) / TILE_SIZE))
+			&& (posY == (int)((pixelY + deltaY * ite) / TILE_SIZE)))
+		{
+			pixelX += deltaX * ite;
+			pixelY += deltaY * ite;
+		}
+
 		if(iterator % 2 == 0)
 			pixelX += deltaX;
 		else

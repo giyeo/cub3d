@@ -84,6 +84,7 @@ typedef struct	s_config
 	int		*texture_test;
 	double	scale;
 	time_t	start_time;
+	int		operations;
 }			t_config;
 
 /* PARSER */
