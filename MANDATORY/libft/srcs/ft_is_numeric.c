@@ -6,13 +6,13 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 20:20:24 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 17:08:34 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:25:05 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	check_first_pos(char c);
+static int		check_first_pos(char c);
 static char		*skip_spc1(char *str);
 
 int	ft_is_numeric(char *str)
@@ -51,7 +51,7 @@ static int	check_first_pos(char c)
 	return (0);
 }
 
-static char 	*skip_spc1(char *str)
+static char	*skip_spc1(char *str)
 {
 	char	*ret;
 

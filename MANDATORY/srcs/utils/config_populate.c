@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config_populate.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 00:01:09 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 12:04:43 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:25:47 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static void	player_init(t_config *config)
 	config->player.turn_direction = 0;
 	config->player.walk_direction = 0;
 	config->player.walk_side_direction = 0;
-	if(config->player_direction == 'N')
+	if (config->player_direction == 'N')
 		config->player.rotation_angle = PI + PI / 2;
-	else if(config->player_direction == 'S')
+	else if (config->player_direction == 'S')
 		config->player.rotation_angle = PI / 2;
-	else if(config->player_direction == 'W')
+	else if (config->player_direction == 'W')
 		config->player.rotation_angle = PI;
-	else if(config->player_direction == 'E')
+	else if (config->player_direction == 'E')
 		config->player.rotation_angle = 0;
 	config->player.walk_speed = 1.0 / 10.0;
 	config->player.turn_speed = 2 * (PI / 180);

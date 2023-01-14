@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 00:10:51 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 15:27:36 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:37:04 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,9 @@ char	*ft_skip_space(char *str);
 int		validate_config(char **buffer, t_config *config, int map_line);
 int		validate_map(char **buffer, t_config *config);
 void	assign_color(t_config *config, int color[], char type);
+
+int		color_error_handling(char *line_content);
+int		line_check(char line_cont, int *has_digit, int *count_commas);
 
 int		parse_line_content(char *line_content, char type, t_config *config);
 

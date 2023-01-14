@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 20:50:37 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 17:10:00 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:39:38 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,18 @@
 
 static int		parse_path(char *file_content, char type, t_config *config);
 static int		assign_config(char *path, char type, t_config *config);
-static int		color_error_handling(char *line_content);
-static int		line_check(char line_cont, int *has_digit, int *count_commas);
+static void		get_color(t_config *config, char *line_content);
 
 int	parse_line_content(char *line_content, char type, t_config *config)
 {
 	int		err_ret;
-	int		color[3];
-	char	rgb_type;
-	char	**rgb_split;
-	int		i;
 
 	err_ret = 0;
 	if (type == 'F' || type == 'C')
 	{
 		err_ret = color_error_handling(line_content + 1);
 		if (!err_ret)
-		{
-			rgb_split = ft_split(line_content + 1, ',');
-			i = 0;
-			while (i < 3)
-			{
-				color[i] = -1;
-				if (ft_is_numeric(ft_skip_space(rgb_split[i])))
-					color[i] = atoi(rgb_split[i]);
-				i++;
-			}
-			ft_destroy_matrix(rgb_split);
-			rgb_type = ft_skip_space(line_content)[0];
-			assign_color(config, color, rgb_type);
-		}
+			get_color(config, line_content);
 	}
 	else
 		err_ret = parse_path(line_content + 2, type, config);
@@ -82,44 +64,23 @@ static int	assign_config(char *path, char type, t_config *config)
 	return (0);
 }
 
-static int	color_error_handling(char *line_content)
+static void	get_color(t_config *config, char *line_content)
 {
-	int	count_commas;
-	int	has_digit;
-	int	i;
-	int	ret;
+	char	**rgb_split;
+	int		color[3];
+	int		i;
+	char	rgb_type;
 
-	count_commas = 0;
-	has_digit = 0;
+	rgb_split = ft_split(line_content + 1, ',');
 	i = 0;
-	if (count_occur(line_content, ',') != 2)
-		return (ERR_INV_CHAR_COLOR);
-	while (line_content[i] != '\0')
+	while (i < 3)
 	{
-		ret = line_check(line_content[i], &has_digit, &count_commas);
-		if (!ret)
-			return (ret);
+		color[i] = -1;
+		if (ft_is_numeric(ft_skip_space(rgb_split[i])))
+			color[i] = atoi(rgb_split[i]);
 		i++;
 	}
-	if (has_digit == 0)
-		return (ERR_NOT_ENOUGH_DIGITS);
-	return (ret);
-}
-
-static int	line_check(char line_cont, int *has_digit, int *count_commas)
-{
-	if (!ft_isdigit(line_cont)
-		&& line_cont != ' '
-		&& line_cont != ',')
-		return (ERR_INV_CHAR_COLOR);
-	if (ft_isdigit(line_cont))
-		*has_digit = 1;
-	if (line_cont == ',')
-	{
-		if (*has_digit == 0)
-			return (ERR_NOT_ENOUGH_DIGITS);
-		*count_commas = (*count_commas) + 1;
-		*has_digit = 0;
-	}
-	return (0);
+	ft_destroy_matrix(rgb_split);
+	rgb_type = ft_skip_space(line_content)[0];
+	assign_color(config, color, rgb_type);
 }

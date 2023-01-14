@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:32:11 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/14 13:15:30 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:26:43 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_struct(t_config *config)
 {
-	int i;
+	int	i;
 
 	if (config->no == NULL || config->we == NULL
 		|| config->so == NULL || config->ea == NULL
@@ -30,7 +30,7 @@ int	check_struct(t_config *config)
 	{
 		if (config->f[i] < 0 || config->f[i] > 255
 			|| config->c[i] < 0 || config->c[i] > 255)
-		return (ERR_INV_CHAR_COLOR);
+			return (ERR_INV_CHAR_COLOR);
 		i++;
 	}
 	return (0);
