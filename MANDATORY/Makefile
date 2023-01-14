@@ -6,7 +6,7 @@
 #    By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 00:00:12 by anjose-d          #+#    #+#              #
-#    Updated: 2023/01/14 13:19:06 by anjose-d         ###   ########.fr        #
+#    Updated: 2023/01/14 16:22:21 by anjose-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,7 +70,8 @@ UTILS_SRCS	:=	utils.c \
 				find_player.c \
 				error_handler.c \
 				load_textures.c \
-				config_populate.c
+				config_populate.c \
+				count_occur.c skip_space.c \
 
 FREE_DIR	:=	free
 FREE_SRCS	:=	free_config.c
@@ -89,7 +90,7 @@ SRCS		:=	main.c \
 				$(addprefix $(EXECUTION_DIR)/, $(EXECUTION_SRCS))
 
 SRCS_PTH	:=	$(addprefix $(SRCS_DIR)/, $(SRCS)) \
-				libft/srcs/ft_mtxcpy.c
+				libft/srcs/ft_is_numeric.c
 
 # OBJECTS
 OBJS_DIR	:=	./objs
@@ -118,19 +119,19 @@ fclean: clean minilibx_clean
 re: fclean all
 
 run: all
-	./$(NAME) ./rendermap.cub
+	./$(NAME) ./maps/simple/rendermap.cub
 
 valgrind:
 	@make -C $(LIBFT_DIR)
 	@make -C $(MLX_DIR)
 	$(CC) -g $(SRCS_PTH) $(CFLAGS) $(INC_FLAGS) $(LINK_FLAGS) -o $@
-	valgrind --leak-check=full --show-leak-kinds=all ./$@ rendermap.cub
+	valgrind --leak-check=full --show-leak-kinds=all ./$@ maps/simple/rendermap.cub
 
 debug:
 	@make -C $(LIBFT_DIR)
 	@make -C $(MLX_DIR)
-	$(CC) -g $(SRCS_PTH) $(CFLAGS) $(INC_FLAGS) $(LINK_FLAGS) -o $@
-	gdb --tui --args ./$@ rendermap.cub
+	$(CC) -g $(SRCS_PTH) $(INC_FLAGS) $(LINK_FLAGS) -o $@
+	gdb --tui --args ./$@ maps/simple/rendermap.cub
 
 minilibx_clean:
 	@make clean -C $(MLX_DIR)

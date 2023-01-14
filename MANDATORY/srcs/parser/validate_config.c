@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:49:51 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/14 12:23:43 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 16:54:59 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ static int	config_check(char *config_line)
 	int	ret;
 
 	ret = 0;
+	if (!config_line)
+		return (0);
 	ret = ft_strncmp(config_line, "NO", ft_strlen("NO") + 1);
 	if (!ret)
 		return (ret);
@@ -92,19 +94,17 @@ static int	check_invalid_char(char *line_str, int *config_nbr)
 	int		ret;
 
 	ret = 0;
-	while (ft_isspace(*line_str))
-		line_str++;
 	if (line_str)
 	{
 		config_line = ft_split(line_str, ' ');
 		if (config_line)
 		{
 			ret = config_check(config_line[0]);
-			ft_destroy_matrix(config_line);
 		}
 	}
-	if (!ret)
+	if (!ret && *config_line)
 		(*config_nbr)++;
+	ft_destroy_matrix(config_line);
 	return (ret);
 }
 
@@ -116,6 +116,8 @@ static int	loop_through_line(t_config *config, char *line, int *config_nbr)
 
 	column = 0;
 	err_ret = 0;
+	while (ft_isspace(line[column]))
+		column++;
 	while (line[column] != '\0')
 	{
 		err_ret = check_invalid_char(line, config_nbr);

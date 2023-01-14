@@ -22,7 +22,7 @@ void	collision_detected(t_config *config, double backup_x, double backup_y)
 	map = config->map;
 	px = config->player.x;
 	py = config->player.y;
-	player_square = 0.2;
+	player_square = 0.1;
 	if (map[(int)(py + player_square)][(int)(px + player_square)] == '1'
 	|| map[(int)(py + player_square)][(int)(px - player_square)] == '1'
 	|| map[(int)(py - player_square)][(int)(px + player_square)] == '1'

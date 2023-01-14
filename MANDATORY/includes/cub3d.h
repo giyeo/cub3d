@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 00:10:51 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 00:46:35 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 15:27:36 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,14 +135,15 @@ int		mlx_get_hex_trgb(int r, int g, int b);
 double	normalize_angle(double angle);
 void	config_populate(t_config *config);
 int		test_path(char *path);
+int		count_occur(char *str, char c);
+char	*ft_skip_space(char *str);
 
 /* VALIDATE*/
 int		validate_config(char **buffer, t_config *config, int map_line);
 int		validate_map(char **buffer, t_config *config);
+void	assign_color(t_config *config, int color[], char type);
 
 int		parse_line_content(char *line_content, char type, t_config *config);
-
-void	parse_color(char *file_content, char type, t_config *config);
 
 /* FREE */
 void	free_config(t_config *config);
