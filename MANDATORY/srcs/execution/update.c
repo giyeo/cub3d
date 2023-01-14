@@ -14,11 +14,15 @@
 
 void	collision_detected(t_config *config, double backup_x, double backup_y)
 {
-	char	**map = config->map;
-	double	px = config->player.x;
-	double	py = config->player.y;
-	double player_square = 0.2;
+	char	**map;
+	double	px;
+	double	py;
+	double	player_square;
 
+	map = config->map;
+	px = config->player.x;
+	py = config->player.y;
+	player_square = 0.2;
 	if (map[(int)(py + player_square)][(int)(px + player_square)] == '1'
 	|| map[(int)(py + player_square)][(int)(px - player_square)] == '1'
 	|| map[(int)(py - player_square)][(int)(px + player_square)] == '1'
@@ -54,7 +58,6 @@ void	update(t_config *config)
 	player = &config->player;
 	backup_y = player->y;
 	backup_x = player->x;
-
 	player_moviments(config);
 	collision_detected(config, backup_x, backup_y);
 }
