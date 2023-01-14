@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 00:10:51 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 17:37:04 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:50:56 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@
 # include "defines.h"
 # include <X11/X.h>
 # include "math.h"
-// open();
 # include <stdio.h>
-// perror();
 # include <string.h>
-// strerror();
 # include <errno.h>
 
 typedef struct s_conn
@@ -54,8 +51,6 @@ typedef struct s_player
 	double	rotation_angle;
 	double	walk_speed;
 	double	turn_speed;
-	int		interact;
-	int		is_middle;
 	int		mouse_x;
 	int		mouse_y;
 }				t_player;
@@ -106,10 +101,6 @@ typedef struct s_config
 	t_img		img;
 	t_player	player;
 	t_textures	textures;
-	int			ciclo;
-	double		scale;
-	time_t		start_time;
-	int			operations;
 }			t_config;
 
 /* PARSER */
@@ -157,17 +148,10 @@ int		key_pressed(int keysym, t_config *config);
 int		key_released(int keysym, t_config *config);
 int		end_game(t_config *config);
 int		load_game(t_config *config);
-int		mouse_handler(int button, int x, int y, t_config *config);
 
 // render
-int		render_background(t_config *config, int color, t_img *img);
-
-void	render_player(t_config *config);
 void	img_pix_put(t_img *img, int x, int y, int color);
 double	render_line(t_config *config, double x1, double y1);
-
-// player
-void	move_player(t_config *config);
 
 //execution
 void	update(t_config *config);

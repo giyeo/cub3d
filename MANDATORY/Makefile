@@ -6,7 +6,7 @@
 #    By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 00:00:12 by anjose-d          #+#    #+#              #
-#    Updated: 2023/01/14 16:22:21 by anjose-d         ###   ########.fr        #
+#    Updated: 2023/01/14 17:55:12 by anjose-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,7 @@ TRACK_INC	:=	$(INCS_DIR)/defines.h $(INCS_DIR)/errors.h
 
 INC_FLAGS	:=	-I $(INCS_DIR) -I $(LIBFT_DIR)/includes \
 				-I $(MLX_DIR)
-LINK_FLAGS	:=	-lm $(LIBFT_LINK) $(MLX_LINK) #-fsanitize=address
+LINK_FLAGS	:=	-lm $(LIBFT_LINK) $(MLX_LINK)
 
 # SOURCES
 PARSER_DIR	:=	parser
@@ -89,8 +89,7 @@ SRCS		:=	main.c \
 				$(addprefix $(RENDER_DIR)/, $(RENDER_SRCS)) \
 				$(addprefix $(EXECUTION_DIR)/, $(EXECUTION_SRCS))
 
-SRCS_PTH	:=	$(addprefix $(SRCS_DIR)/, $(SRCS)) \
-				libft/srcs/ft_is_numeric.c
+SRCS_PTH	:=	$(addprefix $(SRCS_DIR)/, $(SRCS))
 
 # OBJECTS
 OBJS_DIR	:=	./objs
@@ -117,21 +116,6 @@ fclean: clean minilibx_clean
 	rm -rf $(NAME)
 
 re: fclean all
-
-run: all
-	./$(NAME) ./maps/simple/rendermap.cub
-
-valgrind:
-	@make -C $(LIBFT_DIR)
-	@make -C $(MLX_DIR)
-	$(CC) -g $(SRCS_PTH) $(CFLAGS) $(INC_FLAGS) $(LINK_FLAGS) -o $@
-	valgrind --leak-check=full --show-leak-kinds=all ./$@ maps/simple/rendermap.cub
-
-debug:
-	@make -C $(LIBFT_DIR)
-	@make -C $(MLX_DIR)
-	$(CC) -g $(SRCS_PTH) $(INC_FLAGS) $(LINK_FLAGS) -o $@
-	gdb --tui --args ./$@ maps/simple/rendermap.cub
 
 minilibx_clean:
 	@make clean -C $(MLX_DIR)

@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 00:01:09 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 17:42:59 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 17:48:44 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static void	player_init(t_config *config)
 		config->player.rotation_angle = 0;
 	config->player.walk_speed = 1.0 / 10.0;
 	config->player.turn_speed = 2 * (PI / 180);
-	config->player.interact = 0;
 }
 
 static void	mlx_conn_init(t_config *config)
