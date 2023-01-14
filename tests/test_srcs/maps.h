@@ -24,4 +24,9 @@
 // config
 # define WRONG_CONFIG1 "maps_for_test/wrong/wrong_config1.cub"
 # define NO_MAP "maps_for_test/wrong/no_map.cub"
+
+// weird
+# define WEIRD_RGB1 "maps_for_test/weird/weird_rgb1.cub"
+# define WEIRD_RGB2 "maps_for_test/weird/weird_rgb2.cub"
+
 #endif

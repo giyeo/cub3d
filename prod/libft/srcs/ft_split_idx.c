@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 17:47:08 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/08/12 17:59:17 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 19:54:03 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ char	**ft_split_idx(char const *s, int idx)
 	split[0] = ft_substr(s, 0, i);
 	split[1] = ft_substr(s, i + 1, ft_strlen(s) - i);
 	split[2] = NULL;
-	
 	return (split);
 }

@@ -37,7 +37,10 @@ void	find_map_start_test_no_map();
 void	validate_config_test_not_null();
 void	validate_config_test_values_check();
 void	validate_config_test_rgb_wrong();
+void	validate_config_test_weird_rgb1();
+void	validate_config_test_weird_rgb2();
 
+// validate_map
 void	validate_map_test_invalid_char_in_map();
 void	validate_map_test_valid_map();
 void	validate_map_test_bottom_entrance_map();
@@ -50,6 +53,7 @@ void	validate_map_test_double_hole_map();
 void	validate_map_test_open_invalid_read_map();
 void	validate_map_test_two_players_map();
 void	validate_map_test_glued_map();
+void	validate_map_test_separated_map();
 
 /* SRC FILES (ISSO VAI SAIR DAQUI) */
 int		find_split_line(char **read_file);

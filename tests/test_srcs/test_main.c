@@ -59,12 +59,16 @@ int	main()
 	RUN_TEST(validate_map_test_open_invalid_read_map); // invalid read
 	RUN_TEST(validate_map_test_two_players_map);
 	RUN_TEST(validate_map_test_glued_map);
+	RUN_TEST(validate_map_test_separated_map);
+	
 
 	ft_printf("\033[1;33m validate_config_tests \033[0m\n");
 		// validate_config function is breaking tests because of the 'throws'
 	RUN_TEST(validate_config_test_not_null);
 	RUN_TEST(validate_config_test_values_check);
 	RUN_TEST(validate_config_test_rgb_wrong);
+	RUN_TEST(validate_config_test_weird_rgb1);
+	RUN_TEST(validate_config_test_weird_rgb2);
 
 	ft_printf("\033[1;33m libft_tests \033[0m\n");
 	RUN_TEST(ft_mtxcpy_not_null);

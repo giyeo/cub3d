@@ -9,7 +9,7 @@ void	validate_map_test_invalid_char_in_map()
 	file_read = read_file(fd, INVALID_MAP);
 	map_start = find_map_start(file_read);
 	ret = validate_map(file_read + map_start, &config);
-	TEST_ASSERT_EQUAL(-1, ret);
+	TEST_ASSERT_EQUAL(ERR_MAP_INVALID, ret);
 }
 
 void	validate_map_test_valid_map()
@@ -20,6 +20,7 @@ void	validate_map_test_valid_map()
 	int	fd = file_check(SUBJECT_MAP);
 	file_read = read_file(fd, SUBJECT_MAP);
 	map_start = find_map_start(file_read);
+	validate_config(file_read, &config, map_start);
 	ret = validate_map(file_read + map_start, &config);
 	TEST_ASSERT_EQUAL(0, ret);
 }
@@ -33,7 +34,7 @@ void	validate_map_test_bottom_entrance_map()
 	file_read = read_file(fd, ENTRANCE_BOTTOM_MAP);
 	map_start = find_map_start(file_read);
 	ret = validate_map(file_read + map_start, &config);
-	TEST_ASSERT_EQUAL(-1, ret);
+	TEST_ASSERT_EQUAL(ERR_MAP_INVALID, ret);
 }
 
 void	validate_map_test_top_entrance_map()
@@ -45,7 +46,7 @@ void	validate_map_test_top_entrance_map()
 	file_read = read_file(fd, ENTRANCE_TOP_MAP);
 	map_start = find_map_start(file_read);
 	ret = validate_map(file_read + map_start, &config);
-	TEST_ASSERT_EQUAL(-1, ret);
+	TEST_ASSERT_EQUAL(ERR_MAP_INVALID, ret);
 }
 
 void	validate_map_test_left_entrance_map()
@@ -57,7 +58,7 @@ void	validate_map_test_left_entrance_map()
 	file_read = read_file(fd, ENTRANCE_LEFT_MAP);
 	map_start = find_map_start(file_read);
 	ret = validate_map(file_read + map_start, &config);
-	TEST_ASSERT_EQUAL(-1, ret);
+	TEST_ASSERT_EQUAL(ERR_MAP_INVALID, ret);
 }
 
 void	validate_map_test_right_entrance_map()
@@ -69,7 +70,7 @@ void	validate_map_test_right_entrance_map()
 	file_read = read_file(fd, ENTRANCE_RIGHT_MAP);
 	map_start = find_map_start(file_read);
 	ret = validate_map(file_read + map_start, &config);
-	TEST_ASSERT_EQUAL(-1, ret);
+	TEST_ASSERT_EQUAL(ERR_MAP_INVALID, ret);
 }
 
 void	validate_map_test_open_on_top_map()
@@ -81,7 +82,7 @@ void	validate_map_test_open_on_top_map()
 	file_read = read_file(fd, OPEN_ON_TOP_MAP);
 	map_start = find_map_start(file_read);
 	ret = validate_map(file_read + map_start, &config);
-	TEST_ASSERT_EQUAL(-1, ret);
+	TEST_ASSERT_EQUAL(ERR_MAP_INVALID, ret);
 }
 
 void	validate_map_test_open_on_bottom_map()
@@ -93,7 +94,7 @@ void	validate_map_test_open_on_bottom_map()
 	file_read = read_file(fd, OPEN_ON_BOTTOM_MAP);
 	map_start = find_map_start(file_read);
 	ret = validate_map(file_read + map_start, &config);
-	TEST_ASSERT_EQUAL(-1, ret);
+	TEST_ASSERT_EQUAL(ERR_MAP_INVALID, ret);
 }
 
 void	validate_map_test_double_hole_map()
@@ -104,6 +105,7 @@ void	validate_map_test_double_hole_map()
 	int	fd = file_check(DOUBLE_HOLE_MAP);
 	file_read = read_file(fd, DOUBLE_HOLE_MAP);
 	map_start = find_map_start(file_read);
+	validate_config(file_read, &config, map_start);
 	ret = validate_map(file_read + map_start, &config);
 	TEST_ASSERT_EQUAL(0, ret);
 }
@@ -117,7 +119,7 @@ void	validate_map_test_open_invalid_read_map()
 	file_read = read_file(fd, OPEN_INVREAD_MAP);
 	map_start = find_map_start(file_read);
 	ret = validate_map(file_read + map_start, &config);
-	TEST_ASSERT_EQUAL(-1, ret);
+	TEST_ASSERT_EQUAL(ERR_MAP_INVALID, ret);
 }
 
 void	validate_map_test_two_players_map()
@@ -140,6 +142,20 @@ void	validate_map_test_glued_map()
 	int	fd = file_check(GLUED_MAP);
 	file_read = read_file(fd, GLUED_MAP);
 	map_start = find_map_start(file_read);
+	validate_config(file_read, &config, map_start);
+	ret = validate_map(file_read + map_start, &config);
+	TEST_ASSERT_EQUAL(0, ret);
+}
+
+void	validate_map_test_separated_map()
+{
+	int			ret;
+	int			map_start;
+
+	int	fd = file_check(DOUBLE_ROOM_MAP);
+	file_read = read_file(fd, DOUBLE_ROOM_MAP);
+	map_start = find_map_start(file_read);
+	validate_config(file_read, &config, map_start);
 	ret = validate_map(file_read + map_start, &config);
 	TEST_ASSERT_EQUAL(0, ret);
 }

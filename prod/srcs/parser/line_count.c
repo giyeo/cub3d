@@ -6,13 +6,13 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 00:14:09 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/14 11:04:53 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 20:01:33 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		line_count(char *file)
+int	line_count(char *file)
 {
 	int		count;
 	int		fd;

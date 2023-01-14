@@ -6,44 +6,26 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:32:11 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/11 17:38:59 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 22:18:47 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_struct(t_config *config, int i)
+int	check_struct(t_config *config)
 {
-	if(config->NO == NULL || config->WE == NULL
-	|| config->SO == NULL || config->EA == NULL
-	|| config->F[0] == -1 || config->C[0] == -1)
-		throw_error("Configuration missing");
-	if(i && (config->map == NULL
-	|| config->player_direction == 'Z' 
-	|| config->player_position[0] == -1))
-		throw_error("Map configuration missing");
+	if (config->no == NULL || config->we == NULL
+		|| config->so == NULL || config->ea == NULL
+		|| config->f[0] == -1 || config->c[0] == -1)
+		return (ERR_CONFIG_MISSING);
+	if (config->map == NULL
+		|| config->player_direction == 'Z'
+		|| config->player_position[0] == -1)
+		return (ERR_CONFIG_MISSING);
+	return (0);
 }
 
-void	init(t_config *config)
-{
-	config->NO = NULL;
-	config->WE = NULL;
-	config->SO = NULL;
-	config->EA = NULL;
-	config->map = NULL;
-	config->F[0] = -1;
-	config->C[0] = -1;
-	config->player_position[0] = -1;
-	config->player_direction = 'Z';
-}
-
-int	throw_error(char *error)
-{
-	printf("Error\n%s.\n", error);
-	return (-1);
-}
-
-int		is_one_of_these(char c, char *these)
+int	is_one_of_these(char c, char *these)
 {
 	int	i;
 
@@ -57,19 +39,22 @@ int		is_one_of_these(char c, char *these)
 	return (0);
 }
 
-void	print_struct(t_config *config)
+int	test_path(char *path)
 {
-	printf("NO: %s\nEA: %s\nSO: %s\nWE: %s\nF: %d, %d, %d\nC: %d, %d, %d\n",
-			config->NO, config->EA, config->SO, config->WE,
-			config->F[0], config->F[1], config->F[2],
-			config->C[0], config->C[1], config->C[2]);
-	printf("Player Position X: %d, Y: %d.\nPlayer Direction: %c\n",
-	config->player_position[0],
-	config->player_position[1],
-	config->player_direction);
-	int i = 0;
-	printf("------START MAP------\n");
-	while(config->map && config->map[i])
-		printf("%s\n", config->map[i++]);
-	printf("------END MAP------\n");
+	int		fd;
+	char	*temp;
+	char	*msg;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		temp = ft_strjoin(path, ": ");
+		msg = ft_strjoin(temp, strerror(errno));
+		throw_error(msg);
+		free(temp);
+		free(msg);
+		return (-1);
+	}
+	close(fd);
+	return (0);
 }

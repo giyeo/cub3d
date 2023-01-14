@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:02:26 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/18 12:19:43 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 20:40:58 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	find_player(char **buffer, int first_line, t_config *config)
 				config->player_position[1] = col;
 				config->player_direction = buffer[line][col];
 				break ;
-				
 			}
 			col++;
 		}

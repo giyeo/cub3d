@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 10:46:45 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/11 17:29:10 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 20:00:24 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,23 @@
 enum e_errors
 {
 	ERR_OK = 0,
-	ERR_NO_FD,						// can't get file descriptor
-	ERR_INV_CHAR_IN_FILE,			// invalid char in .cub file		
-	ERR_FILE_INCOMPLETE,			// file isn't complete (?)
-	ERR_MAP_STARTS_ZERO,			// map started with 0
-	ERR_MAP_INVALID_CHAR,			// invalid char in map
-	ERR_MAP_INNEXIST,				// no map
-	ERR_MAP_ENTRANCE,				// 0 on top or bottom of the map
-	ERR_MAP_INVALID_WALLS,			// letter in the walls | 0 in the wall
-	ERR_TOO_MNY_ARGS,				// too many arguments
-	ERR_FILE_EXT_INVALID,			// invalid file extension
-	ERR_CONFIG_MISSING,				// configuration missing
-	ERR_CONFIG_COLOR_DUP,			// duplicate of colors
-	ERR_CONFIG_TEXT_DUP,			// more than one texture
-	ERR_INV_CHAR_COLOR,				// Invalid Char on Color
-	ERR_NOT_ENOUGH_DIGITS			// Not enough digits
+	ERR_NO_FD,
+	ERR_INV_CHAR_IN_FILE,
+	ERR_FILE_INCOMPLETE,
+	ERR_MAP_STARTS_ZERO,
+	ERR_MAP_INVALID_CHAR,
+	ERR_MAP_INNEXIST,
+	ERR_MAP_ENTRANCE,
+	ERR_MAP_INVALID,
+	ERR_TOO_MNY_ARGS,
+	ERR_FILE_EXT_INVALID,
+	ERR_CONFIG_MISSING,
+	ERR_CONFIG_COLOR_DUP,
+	ERR_CONFIG_TEXT_DUP,
+	ERR_INV_CHAR_COLOR,
+	ERR_NOT_ENOUGH_DIGITS,
+	ERR_MAP_NOT_FOUND,
+	ERR_MORE_THAN_ONE_PLAYER
 };
 
 #endif

@@ -46,10 +46,12 @@ clean:
 	rm -rf ./$(BIN)
 
 debug:
+	@make -C $(MAIN_PJ)/libft
 	gcc -g $(INCLUDE) $(SRCS) $(UNITY_SRCS) $(LIBFT_LINK) -o $(BIN)
 	gdb --tui ./$(BIN)
 
 valgrind:
+	@make -C $(MAIN_PJ)/libft
 	gcc -g $(INCLUDE) $(SRCS) $(UNITY_SRCS) $(LIBFT_LINK) -o $(BIN)
 	valgrind --leak-check=full ./$(BIN)
 

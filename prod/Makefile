@@ -1,3 +1,14 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/13 22:10:45 by anjose-d          #+#    #+#              #
+#    Updated: 2023/01/13 22:10:51 by anjose-d         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 # MAIN VARIABLES
 NAME		:=	cub3D
@@ -35,15 +46,18 @@ PARSER_SRCS	:=	extension_check.c \
 				read_file.c \
 				parser_and_validate.c \
 				file_validate.c \
-				validate_config.c \
 				find_map_start.c \
+				validate_config.c \
+				validate_config_utils1.c \
+				validate_config_utils2.c \
 				validate_map.c
 
 UTILS_DIR	:=	utils
 UTILS_SRCS	:=	utils.c \
 				only_these.c \
 				config_init.c \
-				find_player.c
+				find_player.c \
+				error_handler.c
 
 FREE_DIR	:=	free
 FREE_SRCS	:=	free_config.c

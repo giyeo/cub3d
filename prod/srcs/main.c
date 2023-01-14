@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:02:23 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/11 17:55:13 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 20:00:58 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	main(int argc, char *argv[])
 	if (ret)
 		return (-1);
 	ft_destroy_matrix(buffer);
-	print_struct(&config);
 	free_config(&config);
 	return (0);
 }

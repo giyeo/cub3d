@@ -6,13 +6,13 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:27:10 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/11 21:05:27 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 22:15:51 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	check_line(char *line);
+static int	check_line(char *line);
 
 int	find_map_start(char **read_file)
 {
@@ -27,12 +27,10 @@ int	find_map_start(char **read_file)
 	}
 	if (map_start == ft_mtxlen(read_file))
 		return (-1);
-	// e quando o mapa não é encontrado?
-	// read_file == map_start?
 	return (map_start);
 }
 
-int	check_line(char *line)
+static int	check_line(char *line)
 {
 	int	i;
 

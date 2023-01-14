@@ -6,12 +6,11 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 00:12:18 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/19 18:36:04 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 22:13:25 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
-
 # define LIBFT_H
 
 # include <stdlib.h>
@@ -501,10 +500,10 @@ void		ft_dlstadd_front(t_dlist **lst, t_dlist *new);
 /* FIND THE SIZE OF THE DOUBLE LINKED LIST */
 int			ft_dlstsize(t_dlist *lst);
 
-/* FUNÇÃO PARA LIMPAR A LINKED LIST */
+/* function to clean a double linked list */
 void		ft_dlstclear(t_dlist **lst, void (*del)(void *));
 
-/* Remove um node especificado da lista */
+/* remove a specific node on the list */
 void		ft_dlstrm_node(t_dlist **lst, t_dlist *old_node);
 
 char		*get_next_line(int fd);
