@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config_populate.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 00:01:09 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 00:36:09 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 12:04:43 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,14 @@ static void	player_init(t_config *config)
 	config->player.turn_direction = 0;
 	config->player.walk_direction = 0;
 	config->player.walk_side_direction = 0;
-	config->player.rotation_angle = PI;
+	if(config->player_direction == 'N')
+		config->player.rotation_angle = PI + PI / 2;
+	else if(config->player_direction == 'S')
+		config->player.rotation_angle = PI / 2;
+	else if(config->player_direction == 'W')
+		config->player.rotation_angle = PI;
+	else if(config->player_direction == 'E')
+		config->player.rotation_angle = 0;
 	config->player.walk_speed = 1.0 / 10.0;
 	config->player.turn_speed = 2 * (PI / 180);
 	config->player.interact = 0;
