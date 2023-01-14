@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:17:26 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/15 19:56:55 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 12:54:53 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ int	only_these(char *str, char *needles)
 	int	found;
 
 	i = 0;
-	if (str[i] == '\0')
-		return (-1);
 	while (str[i])
 	{
 		j = 0;

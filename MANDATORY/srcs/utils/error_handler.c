@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 17:33:23 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/13 20:39:48 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 12:51:38 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	errors_init(char **errors);
 int	throw_error(char *error)
 {
 	printf("Error\n%s.\n", error);
-	return (-1);
+	exit(1);
 }
 
 int	throw_msg_error(int error)

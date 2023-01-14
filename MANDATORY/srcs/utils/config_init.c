@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:45:47 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/14 00:29:44 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 12:36:25 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ void	config_init(t_config *config)
 	config->ea = NULL;
 	config->map = NULL;
 	config->f[0] = -1;
+	config->f[1] = -1;
+	config->f[2] = -1;
 	config->c[0] = -1;
+	config->c[1] = -1;
+	config->c[2] = -1;
 	config->player_position[0] = -1;
 	config->player_position[1] = -1;
 	config->player_direction = 'Z';

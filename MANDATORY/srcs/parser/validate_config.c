@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:49:51 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/13 22:09:25 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 12:23:43 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	validate_config(char **buffer, t_config *config, int map_line)
 			return (err_ret);
 		line++;
 	}
+	if (config_nbr != 6)
+		return (ERR_CONFIG_MISSING);
 	return (err_ret);
 }
 
@@ -58,23 +60,29 @@ static int	can_parse(char *line_content, int i)
 	return (0);
 }
 
-static int	config_check(char *config_line, int config_nbr)
+static int	config_check(char *config_line)
 {
 	int	ret;
 
 	ret = 0;
-	if (config_nbr == 0)
-		ret = ft_strncmp(config_line, "NO", ft_strlen("NO") + 1);
-	else if (config_nbr == 1)
-		ret = ft_strncmp(config_line, "SO", ft_strlen("SO") + 1);
-	else if (config_nbr == 2)
-		ret = ft_strncmp(config_line, "WE", ft_strlen("WE") + 1);
-	else if (config_nbr == 3)
-		ret = ft_strncmp(config_line, "EA", ft_strlen("EA") + 1);
-	else if (config_nbr == 4)
-		ret = ft_strncmp(config_line, "F", ft_strlen("F") + 1);
-	else if (config_nbr == 5)
-		ret = ft_strncmp(config_line, "C", ft_strlen("C") + 1);
+	ret = ft_strncmp(config_line, "NO", ft_strlen("NO") + 1);
+	if (!ret)
+		return (ret);
+	ret = ft_strncmp(config_line, "SO", ft_strlen("SO") + 1);
+	if (!ret)
+		return (ret);
+	ret = ft_strncmp(config_line, "WE", ft_strlen("WE") + 1);
+	if (!ret)
+		return (ret);
+	ret = ft_strncmp(config_line, "EA", ft_strlen("EA") + 1);
+	if (!ret)
+		return (ret);
+	ret = ft_strncmp(config_line, "F", ft_strlen("F") + 1);
+	if (!ret)
+		return (ret);
+	ret = ft_strncmp(config_line, "C", ft_strlen("C") + 1);
+	if (!ret)
+		return (ret);
 	return (ret);
 }
 
@@ -91,7 +99,7 @@ static int	check_invalid_char(char *line_str, int *config_nbr)
 		config_line = ft_split(line_str, ' ');
 		if (config_line)
 		{
-			ret = config_check(config_line[0], *config_nbr);
+			ret = config_check(config_line[0]);
 			ft_destroy_matrix(config_line);
 		}
 	}

@@ -6,7 +6,7 @@
 #    By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 00:00:12 by anjose-d          #+#    #+#              #
-#    Updated: 2023/01/14 00:50:21 by anjose-d         ###   ########.fr        #
+#    Updated: 2023/01/14 13:19:06 by anjose-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -109,7 +109,7 @@ $(NAME): $(OBJS)
 	$(CC) $(OBJS) $(CFLAGS) $(INC_FLAGS) $(LINK_FLAGS) -o $@
 
 clean:
-	rm -rf $(OBJS_DIR) valgrind
+	rm -rf $(OBJS_DIR) valgrind debug
 
 fclean: clean minilibx_clean
 	@make $@ -C $(LIBFT_DIR)
@@ -126,7 +126,13 @@ valgrind:
 	$(CC) -g $(SRCS_PTH) $(CFLAGS) $(INC_FLAGS) $(LINK_FLAGS) -o $@
 	valgrind --leak-check=full --show-leak-kinds=all ./$@ rendermap.cub
 
+debug:
+	@make -C $(LIBFT_DIR)
+	@make -C $(MLX_DIR)
+	$(CC) -g $(SRCS_PTH) $(CFLAGS) $(INC_FLAGS) $(LINK_FLAGS) -o $@
+	gdb --tui --args ./$@ rendermap.cub
+
 minilibx_clean:
 	@make clean -C $(MLX_DIR)
 
-.PHONY: clean fclean re all minilibx_clean valgrind
+.PHONY: clean fclean re all minilibx_clean valgrind debug
