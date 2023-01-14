@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:32:11 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/14 00:17:50 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 11:50:18 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,25 @@
 
 int	check_struct(t_config *config)
 {
+	int i;
+
 	if (config->no == NULL || config->we == NULL
 		|| config->so == NULL || config->ea == NULL
 		|| config->f[0] == -1 || config->c[0] == -1)
 		return (ERR_CONFIG_MISSING);
 	if (config->map == NULL
 		|| config->player_direction == 'Z'
-		|| config->player_position[0] == -1)
+		|| config->player_position[0] == -1
+		|| config->player_position[1] == -1)
 		return (ERR_CONFIG_MISSING);
+	i = 0;
+	while (i < 3)
+	{
+		if (config->f[i] < 0 || config->f[i] > 255
+			|| config->c[i] < 0 || config->c[i] > 255)
+		return (ERR_INV_CHAR_COLOR);
+		i++;
+	}
 	return (0);
 }
 

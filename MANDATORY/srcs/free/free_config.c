@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 11:05:16 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 01:04:12 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 11:43:52 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,3 @@ void	free_config(t_config *config)
 			ft_destroy_matrix(config->map);
 	}
 }
-
