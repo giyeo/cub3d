@@ -1,0 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_mapping.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/28 23:55:22 by anjose-d          #+#    #+#             */
+/*   Updated: 2023/01/14 19:48:13 by anjose-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d_bonus.h"
+
+int	key_pressed(int keysym, t_config *config)
+{
+	if (keysym == ESC || keysym == Q)
+		end_game(config);
+	if (keysym == UP_ARROW || keysym == W)
+		config->player.walk_direction = 1;
+	if (keysym == DOWN_ARROW || keysym == S)
+		config->player.walk_direction = -1;
+	if (keysym == LEFT_ARROW)
+		config->player.turn_direction = -1;
+	if (keysym == RIGHT_ARROW)
+		config->player.turn_direction = 1;
+	if (keysym == D)
+		config->player.walk_side_direction = 1;
+	if (keysym == A)
+		config->player.walk_side_direction = -1;
+	if (keysym == 101)
+		config->fov -= 1;
+	if (keysym == 117 && config->scale < 0.5)
+		config->scale += 0.05;
+    if (keysym == 121 && config->scale > 0.1)
+		config->scale -= 0.05;
+	return (0);
+}
+
+int	key_released(int keysym, t_config *config)
+{
+	if (keysym == UP_ARROW || keysym == W)
+		config->player.walk_direction = 0;
+	if (keysym == DOWN_ARROW || keysym == S)
+		config->player.walk_direction = 0;
+	if (keysym == LEFT_ARROW || keysym == RIGHT_ARROW)
+		config->player.turn_direction = 0;
+	if (keysym == A || keysym == D)
+		config->player.walk_side_direction = 0;
+	return (0);
+}

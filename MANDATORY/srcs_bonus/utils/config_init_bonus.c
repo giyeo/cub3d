@@ -6,11 +6,11 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:45:47 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/14 20:13:33 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/14 20:13:54 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	config_init(t_config *config)
 {
@@ -33,4 +33,5 @@ void	config_init(t_config *config)
 	config->img.addr = NULL;
 	config->img.mlx_img = NULL;
 	config->fov = 60.0;
+	config->scale = 0.2;
 }
