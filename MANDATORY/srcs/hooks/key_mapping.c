@@ -6,7 +6,7 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 23:55:22 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/13 19:13:03 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/14 16:48:50 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int	key_pressed(int keysym, t_config *config)
 		config->player.walk_side_direction = 1;
 	if (keysym == A)
 		config->player.walk_side_direction = -1;
+	if (keysym == 101)
+		config->fov -= 1;
 	return (0);
 }
 
