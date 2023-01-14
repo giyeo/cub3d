@@ -1,10 +1,10 @@
-NO ../textures/texture1
-SO ../textures/texture2
-WE ../textures/texture3
-EA ../textures/texture4
+NO ./textures/mine/1.xpm
+SO ./textures/mine/2.xpm
+WE ./textures/mine/3.xpm
+EA ./textures/mine/4.xpm
 
-F 220,100,0
-C 225,30,0
+F 255,255,255
+C 0,0,0
 
 11111111111111111111
 10010000000000000001

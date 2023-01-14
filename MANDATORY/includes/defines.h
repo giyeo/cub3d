@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   defines.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/14 00:08:35 by anjose-d          #+#    #+#             */
+/*   Updated: 2023/01/14 00:10:35 by anjose-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DEFINES_H
 # define DEFINES_H
 
@@ -6,14 +18,13 @@
 # define PLAYER_DIRECTIONS "NSEW"
 
 /* colors */
-#define RED_PIXEL 0xFF0000
-#define GREEN_PIXEL 0xFF00
-#define WHITE_PIXEL 0xFFFFFF
-#define BLACK_PIXEL 0x0
-#define YELLOW_PIXEL 0xFFFF00
-#define BLUE_PIXEL 0x0000FF
-#define GREY_PIXEL 0xAAAAAA
-
+# define RED_PIXEL 0xFF0000
+# define GREEN_PIXEL 0xFF00
+# define WHITE_PIXEL 0xFFFFFF
+# define BLACK_PIXEL 0x0
+# define YELLOW_PIXEL 0xFFFF00
+# define BLUE_PIXEL 0x0000FF
+# define GREY_PIXEL 0xAAAAAA
 
 /* type identifiers */
 # define TID_NORTH_TXT "NO"
@@ -43,7 +54,5 @@
 
 # define WINDOW_WIDTH (1024)
 # define WINDOW_HEIGHT (600)
-# define RAY_RANGE ((WINDOW_WIDTH + WINDOW_HEIGHT) * 1.5)
-# define FOV_ANGLE (60 * (PI / 180))
 
 #endif

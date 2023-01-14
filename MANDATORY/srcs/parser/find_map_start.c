@@ -1,29 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_split_line.c                                  :+:      :+:    :+:   */
+/*   find_map_start.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 17:27:10 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/15 20:03:34 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 22:15:51 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	find_split_line(char **read_file)
-{
-	int	idx_line;
-	int	mtx_size;
+static int	check_line(char *line);
 
-	mtx_size = ft_mtxlen(read_file);
-	idx_line = mtx_size;
-	while (read_file[idx_line - 1] && idx_line)
+int	find_map_start(char **read_file)
+{
+	int	map_start;
+
+	map_start = 0;
+	while (read_file[map_start] != NULL)
 	{
-		idx_line--;
-		if (read_file[idx_line][0] == 0)
+		if (check_line(read_file[map_start]))
+			break ;
+		map_start++;
+	}
+	if (map_start == ft_mtxlen(read_file))
+		return (-1);
+	return (map_start);
+}
+
+static int	check_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '1')
+			return (1);
+		if (ft_isspace(line[i]))
+			i++;
+		else
 			break ;
 	}
-	return (idx_line);
+	return (0);
 }

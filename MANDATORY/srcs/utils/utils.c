@@ -3,31 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:32:11 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/13 21:52:31 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/14 00:17:50 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	check_struct(t_config *config, int i)
+int	check_struct(t_config *config)
 {
-	if (config->NO == NULL || config->WE == NULL
-		|| config->SO == NULL || config->EA == NULL
-		|| config->F[0] == -1 || config->C[0] == -1)
-		throw_error("Configuration missing");
-	if (i && (config->map == NULL
-			|| config->player_direction == 'Z'
-			|| config->player_position[0] == -1))
-		throw_error("Map configuration missing");
-}
-
-void	throw_error(char *error)
-{
-	printf("Error\n%s.\n", error);
-	//exit(1);
+	if (config->no == NULL || config->we == NULL
+		|| config->so == NULL || config->ea == NULL
+		|| config->f[0] == -1 || config->c[0] == -1)
+		return (ERR_CONFIG_MISSING);
+	if (config->map == NULL
+		|| config->player_direction == 'Z'
+		|| config->player_position[0] == -1)
+		return (ERR_CONFIG_MISSING);
+	return (0);
 }
 
 int	is_one_of_these(char c, char *these)
@@ -55,4 +50,24 @@ double	normalize_angle(double angle)
 	if (angle < 0)
 		angle = TWO_PI + angle;
 	return (angle);
+}
+
+int	test_path(char *path)
+{
+	int		fd;
+	char	*temp;
+	char	*msg;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+	{
+		temp = ft_strjoin(path, ": ");
+		msg = ft_strjoin(temp, strerror(errno));
+		throw_error(msg);
+		free(temp);
+		free(msg);
+		return (-1);
+	}
+	close(fd);
+	return (0);
 }

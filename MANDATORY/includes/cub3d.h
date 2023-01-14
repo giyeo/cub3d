@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/14 00:10:51 by anjose-d          #+#    #+#             */
+/*   Updated: 2023/01/14 00:46:35 by anjose-d         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -14,7 +26,7 @@
 # include <string.h>
 // strerror();
 # include <errno.h>
-#include <time.h> //REMOVE!
+
 typedef struct s_conn
 {
 	void	*mlx_ptr;
@@ -25,7 +37,7 @@ typedef struct s_img
 {
 	void	*mlx_img;
 	char	*addr;
-	int		bpp;	/* bits per pixel */
+	int		bpp;
 	int		line_len;
 	int		endian;
 }				t_img;
@@ -36,9 +48,9 @@ typedef struct s_player
 	double	y;
 	double	width;
 	double	height;
-	int		turn_direction; // -1 for left, +1 for right | 0 to still
-	int		walk_direction; // -1 for back, +1 for front | 0 to still
-	int		walk_side_direction; // -1 for left, +1 for right |
+	int		turn_direction;
+	int		walk_direction;
+	int		walk_side_direction;
 	double	rotation_angle;
 	double	walk_speed;
 	double	turn_speed;
@@ -48,57 +60,56 @@ typedef struct s_player
 	int		mouse_y;
 }				t_player;
 
-typedef struct	s_textures
+typedef struct s_textures
 {
-	int		*NO;
-	int		*SO;
-	int		*WE;
-	int		*EA;
-	void	*img_NO;
-	void	*img_SO;
-	void	*img_WE;
-	void	*img_EA;
+	int		*no;
+	int		*so;
+	int		*we;
+	int		*ea;
+	void	*img_no;
+	void	*img_so;
+	void	*img_we;
+	void	*img_ea;
 }			t_textures;
 
-typedef	struct	s_render_line
+typedef struct s_render_line
 {
-	double deltaX;
-	double deltaY;
-	double pixelX;
-	double pixelY;
-	int posX;
-	int posY;
-	int posX_old;
-	int posY_old;
+	double	delta_x;
+	double	delta_y;
+	double	pixel_x;
+	double	pixel_y;
+	int		pos_x;
+	int		pos_y;
+	int		pos_x_old;
+	int		pos_y_old;
 	double	player_x;
 	double	player_y;
 }			t_render_line;
 
-typedef struct	s_config
+typedef struct s_config
 {
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	int		F[3];
-	int		C[3];
-	char	**map;
-	int		side[2];
-	int		texture_col[2];
-	int		map_num_rows;
-	int		map_num_cols;
-	int		player_position[2];
-	char	player_direction;
-	double 	FOV;
-	t_conn	conn_mlx;
-	t_img	img;
+	char		*no;
+	char		*so;
+	char		*we;
+	char		*ea;
+	int			f[3];
+	int			c[3];
+	char		**map;
+	int			side[2];
+	int			texture_col[2];
+	int			map_num_rows;
+	int			map_num_cols;
+	int			player_position[2];
+	char		player_direction;
+	double		fov;
+	t_conn		conn_mlx;
+	t_img		img;
 	t_player	player;
 	t_textures	textures;
-	int		ciclo;
-	int		*texture_test;
-	double	scale;
-	time_t	start_time;
-	int		operations;
+	int			ciclo;
+	double		scale;
+	time_t		start_time;
+	int			operations;
 }			t_config;
 
 /* PARSER */
@@ -106,24 +117,32 @@ int		file_validate(char *file, int argc);
 
 int		file_check(char *file);
 int		extension_check(char *file);
-char	**read_file(int	fd, char *file);
+char	**read_file(int fd, char *file);
 int		line_count(char *file);
-void	parser_and_validate(char **buffer, t_config *config);
+int		parser_and_validate(char **buffer, t_config *config);
 int		find_split_line(char **read_file);
+int		find_map_start(char **read_file);
 
 /* UTILS */
-void	throw_error(char *error);
+int		throw_error(char *error);
+int		throw_msg_error(int error);
 int		only_these(char *str, char *needles);
 void	config_init(t_config *config);
-void	check_struct(t_config *config, int i);
+int		check_struct(t_config *config);
 int		is_one_of_these(char c, char *these);
 int		find_player(char **buffer, int first_line, t_config *config);
 int		mlx_get_hex_trgb(int r, int g, int b);
 double	normalize_angle(double angle);
+void	config_populate(t_config *config);
+int		test_path(char *path);
 
 /* VALIDATE*/
-int		validate_config(char **buffer, t_config *config);
+int		validate_config(char **buffer, t_config *config, int map_line);
 int		validate_map(char **buffer, t_config *config);
+
+int		parse_line_content(char *line_content, char type, t_config *config);
+
+void	parse_color(char *file_content, char type, t_config *config);
 
 /* FREE */
 void	free_config(t_config *config);
@@ -138,18 +157,18 @@ int		mouse_handler(int button, int x, int y, t_config *config);
 
 // render
 int		render_background(t_config *config, int color, t_img *img);
-void	render_map(t_config *config, int map_y, int map_x, int pixel_i, int pixel_j);
+
 void	render_player(t_config *config);
 void	img_pix_put(t_img *img, int x, int y, int color);
-int		render_rect(t_conn conn_mlx, int x, int y, int rect_height, int rect_width, int color, t_img *img);
 double	render_line(t_config *config, double x1, double y1);
-double render_line_minimap(t_config *config, double x1, double y1, double x2, double y2, int color, int c);
 
 // player
 void	move_player(t_config *config);
+
 //execution
 void	update(t_config *config);
 void	raycaster(t_config *config);
 
-void	load_textures(t_config *config, void *mlx);
+void	load_textures(t_config *config);
+
 #endif

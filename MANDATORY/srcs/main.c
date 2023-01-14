@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:02:23 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/13 21:45:25 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/14 01:10:03 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	img_init(t_img *img, t_config *config);
 
 int	main(int argc, char *argv[])
 {
@@ -24,15 +22,15 @@ int	main(int argc, char *argv[])
 	fd = file_validate(argv[1], argc);
 	buffer = read_file(fd, argv[1]);
 	close(fd);
-	parser_and_validate(buffer, &config);
-	ft_destroy_matrix(buffer);
+	if (parser_and_validate(buffer, &config))
+		return (-1);
+	load_textures(&config);
 	mlx_hook(config.conn_mlx.win_ptr, KeyPress, KeyPressMask, &key_pressed,
 		&config);
 	mlx_hook(config.conn_mlx.win_ptr, KeyRelease, KeyReleaseMask, &key_released,
 		&config);
 	mlx_hook(config.conn_mlx.win_ptr, DestroyNotify, NoEventMask, &end_game,
 		&config);
-	load_textures(&config, config.conn_mlx.mlx_ptr);
 	mlx_loop_hook(config.conn_mlx.mlx_ptr, &load_game, &config);
 	mlx_loop(config.conn_mlx.mlx_ptr);
 	return (0);

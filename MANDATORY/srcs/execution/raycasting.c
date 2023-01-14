@@ -27,7 +27,7 @@ void	raycaster(t_config *config)
 	int		x;
 
 	x = 0;
-	fov = config->FOV * (PI / 180);
+	fov = config->fov * (PI / 180);
 	angle = normalize_angle(config->player.rotation_angle - (fov / 2.0));
 	while (x < WINDOW_WIDTH)
 	{
@@ -46,9 +46,12 @@ void	raycaster(t_config *config)
 
 int	ray_cast(t_config *config, double angle)
 {
+	double	ray_range;
+
+	ray_range = (WINDOW_WIDTH + WINDOW_HEIGHT) * 1.5;
 	return (render_line(config,
-			((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE)),
-			((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE))));
+			((config->player.x * TILE_SIZE) + cos(angle) * (ray_range)),
+			((config->player.y * TILE_SIZE) + sin(angle) * (ray_range))));
 }
 
 void	paint_wall(t_config *config, int x, double wall_strip, int x_hit)
@@ -66,13 +69,13 @@ void	paint_wall(t_config *config, int x, double wall_strip, int x_hit)
 	{
 		if (y < y_start_wall)
 			img_pix_put(&config->img, x, y,
-				mlx_get_hex_trgb(50, 50, 50));
+				mlx_get_hex_trgb(config->c[0], config->c[1], config->c[2]));
 		else if (y < y_end_wall)
 			img_pix_put(&config->img, x, y,
 				get_color_from_texture(config, wall_strip, x_hit, &y_wall));
 		else
 			img_pix_put(&config->img, x, y,
-				mlx_get_hex_trgb(150, 150, 150));
+				mlx_get_hex_trgb(config->f[0], config->f[1], config->f[2]));
 		y++;
 	}
 }
@@ -99,11 +102,12 @@ int	get_color_from_texture(t_config *config, double wall_strip, int x, int *y)
 int	*find_wall_texture(t_config *config)
 {
 	if (config->side[1] == 1)
-		return (config->textures.NO);
+		return (config->textures.no);
 	else if (config->side[1] == -1)
-		return (config->textures.SO);
+		return (config->textures.so);
 	else if (config->side[0] == 1)
-		return (config->textures.WE);
+		return (config->textures.we);
 	else if (config->side[0] == -1)
-		return (config->textures.EA);
+		return (config->textures.ea);
+	return (0);
 }

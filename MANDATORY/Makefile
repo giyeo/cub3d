@@ -1,8 +1,19 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/14 00:00:12 by anjose-d          #+#    #+#              #
+#    Updated: 2023/01/14 00:50:21 by anjose-d         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 # MAIN VARIABLES
 NAME		:=	cub3D
 CC			:=	cc
-CFLAGS		:=  -O3 #-Wall -Wextra -Werror
+CFLAGS		:=  -O3 -Wall -Wextra -Werror
 
 # LIBRARIES
 ## libft
@@ -36,9 +47,11 @@ PARSER_SRCS	:=	extension_check.c \
 				read_file.c \
 				parser_and_validate.c \
 				file_validate.c \
+				find_map_start.c \
 				validate_config.c \
-				find_split_line.c \
-				validate_map.c \
+				validate_config_utils1.c \
+				validate_config_utils2.c \
+				validate_map.c
 
 HOOKS_DIR	:=	hooks
 HOOKS_SRCS	:=	end_game.c \
@@ -46,8 +59,7 @@ HOOKS_SRCS	:=	end_game.c \
 				load_game.c
 
 RENDER_DIR	:=	render
-RENDER_SRCS	:=	render_map.c \
-				img_pix_put.c \
+RENDER_SRCS	:=	img_pix_put.c \
 				render_line.c
 
 
@@ -56,7 +68,9 @@ UTILS_SRCS	:=	utils.c \
 				only_these.c \
 				config_init.c \
 				find_player.c \
-				load_textures.c
+				error_handler.c \
+				load_textures.c \
+				config_populate.c
 
 FREE_DIR	:=	free
 FREE_SRCS	:=	free_config.c
@@ -110,7 +124,7 @@ valgrind:
 	@make -C $(LIBFT_DIR)
 	@make -C $(MLX_DIR)
 	$(CC) -g $(SRCS_PTH) $(CFLAGS) $(INC_FLAGS) $(LINK_FLAGS) -o $@
-	valgrind --leak-check=full --track-origins=yes ./$@ rendermap.cub
+	valgrind --leak-check=full --show-leak-kinds=all ./$@ rendermap.cub
 
 minilibx_clean:
 	@make clean -C $(MLX_DIR)

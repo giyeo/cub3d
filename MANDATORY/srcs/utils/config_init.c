@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   config_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/13 21:45:47 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/13 21:49:51 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/14 00:29:44 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	config_init(t_config *config)
 {
-	config->NO = NULL;
-	config->WE = NULL;
-	config->SO = NULL;
-	config->EA = NULL;
+	config->no = NULL;
+	config->we = NULL;
+	config->so = NULL;
+	config->ea = NULL;
 	config->map = NULL;
-	config->F[0] = -1;
-	config->C[0] = -1;
+	config->f[0] = -1;
+	config->c[0] = -1;
 	config->player_position[0] = -1;
 	config->player_position[1] = -1;
 	config->player_direction = 'Z';
@@ -28,5 +28,5 @@ void	config_init(t_config *config)
 	config->conn_mlx.win_ptr = NULL;
 	config->img.addr = NULL;
 	config->img.mlx_img = NULL;
-	config->FOV = 60.0;
+	config->fov = 60.0;
 }

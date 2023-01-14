@@ -3,115 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   validate_config.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:49:51 by rpaulino          #+#    #+#             */
-/*   Updated: 2022/12/27 22:27:20 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/13 22:09:25 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	assign_color(char type, t_config *config, int *color)
+static int	loop_through_line(t_config *config, char *line, int *config_nbr);
+
+int	validate_config(char **buffer, t_config *config, int map_line)
 {
-	if (type == 'F' && config->F[0] == -1)
+	int		line;
+	int		err_ret;
+	int		config_nbr;
+
+	line = 0;
+	err_ret = 0;
+	config_nbr = 0;
+	while (line < map_line || (buffer[line] != NULL && !err_ret))
 	{
-		config->F[0] = color[0];
-		config->F[1] = color[1];
-		config->F[2] = color[2];
+		if (line >= map_line)
+			return (err_ret);
+		err_ret = loop_through_line(config, buffer[line], &config_nbr);
+		if (err_ret)
+			return (err_ret);
+		line++;
 	}
-	else if (type == 'C' && config->C[0] == -1)
-	{
-		config->C[0] = color[0];
-		config->C[1] = color[1];
-		config->C[2] = color[2];
-	}
-	else
-		throw_error("Duplicate of Colors");
+	return (err_ret);
 }
 
-void	parse_color(char *file_content, char type, t_config *config)
-{
-	int		i;
-	int		comma_index;
-	int		start_index;
-	char	*number_string;
-	char	*trimmed_number_string;
-	int		*color;
-
-	i = 0;
-	start_index = 0;
-	comma_index = 0;
-	color = (int *)(malloc(sizeof(int) * 3));
-	while (i < 3)
-	{
-		comma_index = ft_str_find_idx(file_content + start_index, ',');
-		if (comma_index == -1)
-			comma_index = ft_str_find_idx(file_content + start_index, '\0');
-		number_string = ft_substr(file_content, start_index, comma_index);
-		trimmed_number_string = ft_strtrim(number_string, " ");
-		color[i++] = ft_atoi(trimmed_number_string);
-		start_index += comma_index + 1;
-		free(number_string);
-		free(trimmed_number_string);
-	}
-	assign_color(type, config, color);
-	free(color);
-}
-
-void	test_path(char *path)
-{
-	int		fd;
-	char	*temp;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-	{
-		temp = ft_strjoin(path, ": ");
-		throw_error(ft_strjoin(temp, strerror(errno)));
-	}
-	close(fd);
-}
-
-void	assign_config(char *path, char type, t_config *config)
-{
-	if (type == 'N' && config->NO == NULL)
-		config->NO = path;
-	else if (type == 'W' && config->WE == NULL)
-		config->WE = path;
-	else if (type == 'S' && config->SO == NULL)
-		config->SO = path;
-	else if (type == 'E' && config->EA == NULL)
-		config->EA = path;
-	else
-		throw_error("More Than one Texture");
-}
-
-void	parse_path(char *file_content, char type, t_config *config)
-{
-	char	*path;
-	char	*trimmed_path;
-
-	path = ft_substr(file_content, 0, ft_str_find_idx(file_content, '\n'));
-	trimmed_path = ft_strtrim(path, " ");
-	test_path(trimmed_path);
-	assign_config(trimmed_path, type, config);
-	free(path);
-}
-
-int	check_invalid_char_or_map_start(char c)
-{
-	if (c == '1')
-		return (1);
-	if (c != 'N' && c != 'O' && c != 'S'
-		&& c != 'W' && c != 'E' && c != 'A'
-		&& c != 'F' && c != 'C' && c != ' '
-		&& c != '\n' && c != '\r')
-		throw_error("Not Allowed Char in .cub file");
-	return (0);
-}
-
-int	can_parse(char *line_content, int i)
+static int	can_parse(char *line_content, int i)
 {
 	char	current;
 	char	next;
@@ -121,7 +45,7 @@ int	can_parse(char *line_content, int i)
 	next = line_content[i + 1];
 	after_next = line_content[i + 2];
 	if (next == '\0' || after_next == '\0')
-		throw_error("File not Completed");
+		return (-1);
 	if (((current == 'N' && next == 'O')
 			|| (current == 'S' && next == 'O')
 			|| (current == 'W' && next == 'E')
@@ -134,75 +58,71 @@ int	can_parse(char *line_content, int i)
 	return (0);
 }
 
-void	color_error_handling(char *line_content)
+static int	config_check(char *config_line, int config_nbr)
 {
-	int	count_commas;
-	int	has_digit;
-	int	i;
+	int	ret;
 
-	count_commas = 0;
-	has_digit = 0;
-	i = 0;
-	while (line_content[i] != '\0')
-	{
-		if (!ft_isdigit(line_content[i])
-			&& line_content[i] != ' '
-			&& line_content[i] != ',')
-			throw_error("Invalid Char on Color");
-		if (ft_isdigit(line_content[i]))
-			has_digit = 1;
-		if (line_content[i] == ',')
-		{
-			if (has_digit == 0)
-				throw_error("Not enough digits");
-			count_commas++;
-			has_digit = 0;
-		}
-		i++;
-	}
-	if (has_digit == 0)
-		throw_error("Not enough digits");
-	if (count_commas != 2)
-		throw_error("Only 2 commas allowed");
+	ret = 0;
+	if (config_nbr == 0)
+		ret = ft_strncmp(config_line, "NO", ft_strlen("NO") + 1);
+	else if (config_nbr == 1)
+		ret = ft_strncmp(config_line, "SO", ft_strlen("SO") + 1);
+	else if (config_nbr == 2)
+		ret = ft_strncmp(config_line, "WE", ft_strlen("WE") + 1);
+	else if (config_nbr == 3)
+		ret = ft_strncmp(config_line, "EA", ft_strlen("EA") + 1);
+	else if (config_nbr == 4)
+		ret = ft_strncmp(config_line, "F", ft_strlen("F") + 1);
+	else if (config_nbr == 5)
+		ret = ft_strncmp(config_line, "C", ft_strlen("C") + 1);
+	return (ret);
 }
 
-void	parse_line_content(char *line_content, char type, t_config *config)
+static int	check_invalid_char(char *line_str, int *config_nbr)
 {
-	if (type == 'F' || type == 'C')
+	char	**config_line;
+	int		ret;
+
+	ret = 0;
+	while (ft_isspace(*line_str))
+		line_str++;
+	if (line_str)
 	{
-		color_error_handling(line_content + 1);
-		parse_color(line_content + 1, type, config);
+		config_line = ft_split(line_str, ' ');
+		if (config_line)
+		{
+			ret = config_check(config_line[0], *config_nbr);
+			ft_destroy_matrix(config_line);
+		}
 	}
-	else
-		parse_path(line_content + 2, type, config);
+	if (!ret)
+		(*config_nbr)++;
+	return (ret);
 }
 
-int	validate_config(char **buffer, t_config *config)
+static int	loop_through_line(t_config *config, char *line, int *config_nbr)
 {
-	char	*line_content;
-	int		line;
-	int		column;
-	int		type;
+	int	column;
+	int	err_ret;
+	int	type;
 
-	line = 0;
-	while (buffer[line] != NULL)
+	column = 0;
+	err_ret = 0;
+	while (line[column] != '\0')
 	{
-		line_content = buffer[line];
-		column = 0;
-		while (line_content[column] != '\0')
+		err_ret = check_invalid_char(line, config_nbr);
+		if (err_ret && column == 0)
+			return (ERR_INV_CHAR_IN_FILE);
+		type = can_parse(line, column);
+		if (type < 0)
+			return (ERR_FILE_INCOMPLETE);
+		else if (type != 0)
 		{
-			if (check_invalid_char_or_map_start(line_content[column]))
-				return (line);
-			type = can_parse(line_content, column);
-			if (type != 0)
-			{
-				parse_line_content(line_content + column, (char)type, config);
-				break ;
-			}
-			column++;
+			err_ret = parse_line_content(line + column,
+					(char)type, config);
+			break ;
 		}
-		line++;
+		column++;
 	}
-	throw_error("Map not found");
-	return (line);
+	return (err_ret);
 }

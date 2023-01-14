@@ -6,28 +6,23 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 18:37:12 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/28 21:00:25 by marvin           ###   ########.fr       */
+/*   Updated: 2023/01/13 20:03:23 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-// remove from here
-int		line_count(char *file);
+static int		find_bline(char *str, int strsize);
+static void		remove_bline(char **str, int lsize);
 
-int		find_bline(char *str, int strsize);
-
-/* put on libft */
-void	remove_bline(char **str, int lsize);
-
-char	**read_file(int	fd, char *file)
+char	**read_file(int fd, char *file)
 {
 	char	**file_read;
 	int		lcount;
 	int		lsize;
 	int		i;
 	char	*line;
-	
+
 	file_read = NULL;
 	lcount = line_count(file);
 	file_read = malloc(sizeof(char **) * (lcount + 1));
@@ -41,20 +36,20 @@ char	**read_file(int	fd, char *file)
 		file_read[i] = line;
 		i++;
 	}
-	file_read[i] = NULL;
+	file_read[i] = '\0';
 	return (file_read);
 }
 
-int	find_bline(char *str, int strsize)
+static int	find_bline(char *str, int strsize)
 {
 	if (str[strsize - 1] == '\n' || str[strsize - 1] == '\r')
 		return (1);
 	return (0);
 }
 
-void	remove_bline(char **str, int lsize)
+static void	remove_bline(char **str, int lsize)
 {
-	char *line;
+	char	*line;
 
 	line = *str;
 	while (line && lsize > 0 && line[lsize - 1]
