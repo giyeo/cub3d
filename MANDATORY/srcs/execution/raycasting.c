@@ -47,11 +47,8 @@ void	raycaster(t_config *config)
 int	ray_cast(t_config *config, double angle)
 {
 	return (render_line(config,
-			(config->player.x * TILE_SIZE), (config->player.y * TILE_SIZE),
 			((config->player.x * TILE_SIZE) + cos(angle) * (RAY_RANGE)),
-			((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE)),
-			mlx_get_hex_trgb(0, 0, 0),
-			0));
+			((config->player.y * TILE_SIZE) + sin(angle) * (RAY_RANGE))));
 }
 
 void	paint_wall(t_config *config, int x, double wall_strip, int x_hit)

@@ -6,63 +6,75 @@
 /*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 19:47:33 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/13 19:19:20 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/13 22:37:43 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 double	distance_between_points(double x1, double y1, double x2, double y2);
+double	find_distance(t_config *config, t_render_line *values, int pixels);
+void	optimize(t_render_line *values);
 
-double render_line(t_config *config, double x1, double y1, double x2, double y2, int color, int c)
+double	render_line(t_config *config, double x2, double y2)
 {
-	double deltaX = x2 - x1;
-	double deltaY = y2 - y1;
-	
-	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+	t_render_line	values;
+	int				pixels;
 
-	deltaX = deltaX / pixels;
-	deltaY = deltaY / pixels;
+	values.player_x = (config->player.x * TILE_SIZE);
+	values.player_y = (config->player.y * TILE_SIZE);
+	values.deltaX = x2 - values.player_x;
+	values.deltaY = y2 - values.player_y;
+	pixels = sqrt((values.deltaX * values.deltaX)
+			+ (values.deltaY * values.deltaY));
+	values.deltaX = values.deltaX / pixels;
+	values.deltaY = values.deltaY / pixels;
+	values.pixelX = values.player_x;
+	values.pixelY = values.player_y;
+	values.posX = values.pixelX / TILE_SIZE;
+	values.posY = values.pixelY / TILE_SIZE;
+	return (find_distance(config, &values, pixels * 2));
+}
 
-	double pixelX = x1;
-	double pixelY = y1;
-	int posX = pixelX / TILE_SIZE;
-	int posY = pixelY / TILE_SIZE;
-	int iterator = pixels * 2;
-	while (iterator)
+double	find_distance(t_config *config, t_render_line *values, int pixels)
+{
+	while (pixels)
 	{
-		int posX_old =  posX;
-		int posY_old =  posY;
-		posX = (pixelX / TILE_SIZE);
-		posY = (pixelY / TILE_SIZE);
-		if (config->map[posY][posX] == '1')
+		values->posX_old = values->posX;
+		values->posY_old = values->posY;
+		values->posX = (values->pixelX / TILE_SIZE);
+		values->posY = (values->pixelY / TILE_SIZE);
+		if (config->map[values->posY][values->posX] == '1')
 		{
-			config->texture_col[0] = (int)((int)pixelX % 64);
-			config->texture_col[1] = (int)((int)pixelY % 64);
-			config->side[0] = (posX_old - posX);
-			config->side[1] = (posY_old - posY);
-			return (distance_between_points(x1, y1, pixelX, pixelY));
+			config->texture_col[0] = (int)((int)values->pixelX % 64);
+			config->texture_col[1] = (int)((int)values->pixelY % 64);
+			config->side[0] = (values->posX_old - values->posX);
+			config->side[1] = (values->posY_old - values->posY);
+			return (distance_between_points(
+					values->player_x, values->player_y,
+					values->pixelX, values->pixelY));
 		}
-		if (c == 1)
-			img_pix_put(&config->img, pixelX, pixelY, color);
-		
-		int ite = 63;
-		if((posX_old != posX || posY_old != posY)
-			&& (posX == (int)((pixelX + deltaX * ite) / TILE_SIZE))
-			&& (posY == (int)((pixelY + deltaY * ite) / TILE_SIZE)))
-		{
-			pixelX += deltaX * ite;
-			pixelY += deltaY * ite;
-		}
-		
-		if(iterator % 2 == 0)
-			pixelX += deltaX;
+		optimize(values);
+		if (pixels % 2 == 0)
+			values->pixelX += values->deltaX;
 		else
-			pixelY += deltaY;
-		iterator--;
-		config->operations++;
+			values->pixelY += values->deltaY;
+		pixels--;
 	}
-	return (0);
+}
+
+void	optimize(t_render_line *values)
+{
+	if ((values->posX_old != values->posX || values->posY_old != values->posY)
+		&& (values->posX == (int)((values->pixelX + values->deltaX * 63)
+			/ TILE_SIZE))
+		&& (values->posY ==
+			(int)((values->pixelY + values->deltaY * 63)
+			/ TILE_SIZE)))
+	{
+		values->pixelX += values->deltaX * 63;
+		values->pixelY += values->deltaY * 63;
+	}
 }
 
 double	distance_between_points(double x1, double y1, double x2, double y2)

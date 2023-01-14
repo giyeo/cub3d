@@ -60,6 +60,20 @@ typedef struct	s_textures
 	void	*img_EA;
 }			t_textures;
 
+typedef	struct	s_render_line
+{
+	double deltaX;
+	double deltaY;
+	double pixelX;
+	double pixelY;
+	int posX;
+	int posY;
+	int posX_old;
+	int posY_old;
+	double	player_x;
+	double	player_y;
+}			t_render_line;
+
 typedef struct	s_config
 {
 	char	*NO;
@@ -128,7 +142,7 @@ void	render_map(t_config *config, int map_y, int map_x, int pixel_i, int pixel_j
 void	render_player(t_config *config);
 void	img_pix_put(t_img *img, int x, int y, int color);
 int		render_rect(t_conn conn_mlx, int x, int y, int rect_height, int rect_width, int color, t_img *img);
-double	render_line(t_config *config, double x1, double y1, double x2, double y2, int color, int c);
+double	render_line(t_config *config, double x1, double y1);
 double render_line_minimap(t_config *config, double x1, double y1, double x2, double y2, int color, int c);
 
 // player

@@ -1,9 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   config_init.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/13 21:45:47 by rpaulino          #+#    #+#             */
+/*   Updated: 2023/01/13 21:49:51 by rpaulino         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	config_init(t_config *config)
 {
-	time(&config->start_time);
-	config->scale = MINIMAP_SCALE_FACTOR;
 	config->NO = NULL;
 	config->WE = NULL;
 	config->SO = NULL;
@@ -19,5 +29,4 @@ void	config_init(t_config *config)
 	config->img.addr = NULL;
 	config->img.mlx_img = NULL;
 	config->FOV = 60.0;
-	config->ciclo = 0;
 }

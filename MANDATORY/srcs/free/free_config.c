@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_config.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 11:05:16 by anjose-d          #+#    #+#             */
-/*   Updated: 2022/12/30 16:56:01 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/13 21:42:20 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ void	free_img(t_config *config)
 		mlx_destroy_image(
 			config->conn_mlx.mlx_ptr,
 			config->img.mlx_img
-		);
+			);
 }
