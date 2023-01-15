@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   validate_config.c                                  :+:      :+:    :+:   */
+/*   validate_config_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 21:49:51 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/14 19:59:25 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:36:35 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ static int	check_invalid_char(char *line_str, int *config_nbr)
 	int		ret;
 
 	ret = 0;
+	config_line = NULL;
 	if (line_str)
 	{
 		config_line = ft_split(line_str, ' ');

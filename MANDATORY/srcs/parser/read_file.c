@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 18:37:12 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/13 20:03:23 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:32:09 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	**read_file(int fd, char *file)
 		file_read[i] = line;
 		i++;
 	}
-	file_read[i] = '\0';
+	file_read[i] = NULL;
 	return (file_read);
 }
 
