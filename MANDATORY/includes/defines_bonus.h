@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   defines.h                                          :+:      :+:    :+:   */
+/*   defines_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 00:08:35 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/15 16:48:23 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:04:24 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#ifndef DEFINES_BONUS_H
+# define DEFINES_BONUS_H
 
 # define MAP_FILE_EXT ".cub"
 # define ONLY_CHARS_MAP "01WNSE "
@@ -40,6 +40,8 @@
 # define A 97
 # define S 115
 # define D 100
+# define Y 121
+# define U 117
 # define E 101
 # define UP_ARROW 65362
 # define DOWN_ARROW 65364

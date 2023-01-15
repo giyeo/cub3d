@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/03 03:32:11 by rpaulino          #+#    #+#             */
-/*   Updated: 2023/01/14 17:43:13 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:08:54 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	test_path(char *path)
 	if (fd < 0)
 	{
 		temp = ft_strjoin(path, ": ");
-		msg = ft_strjoin(temp, strerror(errno));
+		msg = ft_strjoin(temp, "Error during file validation");
 		throw_error(msg);
 		free(temp);
 		free(msg);

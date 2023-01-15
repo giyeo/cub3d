@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 00:10:51 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/15 15:44:20 by rpaulino         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:05:00 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,12 @@
 # include "libft.h"
 # include "mlx.h"
 # include <fcntl.h>
-# include "errors.h"
-# include "defines.h"
+# include "errors_bonus.h"
+# include "defines_bonus.h"
 # include <X11/X.h>
 # include "math.h"
 # include <stdio.h>
 # include <string.h>
-# include <errno.h>
 
 typedef struct s_conn
 {

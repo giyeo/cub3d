@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 00:10:51 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 17:50:56 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:05:06 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "math.h"
 # include <stdio.h>
 # include <string.h>
-# include <errno.h>
 
 typedef struct s_conn
 {
