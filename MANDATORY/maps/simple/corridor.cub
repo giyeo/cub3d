@@ -1,0 +1,11 @@
+NO ./textures/weird/1.xpm
+SO ./textures/weird/2.xpm
+WE ./textures/weird/3.xpm
+EA ./textures/weird/4.xpm
+
+F 40,40,40
+C 70,70,70
+
+111111111111111111
+100000000000000W01
+111111111111111111

@@ -1,10 +1,10 @@
-NO ./textures/mine/1.xpm
-SO ./textures/mine/2.xpm
-WE ./textures/mine/3.xpm
-EA ./textures/mine/4.xpm
+NO ./textures/wolf/1.xpm
+SO ./textures/wolf/2.xpm
+WE ./textures/wolf/3.xpm
+EA ./textures/wolf/4.xpm
 
-F 220,100,0
-C 225,30,0
+F 100,100,100
+C 40,40,40
 
         1111111111111111111111111
         1000000000110000000000001
