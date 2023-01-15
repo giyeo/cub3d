@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:03:52 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/13 20:43:12 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/15 19:04:19 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ static int	check_surroundings(char **buffer, int line, int col)
 		|| ft_strlen(buffer[line - 1]) < (size_t)col
 		|| ft_strlen(buffer[line + 1]) < (size_t)col)
 		return (-1);
-	if ((!is_one_of_these(buffer[line][col - 1], ONLY_CHARS_MAP)
-		|| !is_one_of_these(buffer[line][col + 1], ONLY_CHARS_MAP)
-		|| !is_one_of_these(buffer[line - 1][col], ONLY_CHARS_MAP)
-		|| !is_one_of_these(buffer[line + 1][col], ONLY_CHARS_MAP)))
+	if ((!is_one_of_these(buffer[line][col - 1], "01WNSE")
+		|| !is_one_of_these(buffer[line][col + 1], "01WNSE")
+		|| !is_one_of_these(buffer[line - 1][col], "01WNSE")
+		|| !is_one_of_these(buffer[line + 1][col], "01WNSE")))
 		return (-1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 #    By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/14 00:00:12 by anjose-d          #+#    #+#              #
-#    Updated: 2023/01/14 20:27:22 by anjose-d         ###   ########.fr        #
+#    Updated: 2023/01/15 19:08:19 by anjose-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ INCS_BNS	:=	cub3d_bonus.h
 MAIN_HEADER	:=	$(addprefix $(INCS_DIR)/, $(INCS))
 MAIN_HDR_BNS:=	$(addprefix $(INCS_DIR)/, $(INCS_BNS))
 TRACK_INC	:=	$(INCS_DIR)/defines.h $(INCS_DIR)/errors.h
+TRACK_INCBNS:=	$(INCS_DIR)/defines_bonus.h $(INCS_DIR)/errors_bonus.h
 
 INC_FLAGS	:=	-I $(INCS_DIR) -I $(LIBFT_DIR)/includes \
 				-I $(MLX_DIR)
@@ -160,7 +161,7 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(MAIN_HEADER) $(TRACK_INC)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@
 
-$(OBJS_DIR_BNS)/%.o: $(SRCS_DIR_BNS)/%.c $(MAIN_HDR_BNS) $(TRACK_INC)
+$(OBJS_DIR_BNS)/%.o: $(SRCS_DIR_BNS)/%.c $(MAIN_HDR_BNS) $(TRACK_INCBNS)
 	@mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INC_FLAGS) -c $< -o $@
 	
@@ -185,6 +186,12 @@ clean:
 fclean: clean minilibx_clean
 	@make $@ -C $(LIBFT_DIR)
 	rm -rf $(NAME) $(NAME_BNS)
+
+run: all
+	./$(NAME) maps/simple/corridor.cub
+
+run_bonus: bonus
+	./$(NAME_BNS) maps/simple/mine.cub
 
 re: fclean all
 
