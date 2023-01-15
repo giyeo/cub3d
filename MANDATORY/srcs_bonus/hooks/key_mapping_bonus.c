@@ -6,7 +6,7 @@
 /*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 23:55:22 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/15 16:49:45 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/15 18:14:28 by anjose-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int	key_pressed(int keysym, t_config *config)
 		config->scale += 0.05;
 	if (keysym == U && config->scale > 0.15)
 		config->scale -= 0.05;
-	printf("%d\n", keysym);
 	return (0);
 }
 
