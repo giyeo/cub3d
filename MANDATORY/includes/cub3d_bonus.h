@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 00:10:51 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 20:02:29 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:44:20 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "libft.h"
 # include "mlx.h"
@@ -38,6 +38,14 @@ typedef struct s_img
 	int		line_len;
 	int		endian;
 }				t_img;
+
+typedef struct s_minimap_iterators
+{
+	int	pixel_i;
+	int	pixel_j;
+	int	map_y;
+	int	map_x;
+}				t_minimap_iterators;
 
 typedef struct s_player
 {
@@ -162,6 +170,6 @@ void	load_textures(t_config *config);
 
 /* BONUS */
 double	render_line_minimap(t_config *config, double x2, double y2);
-void    minimap(t_config *config);
+void	minimap(t_config *config);
 
 #endif

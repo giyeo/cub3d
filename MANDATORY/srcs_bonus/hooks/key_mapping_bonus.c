@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_mapping.c                                      :+:      :+:    :+:   */
+/*   key_mapping_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 23:55:22 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 19:48:13 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:38:49 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ int	key_pressed(int keysym, t_config *config)
 		config->player.walk_side_direction = -1;
 	if (keysym == 101)
 		config->fov -= 1;
-	if (keysym == 117 && config->scale < 0.5)
+	if (keysym == 119 && config->scale < 0.5)
 		config->scale += 0.05;
-    if (keysym == 121 && config->scale > 0.1)
+	if (keysym == 108 && config->scale > 0.15)
 		config->scale -= 0.05;
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_line_minimap_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anjose-d <anjose-d@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: rpaulino <rpaulino@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/30 19:47:33 by anjose-d          #+#    #+#             */
-/*   Updated: 2023/01/14 20:18:59 by anjose-d         ###   ########.fr       */
+/*   Updated: 2023/01/15 15:38:24 by rpaulino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 double	distance_between_points(double x1, double y1, double x2, double y2);
 void	optimize(t_render_line *values);
 
-static double	find_distance(t_config *config, t_render_line *values, int pixels)
+static double	find_distance(t_config *config,
+	t_render_line *values, int pixels)
 {
 	while (pixels)
 	{
@@ -23,8 +24,6 @@ static double	find_distance(t_config *config, t_render_line *values, int pixels)
 		values->pos_y_old = values->pos_y;
 		values->pos_x = (values->pixel_x / TILE_SIZE / config->scale);
 		values->pos_y = (values->pixel_y / TILE_SIZE / config->scale);
-		printf("%f %f %f\n", config->player.x, config->player.y, config->scale);
-		exit(1);
 		if (config->map[values->pos_y][values->pos_x] == '1')
 		{
 			config->texture_col[0] = (int)((int)values->pixel_x % 64);
@@ -51,8 +50,8 @@ double	render_line_minimap(t_config *config, double x2, double y2)
 	t_render_line	values;
 	int				pixels;
 
-	values.player_x = (config->player.x * TILE_SIZE);
-	values.player_y = (config->player.y * TILE_SIZE);
+	values.player_x = (config->player.x * TILE_SIZE * config->scale);
+	values.player_y = (config->player.y * TILE_SIZE * config->scale);
 	values.delta_x = x2 - values.player_x;
 	values.delta_y = y2 - values.player_y;
 	pixels = sqrt((values.delta_x * values.delta_x)
